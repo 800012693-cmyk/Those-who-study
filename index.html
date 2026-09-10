@@ -1,0 +1,10 @@
+<h1>My Game</h1>
+<p>Score: <span id="s">0</span></p>
+<button onclick="add()">Click me!</button>
+<script>
+  let score = 0;
+  function add() {
+    score++;
+    document.getElementById("s").textContent = score;
+  }
+</script>
