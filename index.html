@@ -1,67 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Game Site</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #1a1a2e;
-      color: white;
-      text-align: center;
-      padding-top: 60px;
-    }
-    h1 { font-size: 48px; }
-    .btn {
-      display: block;
-      width: 320px;
-      margin: 15px auto;
-      padding: 20px;
-      font-size: 24px;
-      background: #e94560;
-      color: white;
-      text-decoration: none;
-      border-radius: 12px;
-    }
-    .btn:hover { background: #ff2e63; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Game Site</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', Arial, sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
+    background-size: 400% 400%;
+    animation: bg 12s ease infinite;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  @keyframes bg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(22px, 5vw, 44px);
+    margin-bottom: 10px;
+    text-shadow: 0 0 18px rgba(255,46,99,.9), 0 0 40px rgba(233,69,96,.5);
+  }
+  .tagline { color: #b8b8d0; margin-bottom: 30px; font-size: 15px; }
+  #search {
+    width: min(420px, 90%);
+    padding: 14px 22px;
+    border-radius: 999px;
+    border: 2px solid #ff2e63;
+    background: rgba(0,0,0,.35);
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 40px;
+  }
+  #search::placeholder { color: #9a9ab8; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 26px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .card {
+    display: block;
+    text-decoration: none;
+    border-radius: 18px;
+    padding: 46px 18px 22px;
+    color: #fff;
+    position: relative;
+    transition: transform .25s ease, box-shadow .25s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,.45);
+  }
+  .card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 18px 45px rgba(255,46,99,.45);
+  }
+  .card .icon {
+    font-size: 56px; display: block; margin-bottom: 14px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,.5));
+    transition: transform .25s ease;
+  }
+  .card:hover .icon { transform: scale(1.2) rotate(-6deg); }
+  .card .name {
+    font-weight: 800; font-size: 20px;
+    text-shadow: 0 2px 8px rgba(0,0,0,.6);
+  }
+  .card .play {
+    margin-top: 12px; display: inline-block;
+    background: rgba(0,0,0,.35);
+    padding: 7px 16px; border-radius: 999px;
+    font-size: 13px; font-weight: 600;
+  }
+  .badge {
+    position: absolute; top: 12px; right: 12px;
+    background: #ffe600; color: #111;
+    font-size: 11px; font-weight: 800;
+    padding: 4px 10px; border-radius: 999px;
+    animation: pulse 1.6s infinite;
+  }
+  @keyframes pulse { 50% { transform: scale(1.12); } }
+  #status { color: #888; margin-top: 26px; font-size: 13px; }
+</style>
 </head>
 <body>
-  <h1>🎮 My Game Site</h1>
-  <div id="games"></div>
+  <h1>🎮 MY GAME SITE</h1>
+  <p class="tagline">Pick a game and play — no downloads, no signup</p>
 
-  <!-- Backup button: only shows if auto-detect fails -->
-  <a class="btn" href="drive-mad.htm" id="backup" style="display:none">▶ Play Drive Mad</a>
+  <input id="search" type="text" placeholder="🔎  Search games...">
+
+  <div class="grid" id="games">
+    <!-- Static cards: ALWAYS show, even on school wifi -->
+    <a class="card" href="drive-mad.htm" style="background:linear-gradient(135deg,#ff416c,#ff4b2b)">
+      <span class="icon">🏎️</span>
+      <span class="name">Drive Mad</span><br>
+      <span class="play">▶ Play</span>
+    </a>
+    <a class="card" href="bloons-TD-5.html" style="background:linear-gradient(135deg,#36d1dc,#5b86e5)">
+      <span class="icon">🎈</span>
+      <span class="name">Bloons TD 5</span><br>
+      <span class="play">▶ Play</span>
+    </a>
+  </div>
+  <div id="status"></div>
 
   <script>
     const repo = "800012693-cmyk/Those-who-study";
-
-    function prettyName(file) {
-      return file
-        .replace(/\.html?$/i, "")
-        .replace(/[-_]/g, " ")
-        .replace(/\b\w/g, c => c.toUpperCase());
+    const box = document.getElementById("games");
+    const status = document.getElementById("status");
+    const staticGames = ["drive-mad.htm", "bloons-td-5.html"];
+    const emojis = ["🚀","🐉","⚽","👾","🧩","🕹️","⚔️","🏰","🐍","🎯"];
+    const grads = [
+      "linear-gradient(135deg,#7f00ff,#e100ff)",
+      "linear-gradient(135deg,#11998e,#38ef7d)",
+      "linear-gradient(135deg,#fc4a1a,#f7b733)",
+      "linear-gradient(135deg,#00c6ff,#0072ff)",
+      "linear-gradient(135deg,#f953c6,#b91d73)",
+      "linear-gradient(135deg,#414d0b,#727a17)"
+    ];
+    function hash(str) {
+      let h = 0;
+      for (const ch of str) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+      return h;
     }
-
+    document.getElementById("search").addEventListener("input", e => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll(".card").forEach(c => {
+        c.style.display = c.textContent.toLowerCase().includes(q) ? "" : "none";
+      });
+    });
     fetch("https://api.github.com/repos/" + repo + "/contents/")
       .then(r => r.json())
       .then(files => {
-        const games = files.filter(f =>
-          f.type === "file" &&
-          /\.html?$/i.test(f.name) &&
-          f.name.toLowerCase() !== "index.html"
-        );
-        if (!games.length) throw new Error("no games");
-        const box = document.getElementById("games");
-        games.forEach(f => {
-          const a = document.createElement("a");
-          a.className = "btn";
-          a.href = f.name;
-          a.textContent = "▶ Play " + prettyName(f.name);
-          box.appendChild(a);
-        });
+        if (!Array.isArray(files)) throw new Error("bad");
+        files
+          .filter(f => f.type === "file"
+            && /\.html?$/i.test(f.name)
+            && f.name.toLowerCase() !== "index.html"
+            && !staticGames.includes(f.name.toLowerCase()))
+          .forEach(f => {
+            const h = hash(f.name);
+            const pretty = f.name.replace(/\.html?$/i, "")
+              .replace(/[-_]/g, " ")
+              .replace(/\b\w/g, c => c.toUpperCase());
+            const a = document.createElement("a");
+            a.className = "card";
+            a.href = f.name;
+            a.style.background = grads[h % grads.length];
+            a.innerHTML =
+              '<span class="badge">NEW</span>' +
+              '<span class="icon">' + emojis[h % emojis.length] + '</span>' +
+              '<span class="name">' + pretty + '</span><br>' +
+              '<span class="play">▶ Play</span>';
+            box.appendChild(a);
+          });
+        status.textContent = "";
       })
       .catch(() => {
-        document.getElementById("backup").style.display = "block";
+        status.textContent = "(couldn't auto-load extra games on this network — they'll show at home)";
       });
   </script>
 </body>
