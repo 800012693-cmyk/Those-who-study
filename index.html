@@ -27,10 +27,42 @@
 </head>
 <body>
   <h1>🎮 My Game Site</h1>
+  <div id="games"></div>
 
-<a class="btn" href="drive-mad.htm">▶ Play Drive Mad</a>
+  <!-- Backup button: only shows if auto-detect fails -->
+  <a class="btn" href="drive-mad.htm" id="backup" style="display:none">▶ Play Drive Mad</a>
 
-  <!-- More games? Copy the line below, change game2.html to your file name -->
-  <!-- <a class="btn" href="game2.html">▶ Play Game 2</a> -->
+  <script>
+    const repo = "800012693-cmyk/Those-who-study";
+
+    function prettyName(file) {
+      return file
+        .replace(/\.html?$/i, "")
+        .replace(/[-_]/g, " ")
+        .replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    fetch("https://api.github.com/repos/" + repo + "/contents/")
+      .then(r => r.json())
+      .then(files => {
+        const games = files.filter(f =>
+          f.type === "file" &&
+          /\.html?$/i.test(f.name) &&
+          f.name.toLowerCase() !== "index.html"
+        );
+        if (!games.length) throw new Error("no games");
+        const box = document.getElementById("games");
+        games.forEach(f => {
+          const a = document.createElement("a");
+          a.className = "btn";
+          a.href = f.name;
+          a.textContent = "▶ Play " + prettyName(f.name);
+          box.appendChild(a);
+        });
+      })
+      .catch(() => {
+        document.getElementById("backup").style.display = "block";
+      });
+  </script>
 </body>
 </html>
