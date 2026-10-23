@@ -86,6 +86,14 @@
     animation: pulse 1.6s infinite;
   }
   @keyframes pulse { 50% { transform: scale(1.12); } }
+   /* Badge for games that live on another site (they open in a new tab) */
+  .card .ext {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(0,0,0,.45);
+    border: 1px solid rgba(255,255,255,.3);
+    color: #fff; font-size: 11px; font-weight: 800;
+    padding: 4px 10px; border-radius: 999px;
+  }
   #status { color: #888; margin-top: 26px; font-size: 13px; }
 </style>
 </head>
@@ -129,6 +137,37 @@
       for (const ch of str) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
       return h;
     }
+       /* GAMES HOSTED ON OTHER SITES.
+       Plain links: clicking one opens that game on its own site, new tab. */
+    const linkedGames = [
+      { name: "2048",        emoji: "🔢", url: "https://play2048.co/",                       from: "play2048.co" },
+      { name: "Astray",      emoji: "🧭", url: "https://wwwtyro.github.io/Astray/",          from: "github.io" },
+      { name: "Clumsy Bird", emoji: "🐤", url: "https://ellisonleao.github.io/clumsy-bird/", from: "github.io" }
+      { name: "Cluster Rush", emoji: "🚚", url: "https://REPLACE-WITH-THE-GAME-URL/", from: "site-name" } 
+     // Cluster Rush — paste the page you actually play it on, then reload:
+      // { name: "Cluster Rush", emoji: "🚚", url: "https://…", from: "…" }
+    ];
+
+    function linkedCard(g) {
+      const a = document.createElement("a");
+      a.className = "card";
+      a.href = g.url;
+      a.target = "_blank";            // open on the other site, not inside this page
+      a.rel = "noopener";
+      a.style.background = grads[hash(g.name) % grads.length];
+      a.innerHTML =
+        '<span class="ext">↗ ' + g.from + '</span>' +
+        '<span class="icon">' + g.emoji + '</span>' +
+        '<span class="name">' + g.name + '</span><br>' +
+        '<span class="play">▶ Play</span>';
+      return a;
+    }
+
+    // Rendered up front, so these show even when the GitHub API is blocked.
+    const linkedFrag = document.createDocumentFragment();
+    linkedGames.forEach(g => linkedFrag.appendChild(linkedCard(g)));
+    box.insertBefore(linkedFrag, box.firstChild);
+   
     document.getElementById("search").addEventListener("input", e => {
       const q = e.target.value.toLowerCase();
       document.querySelectorAll(".card").forEach(c => {
