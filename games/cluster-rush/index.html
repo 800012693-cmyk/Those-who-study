@@ -44,5 +44,25 @@
     </script>
     <script src="Release/UnityLoader.js"></script>
         <button id="fsBtn" onclick="toggleFullscreen()">&#9974; Fullscreen</button>
+
+    <script>
+      (function () {
+        function keep() {
+          var c = document.querySelector('canvas.emscripten');
+          if (c) {
+            c.style.position = 'fixed';
+            c.style.left = '0'; c.style.right = '0';
+            c.style.top = '0'; c.style.bottom = '0';
+            c.style.width = '100%'; c.style.height = '100%';
+            c.style.objectFit = 'contain';
+            c.style.background = '#000';
+            c.style.margin = 'auto';
+            c.style.display = 'block';
+          }
+          requestAnimationFrame(keep);
+        }
+        keep();
+      })();
+    </script>
 </body>
 </html>

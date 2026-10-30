@@ -79,5 +79,24 @@
 
     
       <button id="fsBtn" onclick="toggleFullscreen()">&#9974; Fullscreen</button>
+
+    <script>
+      (function () {
+        function keep() {
+          var c = document.getElementById('twhgCanvas');
+          if (c) {
+            c.style.position = 'fixed';
+            c.style.left = '50%';
+            c.style.top = '50%';
+            c.style.marginLeft = (-(c.offsetWidth || c.width) / 2) + 'px';
+            c.style.marginTop = (-(c.offsetHeight || c.height) / 2) + 'px';
+            c.style.maxWidth = '100vw';
+            c.style.maxHeight = '100vh';
+          }
+          requestAnimationFrame(keep);
+        }
+        keep();
+      })();
+    </script>
 </body>
 </html>
