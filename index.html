@@ -3,211 +3,172 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Those Who Study</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+<title>Those Who Study — Games</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Poppins', Arial, sans-serif;
-    color: #fff;
-    min-height: 100vh;
-    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
-    background-size: 400% 400%;
-    animation: bg 12s ease infinite;
-    text-align: center;
-    padding: 60px 20px;
+  :root{--bg:#0f0c29;--card:#1b1a33;--line:#33305c;--text:#f2f2ff;--muted:#a6a5c4;--accent:#ff2e63;--accent2:#8b5cf6}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Poppins',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--text);
+    min-height:100vh;padding:56px 20px 70px;
+    background:linear-gradient(-45deg,#0f0c29,#302b63,#24243e,#1a1a2e);background-size:400% 400%;
+    animation:bg 14s ease infinite;
   }
-  @keyframes bg {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  header{max-width:1120px;margin:0 auto 34px;text-align:center}
+  h1{font-size:clamp(26px,5vw,46px);letter-spacing:-.02em;margin-bottom:8px;text-shadow:0 0 18px rgba(255,46,99,.75)}
+  h1 b{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);font-size:15px;margin-bottom:26px}
+  .bar{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+  #q{width:min(430px,92%);padding:13px 22px;border-radius:999px;border:2px solid var(--accent);
+     background:rgba(0,0,0,.35);color:#fff;font-size:15px;outline:none}
+  #q::placeholder{color:#8e8dae}
+  .count{color:var(--muted);font-size:13.5px}
+  main{max-width:1120px;margin:0 auto}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px;margin-top:30px}
+  .card{
+    background:linear-gradient(180deg,#232045,var(--card));border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:var(--text);
+    transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
   }
-  h1 {
-    font-family: 'Press Start 2P', monospace;
-    font-size: clamp(22px, 5vw, 44px);
-    margin-bottom: 10px;
-    text-shadow: 0 0 18px rgba(255,46,99,.9), 0 0 40px rgba(233,69,96,.5);
-  }
-  .tagline { color: #b8b8d0; margin-bottom: 30px; font-size: 15px; }
-  #search {
-    width: min(420px, 90%);
-    padding: 14px 22px;
-    border-radius: 999px;
-    border: 2px solid #ff2e63;
-    background: rgba(0,0,0,.35);
-    color: #fff;
-    font-size: 16px;
-    outline: none;
-    margin-bottom: 40px;
-  }
-  #search::placeholder { color: #9a9ab8; }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 26px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  .card {
-    display: block;
-    text-decoration: none;
-    border-radius: 18px;
-    padding: 46px 18px 22px;
-    color: #fff;
-    position: relative;
-    transition: transform .25s ease, box-shadow .25s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,.45);
-  }
-  .card:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 18px 45px rgba(255,46,99,.45);
-  }
-  .card .icon {
-    font-size: 56px; display: block; margin-bottom: 14px;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,.5));
-    transition: transform .25s ease;
-  }
-  .card:hover .icon { transform: scale(1.2) rotate(-6deg); }
-  .card .name {
-    font-weight: 800; font-size: 20px;
-    text-shadow: 0 2px 8px rgba(0,0,0,.6);
-  }
-  .card .play {
-    margin-top: 12px; display: inline-block;
-    background: rgba(0,0,0,.35);
-    padding: 7px 16px; border-radius: 999px;
-    font-size: 13px; font-weight: 600;
-  }
-  .badge {
-    position: absolute; top: 12px; right: 12px;
-    background: #ffe600; color: #111;
-    font-size: 11px; font-weight: 800;
-    padding: 4px 10px; border-radius: 999px;
-    animation: pulse 1.6s infinite;
-  }
-  @keyframes pulse { 50% { transform: scale(1.12); } }
-  /* Badge for games that live on another site (they open in a new tab) */
-  .card .ext {
-    position: absolute; top: 12px; right: 12px;
-    background: rgba(0,0,0,.45);
-    border: 1px solid rgba(255,255,255,.3);
-    color: #fff; font-size: 11px; font-weight: 800;
-    padding: 4px 10px; border-radius: 999px;
-  }
-  #status { color: #888; margin-top: 26px; font-size: 13px; }
+  .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 34px rgba(0,0,0,.5)}
+  .cover{height:104px;display:grid;place-items:center;font-size:40px;background:linear-gradient(135deg,#2c2560,#432a6b)}
+  .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .name{font-weight:700;font-size:16.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .tag{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+       padding:2px 7px;border-radius:999px;background:#2a2358;border:1px solid var(--line);color:#cfc9ff}
+  .tag.local{background:#1f3a2c;border-color:#2f6b46;color:#8ff0b6}
+  .tag.warn{background:#3d2a1c;border-color:#6b4a2f;color:#ffc48f}
+  .desc{color:var(--muted);font-size:13.5px;line-height:1.45;flex:1}
+  .play{padding:9px 12px;border-radius:10px;text-align:center;font-weight:700;font-size:13.5px;
+        background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff}
+  footer{max-width:1120px;margin:56px auto 0;color:#77759b;font-size:12.5px;text-align:center;border-top:1px solid var(--line);padding-top:18px}
 </style>
 </head>
 <body>
-  <h1>Those Who Study</h1>
-  <p class="tagline">Pick a game and play — no downloads, no signup</p>
-
-  <input id="search" type="text" placeholder="🔎  Search games...">
-
-  <div class="grid" id="games">
-    <!-- Static cards: ALWAYS show, even on school wifi -->
-    <a class="card" href="drive-mad.htm" style="background:linear-gradient(135deg,#ff416c,#ff4b2b)">
-      <span class="icon">🏎️</span>
-      <span class="name">Drive Mad</span><br>
-      <span class="play">▶ Play</span>
-    </a>
-    <a class="card" href="bloons-TD-5.html" style="background:linear-gradient(135deg,#36d1dc,#5b86e5)">
-      <span class="icon">🎈</span>
-      <span class="name">Bloons TD 5</span><br>
-      <span class="play">▶ Play</span>
-    </a>
+<header>
+  <h1>Those Who <b>Study</b></h1>
+  <p class="sub">Only for those who study and not game. Pick a game, press play, go back to studying.</p>
+  <div class="bar">
+    <input id="q" type="search" placeholder="Search games…" autocomplete="off">
+    <span class="count" id="count"></span>
   </div>
-  <div id="status"></div>
+</header>
 
-  <script>
-    const repo = "800012693-cmyk/Those-who-study";
-    const box = document.getElementById("games");
-    const status = document.getElementById("status");
-    const staticGames = ["drive-mad.htm", "bloons-td-5.html"];
-    const emojis = ["🚀","🐉","⚽","👾","🧩","🕹️","⚔️","🏰","🐍","🎯"];
-    const grads = [
-      "linear-gradient(135deg,#7f00ff,#e100ff)",
-      "linear-gradient(135deg,#11998e,#38ef7d)",
-      "linear-gradient(135deg,#fc4a1a,#f7b733)",
-      "linear-gradient(135deg,#00c6ff,#0072ff)",
-      "linear-gradient(135deg,#f953c6,#b91d73)",
-      "linear-gradient(135deg,#414d0b,#727a17)"
-    ];
-    function hash(str) {
-      let h = 0;
-      for (const ch of str) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-      return h;
-    }
+<main>
+<div class="grid" id="grid">
 
-    /* GAMES HOSTED ON OTHER SITES.
-       Plain links: clicking one opens that game on its own site, new tab. */
-    const linkedGames = [
-      { name: "2048",         emoji: "🔢", url: "https://play2048.co/",                       from: "play2048.co" },
-      { name: "Astray",       emoji: "🧭", url: "https://wwwtyro.github.io/Astray/",          from: "github.io" },
-      { name: "Clumsy Bird",  emoji: "🐤", url: "https://ellisonleao.github.io/clumsy-bird/", from: "github.io" },
-      { name: "Cluster Rush", emoji: "🚚", url: "https://gameversemaster.github.io/cluster/",          from: "ME" },
-      { name: "Getaway Shootout", emoji: "⚔️", url: "https://gapslice.github.io/GetawayShootout/",          from: "ME" },
-      { name: "Run 3", emoji: "👾", url: "https://qerionx.github.io/games/run3/",          from: "ME" },
-      { name: "OvO", emoji: "🧩", url: "https://pv-a0e0232d6e76-97cc2542-9ab1-4e86-a6b3-20df80510c1f.style.dev/",          from: "ME" },
-      { name: "Snow Rider 3D", emoji: "🐉", url: "https://pv-a0e0232d6e76-1414ee1e-570a-4c3a-a175-8eb954ba730c.style.dev/",          from: "ME" }
+  <a class="card" href="games/ovo/" data-name="ovo parkour platformer dedra">
+    <div class="cover">🏃</div>
+    <div class="body">
+      <div class="name">OvO <span class="tag local">Self-hosted</span></div>
+      <p class="desc">Wall jumps, slides and tight timing across 60+ parkour levels.</p>
+      <div class="play">Play OvO</div>
+    </div>
+  </a>
 
-    ];
+  <a class="card" href="games/snow-rider-3d/" data-name="snow rider 3d sled winter unity sleigh">
+    <div class="cover">🛷</div>
+    <div class="body">
+      <div class="name">Snow Rider 3D <span class="tag local">Self-hosted</span></div>
+      <p class="desc">Endless sled run down a snowy slope. Dodge trees, grab gifts, unlock sleighs.</p>
+      <div class="play">Play Snow Rider</div>
+    </div>
+  </a>
 
-    function linkedCard(g) {
-      const a = document.createElement("a");
-      a.className = "card";
-      a.href = g.url;
-      a.target = "_blank";            // open on the other site, not inside this page
-      a.rel = "noopener";
-      a.style.background = grads[hash(g.name) % grads.length];
-      a.innerHTML =
-        '<span class="ext">↗ ' + g.from + '</span>' +
-        '<span class="icon">' + g.emoji + '</span>' +
-        '<span class="name">' + g.name + '</span><br>' +
-        '<span class="play">▶ Play</span>';
-      return a;
-    }
+  <a class="card" href="12-mini-battles.html" data-name="12 mini battles">
+    <div class="cover">⚔️</div>
+    <div class="body">
+      <div class="name">12 Mini Battles</div>
+      <p class="desc">Tiny stick-figure armies fighting it out across a dozen battlefields.</p>
+      <div class="play">Play</div>
+    </div>
+  </a>
 
-    // Rendered up front, so these show even when the GitHub API is blocked.
-    const linkedFrag = document.createDocumentFragment();
-    linkedGames.forEach(g => linkedFrag.appendChild(linkedCard(g)));
-    box.insertBefore(linkedFrag, box.firstChild);
+  <a class="card" href="basket-random%20(1).html" data-name="basket random basketball">
+    <div class="cover">🏀</div>
+    <div class="body">
+      <div class="name">Basket Random</div>
+      <p class="desc">Two-player basketball with deliberately ridiculous physics.</p>
+      <div class="play">Play</div>
+    </div>
+  </a>
 
-    document.getElementById("search").addEventListener("input", e => {
-      const q = e.target.value.toLowerCase();
-      document.querySelectorAll(".card").forEach(c => {
-        c.style.display = c.textContent.toLowerCase().includes(q) ? "" : "none";
-      });
-    });
-    fetch("https://api.github.com/repos/" + repo + "/contents/")
-      .then(r => r.json())
-      .then(files => {
-        if (!Array.isArray(files)) throw new Error("bad");
-        files
-          .filter(f => f.type === "file"
-            && /\.html?$/i.test(f.name)
-            && f.name.toLowerCase() !== "index.html"
-            && !staticGames.includes(f.name.toLowerCase()))
-          .forEach(f => {
-            const h = hash(f.name);
-            const pretty = f.name.replace(/\.html?$/i, "")
-              .replace(/[-_]/g, " ")
-              .replace(/\b\w/g, c => c.toUpperCase());
-            const a = document.createElement("a");
-            a.className = "card";
-            a.href = f.name;
-            a.style.background = grads[h % grads.length];
-            a.innerHTML =
-              '<span class="badge">NEW</span>' +
-              '<span class="icon">' + emojis[h % emojis.length] + '</span>' +
-              '<span class="name">' + pretty + '</span><br>' +
-              '<span class="play">▶ Play</span>';
-            box.appendChild(a);
-          });
-        status.textContent = "";
-      })
-      .catch(() => {
-        status.textContent = "(couldn't auto-load extra games on this network — they'll show at home)";
-      });
-  </script>
+  <a class="card" href="bloons-TD-5.html" data-name="bloons td 5 tower defense monkeys">
+    <div class="cover">🎈</div>
+    <div class="body">
+      <div class="name">Bloons TD 5</div>
+      <p class="desc">The classic tower defence — pop balloons with monkeys across 50+ tracks.</p>
+      <div class="play">Play</div>
+    </div>
+  </a>
+
+  <a class="card" href="circloO-2.html" data-name="circloo circlo o 2 physics">
+    <div class="cover">🔵</div>
+    <div class="body">
+      <div class="name">CircloO 2</div>
+      <p class="desc">Physics platformer where rolling is the only way forward.</p>
+      <div class="play">Play</div>
+    </div>
+  </a>
+
+  <a class="card" href="crossy-road.htm" data-name="crossy road chicken endless hopper">
+    <div class="cover">🐔</div>
+    <div class="body">
+      <div class="name">Crossy Road</div>
+      <p class="desc">Hop the chicken across endless roads, rivers and train tracks.</p>
+      <div class="play">Play</div>
+    </div>
+  </a>
+
+  <a class="card" href="drive-mad.htm" data-name="drive mad car stunt driving">
+    <div class="cover">🚗</div>
+    <div class="body">
+      <div class="name">Drive Mad</div>
+      <p class="desc">Stunt driving where every level is one bad angle away from a crash.</p>
+      <div class="play">Play</div>
+    </div>
+  </a>
+
+  <a class="card" href="eggy-car.html" data-name="eggy car egg driving">
+    <div class="cover">🥚</div>
+    <div class="body">
+      <div class="name">Eggy Car</div>
+      <p class="desc">Drive an egg uphill without cracking it. Harder than it sounds.</p>
+      <div class="play">Play</div>
+    </div>
+  </a>
+
+  <a class="card" href="flood-runner-4.html" data-name="flood runner 4 water escape">
+    <div class="cover">🌊</div>
+    <div class="body">
+      <div class="name">Flood Runner 4</div>
+      <p class="desc">Outrun the rising water across rooftops and collapsing platforms.</p>
+      <div class="play">Play</div>
+    </div>
+  </a>
+
+  <a class="card" href="Getaway-Shootout-main.zip" data-name="getaway shootout archive">
+    <div class="cover">🔫</div>
+    <div class="body">
+      <div class="name">Getaway Shootout <span class="tag warn">Zip</span></div>
+      <p class="desc">Archive only — extract it first, then open the HTML inside.</p>
+      <div class="play">Download</div>
+    </div>
+  </a>
+
+</div>
+</main>
+
+<footer>Games marked Self-hosted are full builds stored in <code>games/</code>. Everything runs in the browser; no installs, no logins.</footer>
+
+<script>
+  const q=document.getElementById('q'),cards=[...document.querySelectorAll('.card')],count=document.getElementById('count');
+  function render(){
+    const t=q.value.trim().toLowerCase();let n=0;
+    for(const c of cards){const hit=!t||c.dataset.name.includes(t)||c.textContent.toLowerCase().includes(t);c.style.display=hit?'':'none';if(hit)n++;}
+    count.textContent=n+(n===1?' game':' games');
+  }
+  q.addEventListener('input',render);render();
+</script>
 </body>
 </html>
