@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Awesome Tanks</title>
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+        <link href="styles/main.css" rel="stylesheet">
+        <link href="styles/fonts.css" rel="stylesheet">
+        <meta name="apple-mobile-web-app-title" content="Awesome Tanks">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+  #fsBtn { position:fixed; right:10px; bottom:10px; z-index:99999; opacity:.35;
+           background:rgba(0,0,0,.6); color:#fff; border:1px solid rgba(255,255,255,.4);
+           border-radius:6px; padding:6px 10px; font:12px system-ui,sans-serif; cursor:pointer; }
+  #fsBtn:hover { opacity:1; }
+</style>
+<script>
+  function toggleFullscreen() {
+    if (document.fullscreenElement) { document.exitFullscreen(); }
+    else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
+  }
+</script>
+</head>
+    <body>
+        <p style="font-family: 'Gunplay'; position: absolute; pointer-events: none; opacity: 0">Font loader</p>
+        <script>
+            var AT = {
+                // URL where an user will be redirected after clicking "Play" button on the Site lock screen
+                'SITE_LOCK_TARGET': '//www.coolmathgames.com/'
+            };
+
+            var WebFontConfig = {
+                'classes': false,
+                'timeout': 0,
+                'active': function() {},
+                'custom': {'families': ['Gunplay'], 'urls': ['styles/fonts.css']}
+            };
+        </script>
+        <script src="awesome_tanks_2.js"></script>
+    <button id="fsBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+</body>
+</html>
