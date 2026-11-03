@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      #fsBtn {
+        position: fixed; right: 10px; bottom: 10px; z-index: 99999; opacity: .35;
+        background: rgba(0,0,0,.6); color: #fff; border: 1px solid rgba(255,255,255,.4);
+        border-radius: 6px; padding: 6px 10px; font: 12px system-ui, sans-serif; cursor: pointer;
+      }
+      #fsBtn:hover { opacity: 1; }
+    </style>
+    <script>
+      function toggleFullscreen() {
+        if (document.fullscreenElement) { document.exitFullscreen(); }
+        else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
+      }
+    </script>
+    <meta charset="utf-8">
+    <title>Doodle Jump | OutRed</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <canvas id="canvas">Aww, your browser doesn't support HTML5!</canvas>
+      <div id="mainMenu">
+        <h1>doodle jump</h1>
+        <h3>brought to you</h3>
+        <h3>...by <a href="https://outred.org" target="_blank">OutRed Games</a></h3>
+        <p class="info">use <span class="key left">←</span> <span class="key right">→</span> to move and space to (re) start...</p>
+        <a class="button" href="javascript:init()">Play</a>
+      </div>
+      <div id="gameOverMenu">
+        <h1>game over!</h1>
+        <h3 id="go_score">you scored 0 points</h3>
+        <a class="button" href="javascript:reset()">Restart</a>
+      </div>
+      <img id="sprite" src="sprites.png"/>
+      <div id="scoreBoard">
+        <p id="score">0</p>
+      </div>
+    </div>
+    <script src="main.js"></script>
+    <button id="fsBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+</body>
+</html>
