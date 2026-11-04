@@ -5,43 +5,95 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Those Who Study — Games</title>
 <style>
-  :root{--bg:#0f0c29;--card:#1b1a33;--line:#33305c;--text:#f2f2ff;--muted:#a6a5c4;--accent:#ff2e63;--accent2:#8b5cf6}
+  :root{
+    --bg:#0b0a1a; --card:rgba(255,255,255,.045); --line:rgba(255,255,255,.09);
+    --text:#f4f4ff; --muted:#a7a5c8; --accent:#ff2e63; --accent2:#8b5cf6; --accent3:#22d3ee;
+  }
   *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
   body{
     font-family:'Poppins',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--text);
-    min-height:100vh;padding:56px 20px 70px;
-    background:linear-gradient(-45deg,#0f0c29,#302b63,#24243e,#1a1a2e);background-size:400% 400%;
-    animation:bg 14s ease infinite;
+    min-height:100vh;padding:64px 20px 70px;background:var(--bg);overflow-x:hidden;
   }
-  @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  header{max-width:1120px;margin:0 auto 34px;text-align:center}
-  h1{font-size:clamp(26px,5vw,46px);letter-spacing:-.02em;margin-bottom:8px;text-shadow:0 0 18px rgba(255,46,99,.75)}
-  h1 b{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .sub{color:var(--muted);font-size:15px;margin-bottom:26px}
-  .bar{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
-  #q{width:min(430px,92%);padding:13px 22px;border-radius:999px;border:2px solid var(--accent);
-     background:rgba(0,0,0,.35);color:#fff;font-size:15px;outline:none}
+  /* aurora glow blobs */
+  .glow{position:fixed;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;z-index:0}
+  .g1{width:520px;height:520px;top:-160px;left:-120px;background:radial-gradient(circle,rgba(139,92,246,.5),transparent 70%);animation:drift1 18s ease-in-out infinite}
+  .g2{width:560px;height:560px;bottom:-200px;right:-140px;background:radial-gradient(circle,rgba(255,46,99,.38),transparent 70%);animation:drift2 22s ease-in-out infinite}
+  .g3{width:420px;height:420px;top:38%;left:58%;background:radial-gradient(circle,rgba(34,211,238,.22),transparent 70%);animation:drift1 26s ease-in-out infinite reverse}
+  @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,50px) scale(1.15)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,-40px) scale(1.1)}}
+  header,main,footer{position:relative;z-index:1}
+  header{max-width:1120px;margin:0 auto 30px;text-align:center}
+  h1{font-size:clamp(30px,6vw,56px);letter-spacing:-.03em;margin-bottom:10px;line-height:1.05}
+  h1 b{background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));background-clip:text;-webkit-background-clip:text;color:transparent;
+       animation:hue 8s linear infinite;background-size:200% 100%}
+  @keyframes hue{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  .sub{color:var(--muted);font-size:15.5px;margin-bottom:26px}
+  .bar{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
+  .search-box{position:relative;display:inline-block}
+  .search-box::before{content:"🔍";position:absolute;left:15px;top:50%;transform:translateY(-52%);font-size:14px;opacity:.7;pointer-events:none}
+  #q{width:min(430px,86vw);padding:13px 20px 13px 42px;border-radius:999px;border:1px solid var(--line);
+     background:rgba(255,255,255,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+     color:#fff;font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s}
   #q::placeholder{color:#8e8dae}
-  .count{color:var(--muted);font-size:13.5px}
+  #q:focus{border-color:var(--accent2);box-shadow:0 0 0 4px rgba(139,92,246,.18)}
+  #random{padding:12px 18px;border-radius:999px;border:1px solid var(--line);cursor:pointer;
+     background:rgba(255,255,255,.06);color:var(--text);font:inherit;font-size:14px;backdrop-filter:blur(12px);
+     transition:transform .15s,border-color .2s,background .2s}
+  #random:hover{transform:translateY(-2px) rotate(-2deg);border-color:var(--accent);background:rgba(255,46,99,.14)}
+  .chips{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:18px}
+  .chip{padding:7px 15px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);
+      color:var(--muted);font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;user-select:none}
+  .chip:hover{color:#fff;border-color:rgba(255,255,255,.25);transform:translateY(-1px)}
+  .chip.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;
+      box-shadow:0 6px 18px rgba(255,46,99,.35)}
+  .count{color:var(--muted);font-size:13.5px;margin-top:16px;display:inline-block;
+      padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
   main{max-width:1120px;margin:0 auto}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px;margin-top:30px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:20px;margin-top:22px}
   .card{
-    background:linear-gradient(180deg,#232045,var(--card));border:1px solid var(--line);border-radius:16px;
+    position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;
     overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:var(--text);
-    transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+    animation:pop .55s cubic-bezier(.22,1,.36,1) both;
   }
-  .card:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 14px 34px rgba(0,0,0,.5)}
-  .cover{height:104px;display:grid;place-items:center;font-size:40px;background:linear-gradient(135deg,#2c2560,#432a6b)}
+  .card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
+    background:linear-gradient(135deg,rgba(255,46,99,.7),rgba(139,92,246,.5),rgba(34,211,238,.5));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .25s;pointer-events:none}
+  .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.55)}
+  .card:hover::before{opacity:1}
+  @keyframes pop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+  .cover{--h:265;height:110px;display:grid;place-items:center;font-size:44px;position:relative;overflow:hidden;
+      background:linear-gradient(135deg,hsl(var(--h) 55% 20%/ .55),hsl(calc(var(--h) + 45) 60% 30%/ .45)),
+      linear-gradient(180deg,rgba(255,255,255,.03),transparent)}
+  .card:nth-child(4n+1){--h:255}.card:nth-child(4n+2){--h:330}.card:nth-child(4n+3){--h:200}.card:nth-child(4n){--h:150}
+  .cover span{position:relative;z-index:1;filter:drop-shadow(0 6px 14px rgba(0,0,0,.5));transition:transform .25s}
+  .cover::after{content:"";position:absolute;width:120%;height:60%;top:-30%;left:-10%;
+      background:radial-gradient(ellipse at top,rgba(255,255,255,.14),transparent 60%)}
+  .card:hover .cover span{transform:scale(1.18) rotate(-6deg)}
+  .card:hover .cover{filter:saturate(1.25) brightness(1.06)}
   .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
   .name{font-weight:700;font-size:16.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .tag{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
-       padding:2px 7px;border-radius:999px;background:#2a2358;border:1px solid var(--line);color:#cfc9ff}
-  .tag.local{background:#1f3a2c;border-color:#2f6b46;color:#8ff0b6}
-  .tag.warn{background:#3d2a1c;border-color:#6b4a2f;color:#ffc48f}
-  .desc{color:var(--muted);font-size:13.5px;line-height:1.45;flex:1}
-  .play{padding:9px 12px;border-radius:10px;text-align:center;font-weight:700;font-size:13.5px;
-        background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff}
-  footer{max-width:1120px;margin:56px auto 0;color:#77759b;font-size:12.5px;text-align:center;border-top:1px solid var(--line);padding-top:18px}
+  .tag{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+       padding:2.5px 8px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:#cfc9ff}
+  .tag.local{background:rgba(79,222,134,.12);border-color:rgba(79,222,134,.45);color:#7ef0b0}
+  .tag.warn{background:rgba(255,196,143,.1);border-color:rgba(255,196,143,.4);color:#ffc48f}
+  .desc{color:var(--muted);font-size:13.5px;line-height:1.5;flex:1}
+  .play{margin-top:2px;padding:9px 12px;border-radius:12px;text-align:center;font-weight:700;font-size:13.5px;
+        background:linear-gradient(90deg,var(--accent),var(--accent2));background-size:160% 100%;
+        color:#fff;transition:background-position .3s,box-shadow .25s,transform .15s;
+        box-shadow:0 4px 14px rgba(255,46,99,.25)}
+  .play::after{content:"\2192";display:inline-block;margin-left:0;width:0;overflow:hidden;
+        transition:width .25s ease,margin .25s ease;white-space:nowrap}
+  .card:hover .play{background-position:100% 0;box-shadow:0 6px 20px rgba(139,92,246,.45);transform:translateY(-1px)}
+  .card:hover .play::after{width:14px;margin-left:6px}
+  footer{max-width:1120px;margin:60px auto 0;color:#77759b;font-size:12.5px;text-align:center;
+      border-top:1px solid var(--line);padding-top:22px;line-height:1.7}
+  footer code{background:rgba(255,255,255,.07);padding:2px 6px;border-radius:6px}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  @media (max-width:560px){.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}.cover{height:92px;font-size:36px}}
 </style>
 </head>
 <body>
@@ -49,9 +101,12 @@
   <h1>Those Who <b>Study</b></h1>
   <p class="sub">Only for those who study and not game. Pick a game, press play, go back to studying.</p>
   <div class="bar">
-    <input id="q" type="search" placeholder="Search games…" autocomplete="off">
-    <span class="count" id="count"></span>
+    <div class="search-box">
+      <input id="q" type="search" placeholder="Search games…" autocomplete="off">
+    </div>
+    <button id="random" title="Jump to a random game">🎲 Surprise me</button>
   </div>
+  <div class="chips" id="chips"></div>
 </header>
 
 <main>
@@ -435,12 +490,47 @@
 
 <script>
   const q=document.getElementById('q'),cards=[...document.querySelectorAll('.card')],count=document.getElementById('count');
+  // staggered entrance
+  cards.forEach((c,i)=>c.style.animationDelay=(Math.min(i*28,700))+'ms');
+  // wrap cover emoji in a span so hover transforms can animate it
+  document.querySelectorAll('.cover').forEach(cv=>{cv.innerHTML='<span>'+cv.textContent.trim()+'</span>';});
+  // ---- categories ----
+  const CATS={
+    '2-Player':['Getaway Shootout','Boxhead 2Play','Rooftop Snipers','Fireboy & Watergirl','Bad Ice Cream','Tank Trouble 2','Basket Random','Boxing Random','Volley Random','12 Mini Battles'],
+    'Racing':['PolyTrack','Moto X3M','Moto X3M Pool Party','Moto X3M Spooky','Moto X3M Winter','Drive Mad','Eggy Car','Snow Rider 3D','Cluster Rush'],
+    'Horror':['Slender','Backrooms',"Baldi's Basics",'Pixel Jackpot','Buckshot Roulette'],
+    'Puzzle & Idle':['2048','CircloO 2',"The World's Hardest Game 2",'Cookie Clicker','Snake','Google Snake'],
+    'Arcade & Strategy':['Bloons TD 5','Awesome Tanks 2','Stickman Hook','Stick Merge','Rabbit Samurai','N-GON','Doodle Jump','Flappy Bird','Elastic Man','Crossy Road','Flood Runner 4']
+  };
+  const catOf={};
+  Object.entries(CATS).forEach(([cat,names])=>names.forEach(n=>catOf[n.toLowerCase()]=cat));
+  const UNKNOWN='Arcade & Strategy';
+  let activeCat='';
+  const chipsBox=document.getElementById('chips');
+  ['All',...Object.keys(CATS)].forEach(name=>{
+    const b=document.createElement('button');b.className='chip'+(name==='All'?' on':'');b.textContent=name;
+    b.onclick=()=>{activeCat=(name==='All'?'':name);[...chipsBox.children].forEach(x=>x.classList.toggle('on',x===b));render();};
+    chipsBox.appendChild(b);
+  });
+  function catFor(c){
+    let t=(c.querySelector('.name')?c.querySelector('.name').textContent:'').trim();
+    t=t.split('Self-hosted')[0].trim();
+    return catOf[t.toLowerCase()]||UNKNOWN;
+  }
   function render(){
     const t=q.value.trim().toLowerCase();let n=0;
-    for(const c of cards){const hit=!t||c.dataset.name.includes(t)||c.textContent.toLowerCase().includes(t);c.style.display=hit?'':'none';if(hit)n++;}
+    for(const c of cards){
+      const hit=(!t||c.dataset.name.includes(t)||c.textContent.toLowerCase().includes(t))
+             &&(!activeCat||catFor(c)===activeCat);
+      c.style.display=hit?'':'none';if(hit)n++;
+    }
     count.textContent=n+(n===1?' game':' games');
   }
   q.addEventListener('input',render);render();
+  document.getElementById('random').onclick=()=>{
+    const vis=cards.filter(c=>c.style.display!=='none');
+    if(vis.length)vis[Math.floor(Math.random()*vis.length)].scrollIntoView({behavior:'smooth',block:'center'});
+  };
 </script>
 </body>
 </html>
