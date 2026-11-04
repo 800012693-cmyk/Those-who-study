@@ -6,3 +6,6 @@ button { background: #333945; color: white; border: 1px solid #616b7e; border-ra
 main { max-width: 1200px; margin: auto; }
 #game { width: 100%; height: min(75vh, 675px); background: #231f20; }
 #status { text-align: center; }
+
+#newver { margin: 0.75rem auto 0; max-width: 960px; font-size: 0.9rem; }
+#newver a { color: #4da3ff; }
