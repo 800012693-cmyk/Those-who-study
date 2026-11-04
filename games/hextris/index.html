@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hextris</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui" />
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <link rel="stylesheet" href="style/fa/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+    <script type="text/javascript" src="vendor/hammer.min.js"></script>
+    <script type="text/javascript" src="vendor/js.cookie.js"></script>
+    <script type="text/javascript" src="vendor/jsonfn.min.js"></script>
+    <script type="text/javascript" src="vendor/keypress.min.js"></script>
+    <script type="text/javascript" src="vendor/jquery.js"></script>
+    <script type="text/javascript" src="js/save-state.js"></script>
+    <script type="text/javascript" src="js/view.js"></script>
+    <script type="text/javascript" src="js/wavegen.js"></script>
+    <script type="text/javascript" src="js/math.js"></script>
+    <script type="text/javascript" src="js/Block.js"></script>
+    <script type="text/javascript" src="js/Hex.js"></script>
+    <script type="text/javascript" src="js/Text.js"></script>
+    <script type="text/javascript" src="js/comboTimer.js"></script>
+    <script type="text/javascript" src="js/checking.js"></script>
+    <script type="text/javascript" src="js/update.js"></script>
+    <script type="text/javascript" src="js/render.js"></script>
+    <script type="text/javascript" src="js/input.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/initialization.js"></script>
+    <script type="text/javascript" async src="../../../../hextris.io/scripts/a.html"></script>
+    <script src="vendor/sweet-alert.min.js"></script>
+    <link rel="stylesheet" href="style/rrssb.css" />
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <div id="overlay" class="faded overlay"></div>
+    <div id="startBtn"></div>
+    <div id="helpScreen" class="unselectable">
+      <div id="inst_main_body"></div>
+    </div>
+    <img id="openSideBar" class="helpText" src="images/btn_help.svg" />
+    <div class="faded overlay"></div>
+    <img id="pauseBtn" src="images/btn_pause.svg" />
+    <img id="restartBtn" src="images/btn_restart.svg" />
+    <div id="HIGHSCORE">HIGH SCORE</div>
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(window, document, "script", "../../../../www.google-analytics.com/analytics.js", "ga");
+      ga("create", "UA-51272720-2", "auto");
+      ga("send", "pageview");
+    </script>
+    <div id="highScoreInGameText">
+      <div id="highScoreInGameTextHeader">HIGH SCORE</div>
+      <div id="currentHighScore">10292</div>
+    </div>
+    <div id="gameoverscreen">
+      <div id="container">
+        <div id="gameOverBox" class="GOTitle">GAME OVER</div>
+        <div id="cScore">1843</div>
+        <div id="highScoresTitle" class="GOTitle">HIGH SCORES</div>
+        <div class="score">
+          <span class="scoreNum">1.</span>
+          <div id="1place" style="display: inline;">0</div>
+        </div>
+        <div class="score">
+          <span class="scoreNum">2.</span>
+          <div id="2place" style="display: inline;">0</div>
+        </div>
+        <div class="score">
+          <span class="scoreNum">3.</span>
+          <div id="3place" style="display: inline;">0</div>
+        </div>
+      </div>
+      <div id="bottomContainer">
+        <img id="restart" src="images/btn_restart.svg" height="57px" />
+        <div id="socialShare">
+          <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+          <svg width="224.6377px" height="57px" viewBox="0 0 255 65" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <title>Share button</title>
+            <defs></defs>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+              <g id="Game-over-" sketch:type="MSArtboardGroup" transform="translate(-95.000000, -565.000000)">
+                <g id="Share-button" sketch:type="MSLayerGroup" transform="translate(95.000000, 565.000000)">
+                  
+                  <text
+                    style="cursor: pointer;"
+                    class="popup"
+                    onclick="window.open('https://twitter.com/intent/tweet?text=Can you beat my score of '+ score +' points at&button_hashtag=hextris ? http://hextris.github.io/hextris @hextris','name','width=600,height=400')"
+                    id="SHARE-MY-SCORE!"
+                    sketch:type="MSTextLayer"
+                    font-family="Exo"
+                    font-size="16"
+                    font-weight="420"
+                    fill="#FFFFFF"
+                  >
+                    <tspan x="67" y="39">SHARE MY SCORE!</tspan>
+                  </text>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div id="buttonCont">
+          <ul class="rrssb-buttons">
+            <li class="rrssb-facebook">
+              
+            </li>
+            <li class="rrssb-twitter">
+              <a href="http://twitter.com/home?status=Play%20Hextris!%20-%20http://hextris.github.io/#hextris" class="popup">
+                <span class="rrssb-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+                    <path
+                      d="M24.253 8.756C24.69 17.08 18.297 24.182 9.97 24.62c-3.122.162-6.22-.646-8.86-2.32 2.702.18 5.375-.648 7.507-2.32-2.072-.248-3.818-1.662-4.49-3.64.802.13 1.62.077 2.4-.154-2.482-.466-4.312-2.586-4.412-5.11.688.276 1.426.408 2.168.387-2.135-1.65-2.73-4.62-1.394-6.965C5.574 7.816 9.54 9.84 13.802 10.07c-.842-2.738.694-5.64 3.434-6.48 2.018-.624 4.212.043 5.546 1.682 1.186-.213 2.318-.662 3.33-1.317-.386 1.256-1.248 2.312-2.4 2.942 1.048-.106 2.07-.394 3.02-.85-.458 1.182-1.343 2.15-2.48 2.71z"
+                    />
+                  </svg>
+                </span>
+                <span class="rrssb-text">twitter</span>
+              </a>
+            </li>
+          </ul>
+          <div id="badges">
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      (function addRussianSocialShare() {
+        var lang = navigator.language || navigator.userLanguage;
+        if (lang.substr(0, 2) == "ru") {
+          $(".rrssb-facebook").remove();
+          var n = $.parseHTML(
+            '<li class="rrssb-vk"></li>'
+          );
+          $(".rrssb-buttons").prepend(n);
+        }
+      })();
+    </script>
+    <script type="text/javascript" src="vendor/rrssb.min.js"></script>
+  <style>#fsBtn{position:fixed;right:10px;bottom:10px;z-index:99999;opacity:.35;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:6px 10px;font:12px system-ui,sans-serif;cursor:pointer}#fsBtn:hover{opacity:1}</style>
+<script>
+  function toggleFullscreen() {
+    if (document.fullscreenElement) { document.exitFullscreen(); }
+    else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
+  }
+</script>
+<button id="fsBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+</body>
+</html>
