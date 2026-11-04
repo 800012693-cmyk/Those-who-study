@@ -1,24 +1,5 @@
 /* No-op CrazyGames SDK stub: the build embeds the official CrazySDK and calls it for
    ads/user data. Without the portal script this keeps every SDK call harmless. */
-window.CrazyGames = {
-  SDK: {
-    init: function(){ return Promise.resolve(); },
-    gameplayStart: function(){}, gameplayStop: function(){},
-    ad: { requestAd: function(){ return Promise.reject(new Error('ads-unavailable')); } },
-    banner: function(type, cb){ try { (cb||function(){})("finished"); } catch(e){} },
-    rewardedBanner: function(cb){ try { (cb||function(){})("finished"); } catch(e){} },
-    user: { getUser: function(){ return Promise.resolve(null); },
-            getToken: function(){ return Promise.resolve(null); },
-            getUserAndToken: function(){ return Promise.resolve(null); } },
-    data: { clearAllItems: function(){}, deleteItem: function(k){ try{ localStorage.removeItem(k); }catch(e){} },
-            getItem: function(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } },
-            setItem: function(k, v){ try{ localStorage.setItem(k, v); }catch(e){} } },
-    environment: { getEnvironment: function(){ return Promise.resolve('local'); } },
-    game: { sdkGameLoadingStart: function(){}, sdkGameLoadingStop: function(){} },
-    hasAllTranslationCached: function(){ return Promise.resolve(true); }
-  }
-};
-
 function toggleFullscreen() {
   if (document.fullscreenElement) { document.exitFullscreen(); }
   else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
