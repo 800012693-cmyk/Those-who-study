@@ -56,6 +56,20 @@
   </style>
 
 
+<style id="siteFs">
+#fsBtn {
+  position: fixed; right: 10px; bottom: 10px; z-index: 99999; opacity: .35;
+  background: rgba(0,0,0,.6); color: #fff; border: 1px solid rgba(255,255,255,.4);
+  border-radius: 6px; padding: 6px 10px; font: 12px system-ui, sans-serif; cursor: pointer;
+}
+#fsBtn:hover { opacity: 1; }
+</style>
+<script>
+function toggleFullscreen() {
+  if (document.fullscreenElement) { document.exitFullscreen(); }
+  else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
+}
+</script>
 </head>
 
 <body>
@@ -353,6 +367,7 @@ function rewriteURL(original) {
   <script>
     
   </script>
+<button id="fsBtn" onclick="toggleFullscreen()">&#9974; Fullscreen</button>
 </body>
 
 </html>

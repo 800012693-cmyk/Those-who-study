@@ -306,4 +306,26 @@ document.close()
 
 });
 </script>
+<style id="siteFs">
+#fsBtn {
+  position: fixed; right: 10px; bottom: 10px; z-index: 2147483647; opacity: .35;
+  background: rgba(0,0,0,.6); color: #fff; border: 1px solid rgba(255,255,255,.4);
+  border-radius: 6px; padding: 6px 10px; font: 12px system-ui, sans-serif; cursor: pointer;
+}
+#fsBtn:hover { opacity: 1; }
+</style>
+<script id="siteFsJs">
+function toggleFullscreen() {
+  if (document.fullscreenElement) { document.exitFullscreen(); }
+  else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
+}
+document.addEventListener('DOMContentLoaded', function () {
+  if (!document.getElementById('fsBtn')) {
+    var b = document.createElement('button');
+    b.id = 'fsBtn'; b.textContent = '\u26F6 Fullscreen';
+    b.addEventListener('click', toggleFullscreen);
+    (document.body || document.documentElement).appendChild(b);
+  }
+});
+</script>
 </html>
