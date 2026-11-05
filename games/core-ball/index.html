@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Core Ball</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas style="display: none;" id="stage"></canvas>
+    <div id="begin">
+      <section class="center-box">
+        <span class="title">Core Ball</span>
+        <div class="button">
+          <div id="txtAr">▶</div>
+          <div class="text"></div>
+        </div>
+        <div class="op">
+          <span id="btnFW"></span>
+          <span id="btnReset"></span>
+          <div id="tip"></div>
+        </div>
+      </section>
+      <section id="wxArrow"></section>
+    </div>
+    <script type="text/javascript" src="index.js"></script>
+<style>#fsBtn{position:fixed;right:10px;bottom:10px;z-index:99999;opacity:.35;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:6px 10px;font:12px system-ui,sans-serif;cursor:pointer}#fsBtn:hover{opacity:1}</style>
+<script>
+  function toggleFullscreen() {
+    if (document.fullscreenElement) { document.exitFullscreen(); }
+    else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
+  }
+</script>
+<button id="fsBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Super Stickman Golf</title>
+    <meta name="viewport" content="initial-scale=1.0001, minimum-scale=1.0001, maximum-scale=1.0001, user-scalable=no, minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="stylesheet" type="text/css" href="game.css" />
+    <script type="text/javascript" src="game.js"></script>
+    <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+</head>
+  <div class="gamecenter-activator"></div>
+  <body onload="setTimeout(function(){window.scrollTo(0,1)},1);">
+    <div id="ajaxbar">
+      <div id="game"><canvas id="canvas"></canvas></div>
+      <div id="orientate"><img src="media/landscape.jpg" /></div>
+      <div id="play" class="play" onclick=""><img src="media/cover-start.jpg" /></div>
+    </div>
+  <style>#fsBtn{position:fixed;right:10px;bottom:10px;z-index:99999;opacity:.35;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:6px 10px;font:12px system-ui,sans-serif;cursor:pointer}#fsBtn:hover{opacity:1}</style>
+<script>
+  function toggleFullscreen() {
+    if (document.fullscreenElement) { document.exitFullscreen(); }
+    else if (document.documentElement.requestFullscreen) { document.documentElement.requestFullscreen(); }
+  }
+</script>
+<button id="fsBtn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+</body>
+</html>
