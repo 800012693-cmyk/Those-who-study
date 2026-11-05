@@ -7,13 +7,12 @@
     <script>
       window.RufflePlayer = window.RufflePlayer || {};
       window.RufflePlayer.config = {
-        "publicPath": undefined,
         "polyfills": true,
         "autoplay": "auto",
         "unmuteOverlay": "visible",
         "backgroundColor": "black",
         "letterbox": "fullscreen",
-        "warnOnUnsupportedContent": true,
+        "warnOnUnsupportedContent": false,
         "contextMenu": true,
         "showSwfDownload": false,
         "upgradeToHttps": window.location.protocol === "https:",
@@ -42,7 +41,7 @@
           player.load("sugarsugar2.swf");
       });
     </script>
-    <script src="ruffle/ruffle.js"></script>
+    <script src="../sugar-sugar/ruffle/ruffle.js"></script>
     </center>
   <style>#fsBtn{position:fixed;right:10px;bottom:10px;z-index:99999;opacity:.35;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:6px 10px;font:12px system-ui,sans-serif;cursor:pointer}#fsBtn:hover{opacity:1}</style>
 <script>
