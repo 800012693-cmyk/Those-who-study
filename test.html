@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Game test harness — Those Who Study</title>
+<style>
+  :root{--ink:#0b0d10;--panel:#12161c;--line:rgba(255,255,255,.09);--fg:#eceef3;--dim:#8b93a5;--accent:#5fe0ee;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ink);color:var(--fg);font:400 14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:22px}
+  h1{font-size:16px;font-weight:640;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+  h1 b{width:8px;height:8px;background:var(--accent);border-radius:1px;display:inline-block}
+  h1 span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:400;border:1px solid var(--line);padding:2px 7px;border-radius:2px}
+  form{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin:18px 0 12px;padding:14px;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+  label{display:flex;flex-direction:column;gap:5px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  input,select{background:var(--ink);color:var(--fg);border:1px solid var(--line);border-radius:2px;padding:8px 10px;font:inherit;font-family:var(--mono);font-size:12.5px;min-width:150px}
+  input:focus,select:focus{outline:none;border-color:rgba(95,224,238,.5);box-shadow:0 0 0 3px rgba(95,224,238,.1)}
+  input#path{min-width:280px}
+  button{background:var(--accent);color:#06232a;border:none;border-radius:2px;padding:9px 16px;font:inherit;font-weight:650;font-size:13px;cursor:pointer}
+  button.ghost{background:transparent;color:var(--dim);border:1px solid var(--line)}
+  button:hover{filter:brightness(1.06)}
+  #meta{font-family:var(--mono);font-size:11.5px;color:var(--dim);margin-bottom:10px;min-height:17px}
+  #meta b{color:var(--accent);font-weight:600}
+  #stage{border:1px solid var(--line);border-radius:3px;background:#070809;overflow:auto;display:grid;place-items:center;min-height:320px;padding:0}
+  #frame{width:100%;height:640px;border:0;background:#070809;display:block}
+  #log{margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:3px;background:#070809;color:var(--dim);
+       font-family:var(--mono);font-size:11.5px;line-height:1.6;max-height:190px;overflow:auto;white-space:pre-wrap}
+  #log .ok{color:#7ef0b0}#log .err{color:#ff8080}#log .warn{color:#ffc48f}
+  footer{margin-top:16px;color:#5b6273;font-size:11.5px;max-width:80ch}
+</style>
+</head>
+<body>
+<h1><b></b>Game test harness <span>noindex</span></h1>
+
+<form id="f">
+  <label for="path">Game path
+    <input id="path" name="path" value="games/ovo/" list="presets" spellcheck="false" autocomplete="off">
+    <datalist id="presets">
+      <option value="games/ovo/"></option>
+      <option value="games/polytrack6/"></option>
+      <option value="games/among-us/"></option>
+      <option value="games/buckshot-roulette/"></option>
+      <option value="bloons-TD-5.html"></option>
+      <option value="crossy-road.htm"></option>
+    </datalist>
+  </label>
+  <label for="mode">Embedding mode
+    <select id="mode">
+      <option value="same">iframe — same origin</option>
+      <option value="sandbox">iframe — sandboxed (opaque origin)</option>
+      <option value="popup">pop-out window</option>
+    </select>
+  </label>
+  <label for="size">Viewport
+    <select id="size">
+      <option value="fit">fill stage</option>
+      <option value="390x844">390 × 844 (phone)</option>
+      <option value="768x1024">768 × 1024 (tablet)</option>
+      <option value="1280x720">1280 × 720 (laptop)</option>
+      <option value="1440x900">1440 × 900 (desktop)</option>
+    </select>
+  </label>
+  <button type="submit">Load</button>
+  <button type="button" class="ghost" id="clear">Clear log</button>
+</form>
+
+<p id="meta">Pick a path and press Load.</p>
+<div id="stage"><iframe id="frame" title="Game under test" src="about:blank"></iframe></div>
+<pre id="log"></pre>
+
+<footer>This page is a QA surface, not a disguise: real URL, real title, <code>noindex</code>. The sandboxed mode deliberately removes a usable origin — no <code>localStorage</code>, no same-origin <code>fetch</code> — which is how a game behaves inside a cross-origin frame. Pop-out mode opens the game at its own URL in a separate resizable window.</footer>
+
+<script>
+(function(){
+  var f=document.getElementById('f'), pathEl=document.getElementById('path'), modeEl=document.getElementById('mode'),
+      sizeEl=document.getElementById('size'), frame=document.getElementById('frame'), stage=document.getElementById('stage'),
+      meta=document.getElementById('meta'), log=document.getElementById('log'), popup=null;
+
+  function line(cls,msg){
+    var t=new Date().toTimeString().slice(0,8);
+    var d=document.createElement('div');
+    if(cls) d.className=cls;
+    d.textContent='['+t+'] '+msg;
+    log.appendChild(d); log.scrollTop=log.scrollHeight;
+  }
+
+  function resolvePath(raw){
+    var p=(raw||'').trim().replace(/^\/+/,'');
+    return p;
+  }
+
+  function applySize(){
+    var v=sizeEl.value;
+    if(v==='fit'){ frame.style.width='100%'; frame.style.height='640px'; return; }
+    var parts=v.split('x'), w=+parts[0], h=+parts[1];
+    var avail=stage.clientWidth-2;
+    frame.style.width=(w>avail?avail:w)+'px';
+    frame.style.height=h+'px';
+  }
+
+  function attachConsole(win){
+    try{
+      var origErr=win.console.error, origWarn=win.console.warn;
+      win.console.error=function(){ line('err','console.error: '+[].join.call(arguments,' ')); return origErr.apply(win.console,arguments); };
+      win.console.warn=function(){ line('warn','console.warn: '+[].join.call(arguments,' ')); return origWarn.apply(win.console,arguments); };
+      win.addEventListener('error',function(e){ line('err','uncaught: '+(e.message||'script error')); });
+      win.addEventListener('unhandledrejection',function(e){ line('err','unhandled rejection: '+e.reason); });
+      line('ok','console + error hooks attached (same-origin only)');
+    }catch(e){ line('warn','cannot read frame console: '+e.name+' — expected for opaque origins'); }
+  }
+
+  function load(e){
+    if(e) e.preventDefault();
+    var p=resolvePath(pathEl.value);
+    if(!p){ line('err','empty path'); return; }
+    applySize();
+    var mode=modeEl.value;
+
+    if(mode==='popup'){
+      popup=window.open(p,'game-test-'+Date.now(),'width=1024,height=720,menubar=no,toolbar=no,location=yes,resizable=yes');
+      if(!popup){ line('err','pop-up blocked — allow pop-ups for this origin'); meta.textContent='Pop-up blocked.'; return; }
+      line('ok','pop-out opened: '+p+' (own URL, own title)');
+      meta.innerHTML='mode <b>pop-out</b> · '+p;
+      return;
+    }
+
+    if(mode==='sandbox'){
+      line('warn','sandboxed: opaque origin, storage and same-origin fetch unavailable');
+      frame.setAttribute('sandbox','allow-scripts allow-pointer-lock allow-orientation-lock');
+    }else{
+      frame.removeAttribute('sandbox');
+      line('ok','same-origin embed — storage and console hooks available');
+    }
+
+    var t0=performance.now();
+    frame.onload=function(){
+      var ms=Math.round(performance.now()-t0);
+      line('ok','loaded in '+ms+' ms: '+p);
+      meta.innerHTML='mode <b>'+mode+'</b> · '+p+' · <b>'+ms+' ms</b>';
+      if(mode==='same') attachConsole(frame.contentWindow);
+    };
+    frame.src=p;
+    meta.innerHTML='loading <b>'+p+'</b> …';
+  }
+
+  f.addEventListener('submit',load);
+  sizeEl.addEventListener('change',function(){ if(frame.getAttribute('src')!=='about:blank') applySize(); });
+  document.getElementById('clear').addEventListener('click',function(){ log.textContent=''; });
+  window.addEventListener('resize',function(){ if(sizeEl.value!=='fit') applySize(); });
+  line('','harness ready — modes: same-origin, sandboxed opaque origin, pop-out');
+})();
+</script>
+</body>
+</html>
