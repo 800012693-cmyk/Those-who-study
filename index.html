@@ -3,1022 +3,511 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Those Who Study — Games</title>
+<meta name="theme-color" content="#0b0d10">
+<title>AP Calculus AB/BC Notes &amp; Study Hub — Those Who Study</title>
+<meta name="description" content="Free AP Calculus AB and BC study hub: unit-by-unit notes, a derivative and integral quick reference, exam-ready FAQ, and 100+ browser games for study breaks. No accounts, no installs.">
+<link rel="canonical" href="https://800012693-cmyk.github.io/Those-who-study/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Those Who Study">
+<meta property="og:title" content="AP Calculus AB/BC Notes &amp; Study Hub">
+<meta property="og:description" content="Unit-by-unit AP Calculus AB and BC notes, derivative and integral quick reference, and a browser arcade for study breaks.">
+<meta property="og:url" content="https://800012693-cmyk.github.io/Those-who-study/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AP Calculus AB/BC Notes &amp; Study Hub">
+<meta name="twitter:description" content="AP Calculus AB and BC notes, quick reference, and 100+ browser games for study breaks.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Those Who Study","url":"https://800012693-cmyk.github.io/Those-who-study/","description":"AP Calculus AB/BC study hub with unit notes and a browser arcade."},{"@type":"Course","name":"AP Calculus AB/BC","description":"Unit-by-unit AP Calculus AB and BC notes covering limits, differentiation, applications of derivatives, integration, differential equations and series.","url":"https://sites.google.com/view/calculusabbc","educationalLevel":"Advanced Placement","inLanguage":"en","provider":{"@type":"EducationalOrganization","name":"Those Who Study","sameAs":"https://sites.google.com/view/calculusabbc"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is AP Calculus BC harder than AB?","acceptedAnswer":{"@type":"Answer","text":"BC contains everything in AB and adds series, parametric and polar calculus, and more integration techniques, at a faster pace. It is not a separate easier path: it is AB plus roughly two more units."}},{"@type":"Question","name":"How do you get a 5 on AP Calculus?","acceptedAnswer":{"@type":"Answer","text":"Work the units in order, get the derivative and integral rules to recall speed, then practise released free-response questions under timed conditions and review every mistake by topic."}},{"@type":"Question","name":"Are the games on this site free?","acceptedAnswer":{"@type":"Answer","text":"Yes. They are static browser builds served from this site with no logins, installs or payments, meant to be short study breaks."}}]}]}
+</script>
 <style>
   :root{
-    --bg:#0b0a1a; --card:rgba(255,255,255,.045); --line:rgba(255,255,255,.09);
-    --text:#f4f4ff; --muted:#a7a5c8; --accent:#ff2e63; --accent2:#8b5cf6; --accent3:#22d3ee;
+    --ink:#0b0d10; --ink-2:#0e1116; --panel:#12161c; --panel-2:#161b22;
+    --line:rgba(255,255,255,.085); --line-2:rgba(255,255,255,.14);
+    --fg:#eceef3; --dim:#8b93a5; --dim-2:#606776;
+    --accent:#5fe0ee; --accent-dim:rgba(95,224,238,.12); --accent-line:rgba(95,224,238,.34);
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --radius:3px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   body{
-    font-family:'Poppins',system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--text);
-    min-height:100vh;padding:64px 20px 70px;background:var(--bg);overflow-x:hidden;
+    background:var(--ink); color:var(--fg); overflow-x:hidden;
+    font:400 16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background-image:radial-gradient(1100px 520px at 50% -8%,rgba(95,224,238,.10),transparent 62%),
+                     radial-gradient(760px 420px at 88% 6%,rgba(95,224,238,.05),transparent 60%);
   }
-  /* aurora glow blobs */
-  .glow{position:fixed;border-radius:50%;filter:blur(90px);opacity:.55;pointer-events:none;z-index:0}
-  .g1{width:520px;height:520px;top:-160px;left:-120px;background:radial-gradient(circle,rgba(139,92,246,.5),transparent 70%);animation:drift1 18s ease-in-out infinite}
-  .g2{width:560px;height:560px;bottom:-200px;right:-140px;background:radial-gradient(circle,rgba(255,46,99,.38),transparent 70%);animation:drift2 22s ease-in-out infinite}
-  .g3{width:420px;height:420px;top:38%;left:58%;background:radial-gradient(circle,rgba(34,211,238,.22),transparent 70%);animation:drift1 26s ease-in-out infinite reverse}
-  @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,50px) scale(1.15)}}
-  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,-40px) scale(1.1)}}
-  header,main,footer{position:relative;z-index:1}
-  header{max-width:1120px;margin:0 auto 30px;text-align:center}
-  h1{font-size:clamp(30px,6vw,56px);letter-spacing:-.03em;margin-bottom:10px;line-height:1.05}
-  h1 b{background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));background-clip:text;-webkit-background-clip:text;color:transparent;
-       animation:hue 8s linear infinite;background-size:200% 100%}
-  @keyframes hue{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-  .sub{color:var(--muted);font-size:15.5px;margin-bottom:26px}
-  .bar{display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap}
-  .search-box{position:relative;display:inline-block}
-  .search-box::before{content:"🔍";position:absolute;left:15px;top:50%;transform:translateY(-52%);font-size:14px;opacity:.7;pointer-events:none}
-  #q{width:min(430px,86vw);padding:13px 20px 13px 42px;border-radius:999px;border:1px solid var(--line);
-     background:rgba(255,255,255,.06);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-     color:#fff;font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s}
-  #q::placeholder{color:#8e8dae}
-  #q:focus{border-color:var(--accent2);box-shadow:0 0 0 4px rgba(139,92,246,.18)}
-  #random{padding:12px 18px;border-radius:999px;border:1px solid var(--line);cursor:pointer;
-     background:rgba(255,255,255,.06);color:var(--text);font:inherit;font-size:14px;backdrop-filter:blur(12px);
-     transition:transform .15s,border-color .2s,background .2s}
-  #random:hover{transform:translateY(-2px) rotate(-2deg);border-color:var(--accent);background:rgba(255,46,99,.14)}
-  .chips{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:18px}
-  .chip{padding:7px 15px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);
-      color:var(--muted);font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .18s;user-select:none}
-  .chip:hover{color:#fff;border-color:rgba(255,255,255,.25);transform:translateY(-1px)}
-  .chip.on{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;
-      box-shadow:0 6px 18px rgba(255,46,99,.35)}
-  .count{color:var(--muted);font-size:13.5px;margin-top:16px;display:inline-block;
-      padding:4px 12px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
-  main{max-width:1120px;margin:0 auto}
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:20px;margin-top:22px}
-  @media (max-width:960px){.grid{grid-template-columns:repeat(3,1fr)}}
-  @media (max-width:680px){.grid{grid-template-columns:repeat(2,1fr);gap:14px}}
-  .card{
-    position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;
-    overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:var(--text);
-    height:280px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
-    animation:pop .55s cubic-bezier(.22,1,.36,1) both;
+  #bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none}
+  .scrim{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,rgba(11,13,16,.10) 0%,rgba(11,13,16,.55) 46%,var(--ink) 88%)}
+  a{color:inherit}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:#06232a;padding:10px 14px;z-index:99;font-weight:600}
+  .skip:focus{left:12px;top:12px}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .wrap{position:relative;z-index:2;width:min(1180px,92vw);margin:0 auto}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);
+    background:rgba(11,13,16,.74);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2)}
+  .nav .wrap{display:flex;align-items:center;gap:28px;height:62px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:-.01em;text-decoration:none;font-size:15px}
+  .brand i{width:9px;height:9px;background:var(--accent);border-radius:1px;box-shadow:0 0 14px var(--accent-line);display:inline-block}
+  .brand span{color:var(--dim-2);font-weight:400;font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em}
+  .nav nav{display:flex;align-items:center;gap:22px;margin-left:auto;font-size:13.5px}
+  .nav nav a{text-decoration:none;color:var(--dim);padding:6px 0;border-bottom:1px solid transparent;transition:color .16s,border-color .16s}
+  .nav nav a:hover{color:var(--fg);border-bottom-color:var(--line-2)}
+  .nav .cta{color:#06232a;background:var(--accent);border-radius:var(--radius);padding:8px 14px;font-weight:650;border:none;transition:transform .16s,box-shadow .16s}
+  .nav .cta:hover{color:#06232a;transform:translateY(-1px);box-shadow:0 6px 20px rgba(95,224,238,.28)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:88px 0 56px;display:grid;grid-template-columns:1.22fr .78fr;gap:56px;align-items:start}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent-line)}
+  h1{font-size:clamp(38px,5.6vw,74px);line-height:1.02;letter-spacing:-.025em;font-weight:680;margin:18px 0 20px}
+  h1 em{font-style:normal;color:var(--accent)}
+  .lede{color:var(--dim);font-size:clamp(15px,1.5vw,17.5px);max-width:44ch}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+  .btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:640;font-size:14.5px;
+    padding:13px 20px;border-radius:var(--radius);border:1px solid var(--line-2);transition:transform .16s,border-color .16s,background .16s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.solid{background:var(--accent);color:#06232a;border-color:var(--accent)}
+  .btn.solid:hover{box-shadow:0 10px 28px rgba(95,224,238,.26)}
+  .btn.ghost{background:rgba(255,255,255,.03);color:var(--fg)}
+  .btn.ghost:hover{border-color:var(--accent-line);background:var(--accent-dim)}
+  .panel{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--ink-2));border-radius:var(--radius)}
+  .hero aside{padding:20px}
+  .aside-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim-2);margin-bottom:6px}
+  .aside-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:13.5px}
+  .aside-row:first-of-type{border-top:none}
+  .aside-row b{font-weight:650;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:12.5px;color:var(--accent)}
+  .aside-row span{color:var(--dim)}
+
+  /* ---------- sections ---------- */
+  section{padding:64px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:26px;flex-wrap:wrap}
+  h2{font-size:clamp(24px,2.9vw,34px);letter-spacing:-.02em;font-weight:660;line-height:1.15}
+  .sec-head p{color:var(--dim);font-size:14px;max-width:52ch}
+  .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim-2);margin-bottom:10px;display:block}
+
+  /* units */
+  .units{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .unit{padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);position:relative;transition:border-color .18s,transform .18s,background .18s}
+  .unit:hover{border-color:var(--accent-line);transform:translateY(-2px);background:var(--panel-2)}
+  .unit b{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.1em}
+  .unit h3{font-size:15.5px;font-weight:640;margin:9px 0 7px;letter-spacing:-.01em}
+  .unit p{color:var(--dim);font-size:13px;line-height:1.5}
+  .unit .bc{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--dim-2);border:1px solid var(--line);padding:2px 6px;border-radius:2px}
+
+  /* reference */
+  .ref{margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .ref code{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ink-2);
+    font-family:var(--mono);font-size:12.5px;color:#cfd6e4;overflow-x:auto;white-space:nowrap}
+  .ref code i{color:var(--accent);font-style:normal}
+
+  /* arcade controls */
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .search{position:relative;flex:1 1 260px;max-width:340px}
+  .search input{width:100%;padding:11px 12px 11px 34px;background:var(--ink-2);border:1px solid var(--line-2);border-radius:var(--radius);
+    color:var(--fg);font:inherit;font-size:14px;transition:border-color .16s,box-shadow .16s}
+  .search input::placeholder{color:var(--dim-2)}
+  .search input:focus{outline:none;border-color:var(--accent-line);box-shadow:0 0 0 3px rgba(95,224,238,.10)}
+  .search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--dim-2);fill:none;stroke-width:2}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{padding:8px 12px;border:1px solid var(--line);background:transparent;color:var(--dim);border-radius:var(--radius);
+    font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;transition:color .16s,border-color .16s,background .16s}
+  .chip:hover{color:var(--fg);border-color:var(--line-2)}
+  .chip[aria-pressed="true"]{color:#06232a;background:var(--accent);border-color:var(--accent)}
+  .count{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--dim-2);letter-spacing:.08em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:8px}
+  .card{display:grid;grid-template-columns:42px 1fr 16px;align-items:center;gap:12px;padding:9px 12px;
+    border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.018);
+    text-decoration:none;transition:border-color .16s,background .16s,transform .16s}
+  .card:hover{border-color:var(--accent-line);background:var(--accent-dim);transform:translateY(-1px)}
+  .ico{width:42px;height:42px;display:grid;place-items:center;font-size:19px;line-height:1;
+    background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:var(--radius);transition:transform .16s,border-color .16s}
+  .card:hover .ico{transform:scale(1.06);border-color:var(--accent-line)}
+  .meta{min-width:0;display:flex;flex-direction:column;gap:1px}
+  .nm{font-size:13.5px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ds{font-size:11.5px;color:var(--dim-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .go{font-size:12px;color:var(--dim-2);opacity:0;transform:translateX(-3px);transition:opacity .16s,transform .16s,color .16s}
+  .card:hover .go{opacity:1;transform:none;color:var(--accent)}
+  .empty{grid-column:1/-1;padding:34px;text-align:center;color:var(--dim-2);font-size:13.5px;border:1px dashed var(--line);border-radius:var(--radius)}
+
+  /* faq */
+  .faq{max-width:820px}
+  details{border-top:1px solid var(--line);padding:16px 0}
+  details:last-child{border-bottom:1px solid var(--line)}
+  summary{cursor:pointer;font-weight:620;font-size:15.5px;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:var(--mono);color:var(--accent);font-size:17px;line-height:1}
+  details[open] summary::after{content:"−"}
+  details p{color:var(--dim);font-size:14px;margin-top:10px;max-width:70ch}
+
+  footer{border-top:1px solid var(--line);padding:30px 0 46px;margin-top:40px}
+  footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--dim-2);font-size:12.5px}
+  footer a{color:var(--dim);text-decoration:none;border-bottom:1px solid transparent}
+  footer a:hover{color:var(--fg);border-bottom-color:var(--line-2)}
+
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr;gap:30px;padding:62px 0 40px}
+    .units,.ref{grid-template-columns:1fr 1fr}
+    .nav nav a:not(.cta){display:none}
   }
-  .card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
-    background:linear-gradient(135deg,rgba(255,46,99,.7),rgba(139,92,246,.5),rgba(34,211,238,.5));
-    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .25s;pointer-events:none}
-  .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.55)}
-  .card:hover::before{opacity:1}
-  @keyframes pop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
-  .cover{--h:265;height:110px;display:grid;place-items:center;font-size:44px;position:relative;overflow:hidden;
-      background:linear-gradient(135deg,hsl(var(--h) 55% 20%/ .55),hsl(calc(var(--h) + 45) 60% 30%/ .45)),
-      linear-gradient(180deg,rgba(255,255,255,.03),transparent)}
-  .card:nth-child(4n+1){--h:255}.card:nth-child(4n+2){--h:330}.card:nth-child(4n+3){--h:200}.card:nth-child(4n){--h:150}
-  .cover span{position:relative;z-index:1;filter:drop-shadow(0 6px 14px rgba(0,0,0,.5));transition:transform .25s}
-  .cover::after{content:"";position:absolute;width:120%;height:60%;top:-30%;left:-10%;
-      background:radial-gradient(ellipse at top,rgba(255,255,255,.14),transparent 60%)}
-  .card:hover .cover span{transform:scale(1.18) rotate(-6deg)}
-  .card:hover .cover{filter:saturate(1.25) brightness(1.06)}
-  .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
-  .name{font-weight:700;font-size:16.5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;max-height:44px;overflow:hidden}
-  .tag{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
-       padding:2.5px 8px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:#cfc9ff}
-  .tag.local{background:rgba(79,222,134,.12);border-color:rgba(79,222,134,.45);color:#7ef0b0}
-  .tag.warn{background:rgba(255,196,143,.1);border-color:rgba(255,196,143,.4);color:#ffc48f}
-  .desc{color:var(--muted);font-size:13.5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .play{margin-top:auto;padding:9px 12px;border-radius:12px;text-align:center;font-weight:700;font-size:13.5px;
-        background:linear-gradient(90deg,var(--accent),var(--accent2));background-size:160% 100%;
-        color:#fff;transition:background-position .3s,box-shadow .25s,transform .15s;
-        box-shadow:0 4px 14px rgba(255,46,99,.25)}
-  .play::after{content:"\2192";display:inline-block;margin-left:0;width:0;overflow:hidden;
-        transition:width .25s ease,margin .25s ease;white-space:nowrap}
-  .card:hover .play{background-position:100% 0;box-shadow:0 6px 20px rgba(139,92,246,.45);transform:translateY(-1px)}
-  .card:hover .play::after{width:14px;margin-left:6px}
-  footer{max-width:1120px;margin:60px auto 0;color:#77759b;font-size:12.5px;text-align:center;
-      border-top:1px solid var(--line);padding-top:22px;line-height:1.7}
-  footer code{background:rgba(255,255,255,.07);padding:2px 6px;border-radius:6px}
-  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-  @media (max-width:560px){.grid{gap:14px}.cover{height:92px;font-size:36px}}
+  @media (max-width:560px){
+    .units,.ref{grid-template-columns:1fr}
+    .grid{grid-template-columns:1fr}
+    .count{margin-left:0}
+    section{padding:46px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none!important;animation:none!important}
+  }
 </style>
 </head>
 <body>
-<header>
-  <h1>Those Who <b>Study</b></h1>
-  <p class="sub">Only for those who study and not game. Pick a game, press play, go back to studying.</p>
-  <div class="bar">
-    <div class="search-box">
-      <input id="q" type="search" placeholder="Search games…" autocomplete="off">
-    </div>
-    <button id="random" title="Jump to a random game">🎲 Surprise me</button>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="scrim" aria-hidden="true"></div>
+<a class="skip" href="#arcade">Skip to the arcade</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><i></i>Those Who Study <span>hub</span></a>
+    <nav aria-label="Primary">
+      <a href="#calculus">Calculus</a>
+      <a href="#arcade">Arcade</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="https://sites.google.com/view/calculusabbc" rel="noopener">Open notes</a>
+    </nav>
   </div>
-  <div class="chips" id="chips"></div>
 </header>
 
 <main>
-<div class="grid" id="grid">
+  <div class="wrap">
+    <section class="hero" aria-labelledby="hero-h">
+      <div>
+        <p class="eyebrow">AP Calculus AB &amp; BC · study hub</p>
+        <h1 id="hero-h">Study calculus.<br>Then <em>press play</em>.</h1>
+        <p class="lede">Unit-by-unit notes for AP Calculus AB and BC, a quick reference you can actually revise from, and 104 browser games for the gap between two study blocks.</p>
+        <div class="actions">
+          <a class="btn solid" href="https://sites.google.com/view/calculusabbc" rel="noopener">Open the calculus notes</a>
+          <a class="btn ghost" href="#arcade">Browse the arcade <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <aside class="panel" aria-label="Hub at a glance">
+        <p class="aside-label">At a glance</p>
+        <div class="aside-row"><span>Calculus units mapped</span><b>06</b></div>
+        <div class="aside-row"><span>Browser games</span><b id="stat-games">104</b></div>
+        <div class="aside-row"><span>Installs or accounts</span><b>00</b></div>
+        <div class="aside-row"><span>Potato arcade titles</span><b>59</b></div>
+        <p class="aside-label" style="margin-top:18px">Elsewhere</p>
+        <div class="aside-row"><span><a href="https://cameronorr2011-beep.github.io/friendly-potato/" rel="noopener" style="text-decoration:none;border-bottom:1px solid var(--line-2)">Friendly Potato arcade</a></span><b>↗</b></div>
+      </aside>
+    </section>
 
-  <a class="card" href="https://cameronorr2011-beep.github.io/friendly-potato/" data-name="potato friendly potato all games arcade hollow knight doom">
-    <div class="cover">🥔</div>
-    <div class="body">
-      <div class="name">Friendly Potato — 59 games</div>
-      <p class="desc">The whole potato arcade in one place: Hollow Knight, Doom, Pac-Man, racing and 55 more.</p>
-      <div class="play">Play 🥔</div>
-    </div>
-  </a>
+    <section id="calculus" aria-labelledby="calc-h">
+      <div class="sec-head">
+        <div>
+          <span class="kicker">The reason this site exists</span>
+          <h2 id="calc-h">Calculus, organised the way the exam asks it</h2>
+        </div>
+        <p>Six blocks mapped to the AP units. Each one links into the full notes, worked examples and past-paper walkthroughs.</p>
+      </div>
+      <div class="units">
+        <article class="unit"><b>UNIT 01</b><h3>Limits &amp; continuity</h3><p>One-sided limits, removable versus jump discontinuities, squeeze theorem and the Intermediate Value Theorem.</p></article>
+        <article class="unit"><b>UNIT 02</b><h3>Differentiation</h3><p>Power, product, quotient and chain rules, plus implicit and logarithmic differentiation.</p></article>
+        <article class="unit"><b>UNIT 03</b><h3>Applications of derivatives</h3><p>Related rates, mean value theorem, extrema, concavity, optimisation and L'Hôpital's rule.</p></article>
+        <article class="unit"><b>UNIT 04</b><h3>Integration</h3><p>Riemann sums, u-substitution, integration by parts and both parts of the Fundamental Theorem.</p></article>
+        <article class="unit"><b>UNIT 05</b><h3>Differential equations</h3><p>Slope fields, separation of variables and exponential growth and decay models.</p></article>
+        <article class="unit"><b>UNIT 06</b><h3>Series</h3><span class="bc">BC ONLY</span><p>Convergence tests, Taylor and Maclaurin series, and radius and interval of convergence.</p></article>
+      </div>
+      <div class="ref" aria-label="Quick reference">
+        <code>d/dx xⁿ = <i>n xⁿ⁻¹</i></code>
+        <code>d/dx sin x = <i>cos x</i></code>
+        <code>d/dx eˣ = <i>eˣ</i> · d/dx ln x = <i>1/x</i></code>
+        <code>∫ xⁿ dx = <i>xⁿ⁺¹/(n+1) + C</i></code>
+        <code>∫ 1/x dx = <i>ln|x| + C</i></code>
+        <code>∫ₐᵇ f = <i>F(b) − F(a)</i></code>
+      </div>
+    </section>
 
-  <a class="card" href="https://sites.google.com/view/calculusabbc" data-name="calculus ap ab bc notes study math">
-    <div class="cover">📐</div>
-    <div class="body">
-      <div class="name">AP Calculus AB/BC notes</div>
-      <p class="desc">Course notes, integral calculus guide and exam references.</p>
-      <div class="play">Study 📐</div>
-    </div>
-  </a>
+    <section id="arcade" aria-labelledby="arcade-h">
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Between two study blocks</span>
+          <h2 id="arcade-h">The study-break arcade</h2>
+        </div>
+        <p>104 games running entirely in the browser. Nothing to install, nothing to sign into — pick one, play a round, go back to the notes.</p>
+      </div>
+      <div class="controls">
+        <div class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+          <label class="skip" for="q">Search games</label>
+          <input id="q" type="search" placeholder="Search 104 games" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+        <p class="count" id="count" aria-live="polite">104 games</p>
+      </div>
+      <div class="grid" id="grid"></div>
+      <noscript><p class="empty" style="margin-top:10px">The arcade needs JavaScript. The calculus notes are plain links: <a href="https://sites.google.com/view/calculusabbc">open the notes</a>.</p></noscript>
+    </section>
 
-  <a class="card" href="games/ovo/" data-name="ovo parkour platformer dedra">
-    <div class="cover">🏃</div>
-    <div class="body">
-      <div class="name">OvO <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Wall jumps, slides and tight timing across 60+ parkour levels.</p>
-      <div class="play">Play OvO</div>
-    </div>
-  </a>
+    <section id="faq" aria-labelledby="faq-h">
+      <div class="sec-head">
+        <div>
+          <span class="kicker">Straight answers</span>
+          <h2 id="faq-h">Questions students actually ask</h2>
+        </div>
+      </div>
+      <div class="faq">
+        <details><summary>Is AP Calculus BC harder than AB?</summary><p>BC contains everything in AB and adds series, parametric and polar calculus, and more integration techniques, at a faster pace. It is not an easier alternative — it is AB plus roughly two more units.</p></details>
+        <details><summary>How do you get a 5 on AP Calculus?</summary><p>Work the units in order, get the derivative and integral rules to recall speed, then practise released free-response questions under timed conditions and review every mistake by topic. The unit map above is ordered for exactly that.</p></details>
+        <details><summary>Do the games cost anything or track you?</summary><p>No. They are static browser builds served from this site, with no logins, installs or payments. They exist so a break stays a break instead of turning into a scroll.</p></details>
+      </div>
+    </section>
+  </div>
+</main>
 
-  <a class="card" href="games/snow-rider-3d/" data-name="snow rider 3d sled winter unity sleigh">
-    <div class="cover">🛷</div>
-    <div class="body">
-      <div class="name">Snow Rider 3D <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Endless sled run down a snowy slope. Dodge trees, grab gifts, unlock sleighs.</p>
-      <div class="play">Play Snow Rider</div>
-    </div>
-  </a>
-
-  <a class="card" href="12-mini-battles.html" data-name="12 mini battles">
-    <div class="cover">⚔️</div>
-    <div class="body">
-      <div class="name">12 Mini Battles</div>
-      <p class="desc">Tiny stick-figure armies fighting it out across a dozen battlefields.</p>
-      <div class="play">Play</div>
-    </div>
-  </a>
-
-  <a class="card" href="bloons-TD-5.html" data-name="bloons td 5 tower defense monkeys">
-    <div class="cover">🎈</div>
-    <div class="body">
-      <div class="name">Bloons TD 5</div>
-      <p class="desc">The classic tower defence — pop balloons with monkeys across 50+ tracks.</p>
-      <div class="play">Play</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/circloo-2/" data-name="circloo circlo o 2 physics">
-    <div class="cover">🔵</div>
-    <div class="body">
-      <div class="name">CircloO 2</div>
-      <p class="desc">Physics platformer where rolling is the only way forward.</p>
-      <div class="play">Play</div>
-    </div>
-  </a>
-
-  <a class="card" href="crossy-road.htm" data-name="crossy road chicken endless hopper">
-    <div class="cover">🐔</div>
-    <div class="body">
-      <div class="name">Crossy Road</div>
-      <p class="desc">Hop the chicken across endless roads, rivers and train tracks.</p>
-      <div class="play">Play</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/drive-mad/" data-name="drive mad car stunt driving">
-    <div class="cover">🚗</div>
-    <div class="body">
-      <div class="name">Drive Mad</div>
-      <p class="desc">Stunt driving where every level is one bad angle away from a crash.</p>
-      <div class="play">Play</div>
-    </div>
-  </a>
-
-  <a class="card" href="eggy-car.html" data-name="eggy car egg driving">
-    <div class="cover">🥚</div>
-    <div class="body">
-      <div class="name">Eggy Car</div>
-      <p class="desc">Drive an egg uphill without cracking it. Harder than it sounds.</p>
-      <div class="play">Play</div>
-    </div>
-  </a>
-
-  <a class="card" href="flood-runner-4.html" data-name="flood runner 4 water escape">
-    <div class="cover">🌊</div>
-    <div class="body">
-      <div class="name">Flood Runner 4</div>
-      <p class="desc">Outrun the rising water across rooftops and collapsing platforms.</p>
-      <div class="play">Play</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/getaway-shootout2/" data-name="getaway shootout two-player unity">
-    <div class="cover">🔫</div>
-    <div class="body">
-      <div class="name">Getaway Shootout <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Two-player chaotic race-and-shoot sprint to the exit. WASD vs arrows.</p>
-      <div class="play">Play Getaway</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/moto-x3m/" data-name="moto x3m 3d bike stunts">
-    <div class="cover">🏍️</div>
-    <div class="body">
-      <div class="name">Moto X3M <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Time-trial bike stunts over deadly obstacle courses. Arrows to ride, flips cut seconds.</p>
-      <div class="play">Play Moto X3M</div>
-    </div>
-  </a>
-  <a class="card" href="games/snake/" data-name="snake classic arcade retro">
-    <div class="cover">🐍</div>
-    <div class="body">
-      <div class="name">Snake <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The juicy remake: glowing speed-up snake, golden bonus apples, eye-tracking head.</p>
-      <div class="play">Play Snake</div>
-    </div>
-  </a>
-  <a class="card" href="games/google-snake/" data-name="google snake doodle classic original">
-    <div class="cover">🐍</div>
-    <div class="body">
-      <div class="name">Google Snake <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The real Google Doodle snake, mirrored locally — green guy, big apple, apple counter.</p>
-      <div class="play">Play Google Snake</div>
-    </div>
-  </a>
-  <a class="card" href="games/pixel-jackpot/" data-name="horror slots pixel jackpot mob debt creepy pixel art">
-    <div class="cover">🎰</div>
-    <div class="body">
-      <div class="name">Pixel Jackpot <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Horror slots: you owe the mob $6,300 and the reels are hungry.</p>
-      <div class="play">Play Pixel Jackpot</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/baldis-basics/" data-name="baldis basics education horror math">
-    <div class="cover">📚</div>
-    <div class="body">
-      <div class="name">Baldi's Basics <span class="tag local">Self-hosted</span></div>
-      <p class="desc">You know the drill: grab notebooks, avoid Baldi, don't trust him.</p>
-      <div class="play">Play Baldi's Basics</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/awesome-tanks-2/" data-name="awesome tanks 2 arcade shooter">
-    <div class="cover">💥</div>
-    <div class="body">
-      <div class="name">Awesome Tanks 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Arcade tank shooter — blow up rooms and upgrade your ride.</p>
-      <div class="play">Play Awesome Tanks 2</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/boxhead2play/" data-name="boxhead zombies 2 players co-op">
-    <div class="cover">🧟</div>
-    <div class="body">
-      <div class="name">Boxhead 2Play <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Endless zombie mayhem, co-op on one keyboard.</p>
-      <div class="play">Play Boxhead 2Play</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/cookie-clicker/" data-name="cookie clicker idle grandmas">
-    <div class="cover">🍪</div>
-    <div class="body">
-      <div class="name">Cookie Clicker <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The original grandma-factory idle game. Click the cookie.</p>
-      <div class="play">Play Cookie Clicker</div>
-    </div>
-  </a>
-
-
-  <a class="card" href="games/retro-bowl/" data-name="retro bowl football american coach qb">
-    <div class="cover">🏈</div>
-    <div class="body">
-      <div class="name">Retro Bowl <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Manage your franchise and win the Retro Bowl. The cult-manager every classroom plays.</p>
-      <div class="play">Play Retro Bowl</div>
-    </div>
-  </a>
-  <a class="card" href="games/rooftop-snipers/" data-name="rooftop snipers 2 player ragdoll">
-    <div class="cover">🪜</div>
-    <div class="body">
-      <div class="name">Rooftop Snipers <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Physics ragdoll shooting duel: shove or snipe your friend off the rooftop. 2-player.</p>
-      <div class="play">Play Rooftop Snipers</div>
-    </div>
-  </a>
-  <a class="card" href="games/fireboy-watergirl/" data-name="fireboy watergirl forest temple coop puzzle">
-    <div class="cover">🔥</div>
-    <div class="body">
-      <div class="name">Fireboy &amp; Watergirl <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The legendary co-op temple puzzle platformer. Fire avoids water, water avoids lava.</p>
-      <div class="play">Play Fireboy &amp; Watergirl</div>
-    </div>
-  </a>
-  <a class="card" href="games/bad-ice-cream/" data-name="bad ice cream nitrome coop maze arcade">
-    <div class="cover">🍦</div>
-    <div class="body">
-      <div class="name">Bad Ice Cream <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Freeze walls, dodge fruit-haters, eat every grape. Up to 4 players on one keyboard.</p>
-      <div class="play">Play Bad Ice Cream</div>
-    </div>
-  </a>
-  <a class="card" href="games/tank-trouble-2/" data-name="tank trouble 2 multiplayer maze ricochet">
-    <div class="cover">💥</div>
-    <div class="body">
-      <div class="name">Tank Trouble 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Ricochet your own shell back into your friend's tank. Split-keyboard arena chaos.</p>
-      <div class="play">Play Tank Trouble 2</div>
-    </div>
-  </a>
-  <a class="card" href="games/stickman-hook/" data-name="stickman hook swing grappling ragdoll">
-    <div class="cover">🪝</div>
-    <div class="body">
-      <div class="name">Stickman Hook <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Grapple, swing, fling the stickman through 100+ momentum puzzles.</p>
-      <div class="play">Play Stickman Hook</div>
-    </div>
-  </a>
-  <a class="card" href="games/basket-random/" data-name="basket random 2 player basketball physics">
-    <div class="cover">🏀</div>
-    <div class="body">
-      <div class="name">Basket Random <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Two-button wobbly basketball with exploding randomness. First to 5 wins. 2-player.</p>
-      <div class="play">Play Basket Random</div>
-    </div>
-  </a>
-  <a class="card" href="games/boxing-random/" data-name="boxing random 2 player physics fists">
-    <div class="cover">🥊</div>
-    <div class="body">
-      <div class="name">Boxing Random <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Same wobbling two-button chaos, now with boxing gloves and falling bodies. 2-player.</p>
-      <div class="play">Play Boxing Random</div>
-    </div>
-  </a>
-  <a class="card" href="games/volley-random/" data-name="volley random 2 player volleyball physics">
-    <div class="cover">🏐</div>
-    <div class="body">
-      <div class="name">Volley Random <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Third in the Random series: wobbly two-button beach volleyball chaos. First to 5 wins. 2-player.</p>
-      <div class="play">Play Volley Random</div>
-    </div>
-  </a>
-  <a class="card" href="games/stick-merge/" data-name="stick merge guns idle shooter">
-    <div class="cover">🔫</div>
-    <div class="body">
-      <div class="name">Stick Merge <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Merge increasingly absurd guns, then plug waves of stickmen with them.</p>
-      <div class="play">Play Stick Merge</div>
-    </div>
-  </a>
-  <a class="card" href="games/rabbit-samurai/" data-name="rabbit samurai swing ninja physics">
-    <div class="cover">🐰</div>
-    <div class="body">
-      <div class="name">Rabbit Samurai <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Swing from threads, cut ropes, collect all the carrots. Physics-y and sharp.</p>
-      <div class="play">Play Rabbit Samurai</div>
-    </div>
-  </a>
-  <a class="card" href="games/n-gon/" data-name="n-gon arena shooter roguelite chaos">
-    <div class="cover">🌀</div>
-    <div class="body">
-      <div class="name">N-GON <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Open-source hyper-chaotic arena roguelite. Bullets everywhere, upgrades forever.</p>
-      <div class="play">Play N-GON</div>
-    </div>
-  </a>
-  <a class="card" href="games/doodle-jump/" data-name="doodle jump jump arcade classic">
-    <div class="cover">⬆️</div>
-    <div class="body">
-      <div class="name">Doodle Jump <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Bounce forever up the doodle world. Arrows left/right, tilted, timeless.</p>
-      <div class="play">Play Doodle Jump</div>
-    </div>
-  </a>
-  <a class="card" href="games/2048/" data-name="2048 numbers puzzle swipe merge">
-    <div class="cover">🔢</div>
-    <div class="body">
-      <div class="name">2048 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Slide tiles, merge numbers, chase the 2048 before your brain melts.</p>
-      <div class="play">Play 2048</div>
-    </div>
-  </a>
-  <a class="card" href="games/flappy-bird/" data-name="flappy bird arcade tap classic">
-    <div class="cover">🐤</div>
-    <div class="body">
-      <div class="name">Flappy Bird <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The original rage tap-fest, resurrected locally. One button, pure suffering.</p>
-      <div class="play">Play Flappy Bird</div>
-    </div>
-  </a>
-  <a class="card" href="games/elastic-man/" data-name="elastic man face meme funny toy">
-    <div class="cover">😛</div>
-    <div class="body">
-      <div class="name">Elastic Man <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Grab and stretch a photoreal face. Zero goal, maximum giggles.</p>
-      <div class="play">Play Elastic Man</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/polytrack6/" data-name="polytrack time trial racing trackmania low poly">
-    <div class="cover">🏁</div>
-    <div class="body">
-      <div class="name">PolyTrack <span class="tag local">Self-hosted</span></div>
-      <p class="desc">PolyTrack 0.6.3 - 350+ tracks, official levels, community packages, events and the track editor. v0.6.3.</p>
-      <div class="play">Play PolyTrack</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/moto-x3m-pool/" data-name="moto x3m pool party summer bike">
-    <div class="cover">🏊</div>
-    <div class="body">
-      <div class="name">Moto X3M Pool Party <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Summer season of Moto X3M. Arrows to ride, flips cut seconds.</p>
-      <div class="play">Play Pool Party</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/moto-x3m-spooky/" data-name="moto x3m spooky halloween bike">
-    <div class="cover">👻</div>
-    <div class="body">
-      <div class="name">Moto X3M Spooky <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Halloween season of Moto X3M. Arrows to ride, flips cut seconds.</p>
-      <div class="play">Play Spooky</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/moto-x3m-winter/" data-name="moto x3m winter ice snow bike">
-    <div class="cover">❄️</div>
-    <div class="body">
-      <div class="name">Moto X3M Winter <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Ice-and-snow season of Moto X3M. Arrows to ride, flips cut seconds.</p>
-      <div class="play">Play Winter</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/cluster-rush-games/" data-name="cluster rush truck runner parkour">
-    <div class="cover">🚚</div>
-    <div class="body">
-      <div class="name">Cluster Rush <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Jump truck-to-truck across moving cargo in a collapsing chaos parkour. Space to jump.</p>
-      <div class="play">Play Cluster Rush</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/worlds-hardest-game-2-fresh/" data-name="the worlds hardest game 2 whg2 impossible maze dots">
-    <div class="cover">💀</div>
-    <div class="body">
-      <div class="name">The World's Hardest Game 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Devious dot-dodging maze sequel. Cross every level without losing your squishy blue self.</p>
-      <div class="play">Play WHG2</div>
-    </div>
-  </a>
-
-  <a class="card" href="games/slope/" data-name="slope neon ball downhill 3d speed run">
-    <div class="cover">⛰️</div>
-    <div class="body">
-      <div class="name">Slope <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Roll a neon ball down an endlessly steepening slope at blistering speed.</p>
-      <div class="play">Play Slope</div>
-    </div>
-  </a>
-  <a class="card" href="games/tunnel-rush/" data-name="tunnel rush neon walls dash reflex 3d">
-    <div class="cover">🌀</div>
-    <div class="body">
-      <div class="name">Tunnel Rush <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Dash through spinning neon tunnels and dodge every wall before it hits you.</p>
-      <div class="play">Play Tunnel Rush</div>
-    </div>
-  </a>
-  <a class="card" href="games/vex4/" data-name="vex 4 stickman parkour platformer spikes levels">
-    <div class="cover">🧗</div>
-    <div class="body">
-      <div class="name">Vex 4 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Stickman parkour across spike-laced courses — wall-jumps, swings and secret stars.</p>
-      <div class="play">Play Vex 4</div>
-    </div>
-  </a>
-  <a class="card" href="games/vex2/" data-name="vex 2 stickman platformer classic turbowarp scratch">
-    <div class="cover">🕹️</div>
-    <div class="body">
-      <div class="name">Vex 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The classic stickman platformer (TurboWarp edition) — master the jumps, avoid every spike.</p>
-      <div class="play">Play Vex 2</div>
-    </div>
-  </a>
-  <a class="card" href="games/drift-hunters/" data-name="drift hunters cars tuning garage drifting 3d driving">
-    <div class="cover">🚗</div>
-    <div class="body">
-      <div class="name">Drift Hunters <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Free-roam drift simulator — 25+ cars, deep tuning and drift-scoring garage action.</p>
-      <div class="play">Play Drift Hunters</div>
-    </div>
-  </a>
-  <a class="card" href="games/hill-climb-racing/" data-name="hill climb racing physics driving gas updownhill vehicle">
-    <div class="cover">🚙</div>
-    <div class="body">
-      <div class="name">Hill Climb Racing <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Physics driving challenge — keep both the fuel and the driver in one piece uphill.</p>
-      <div class="play">Play Hill Climb Racing</div>
-    </div>
-  </a>
-  <a class="card" href="games/temple-run-2/" data-name="temple run 2 endless runner monkey coins 3d">
-    <div class="cover">🏯</div>
-    <div class="body">
-      <div class="name">Temple Run 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Endless temple runner — swerve, jump, slide and outrun the demon monkey.</p>
-      <div class="play">Play Temple Run 2</div>
-    </div>
-  </a>
-  <a class="card" href="games/there-is-no-game/" data-name="there is no game comedy point and click meta puzzle">
-    <div class="cover">🎭</div>
-    <div class="body">
-      <div class="name">There Is No Game <span class="tag local">Self-hosted</span></div>
-      <p class="desc">A comedy meta-puzzle where the program insists there is nothing to play. Spoiler: there is.</p>
-      <div class="play">Play There Is No Game</div>
-    </div>
-  </a>
-  <a class="card" href="games/idle-breakout/" data-name="idle breakout brick breaker balls upgrades incremental">
-    <div class="cover">🧱</div>
-    <div class="body">
-      <div class="name">Idle Breakout <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Idle brick-breaker — buy and upgrade balls that smash bricks even while you wait.</p>
-      <div class="play">Play Idle Breakout</div>
-    </div>
-  </a>
-  <a class="card" href="games/grindcraft/" data-name="grindcraft mine craft clicker idle minecraft build">
-    <div class="cover">⛏️</div>
-    <div class="body">
-      <div class="name">Grindcraft <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Mine, craft and grow a whole crafting-base in this Minecraft-style idle clicker.</p>
-      <div class="play">Play Grindcraft</div>
-    </div>
-  </a>
-  <a class="card" href="games/minecraft-classic/" data-name="minecraft classic browser build blocks creative sandbox">
-    <div class="cover">🌱</div>
-    <div class="body">
-      <div class="name">Minecraft Classic <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The original browser Minecraft — build what you like in classic creative mode.</p>
-      <div class="play">Play Minecraft Classic</div>
-    </div>
-  </a>
-  <a class="card" href="games/geodash/" data-name="geometry dash rhythm platformer spikes cube music">
-    <div class="cover">🎵</div>
-    <div class="body">
-      <div class="name">Geometry Dash <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Rhythm platformer — jump to the beat over spikes, portals and one-hit-no-retries.</p>
-      <div class="play">Play Geometry Dash</div>
-    </div>
-  </a>
-  <a class="card" href="games/bitlife/" data-name="bitlife life simulator text career family crime">
-    <div class="cover">📱</div>
-    <div class="body">
-      <div class="name">BitLife <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Text life-simulator — careers, crime, relationships and all the chaos between.</p>
-      <div class="play">Play BitLife</div>
-    </div>
-  </a>
-  <a class="card" href="games/happywheels/" data-name="happy wheels ragdoll flash ruffle obstacle gory">
-    <div class="cover">🛞</div>
-    <div class="body">
-      <div class="name">Happy Wheels <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Ragdoll obstacle courses on wheels — expect pain, and lots of it.</p>
-      <div class="play">Play Happy Wheels</div>
-    </div>
-  </a>
-  <a class="card" href="games/sort-the-court/" data-name="sort the court kingdom king decisions yes no idle">
-    <div class="cover">👑</div>
-    <div class="body">
-      <div class="name">Sort the Court <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Rule the realm with yes/no decisions — balance gold, people and happiness.</p>
-      <div class="play">Play Sort the Court</div>
-    </div>
-  </a>
-  <a class="card" href="games/stack/" data-name="stack blocks tower timing reflex clicker">
-    <div class="cover">🟦</div>
-    <div class="body">
-      <div class="name">Stack <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Stack the blocks perfectly sky-high — miss once and the tower starts shrinking.</p>
-      <div class="play">Play Stack</div>
-    </div>
-  </a>
-  <a class="card" href="games/hextris/" data-name="hextris hexagon puzzle tetris 2048 rotate">
-    <div class="cover">🔶</div>
-    <div class="body">
-      <div class="name">Hextris <span class="tag local">Self-hosted</span></div>
-      <p class="desc">A spinning-hexagon puzzle — stack edges on the right side before they overflow.</p>
-      <div class="play">Play Hextris</div>
-    </div>
-  </a>
-  <a class="card" href="games/jetpack-joyride/" data-name="jetpack joyride endless runner laser shark lab">
-    <div class="cover">🚀</div>
-    <div class="body">
-      <div class="name">Jetpack Joyride <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Strap a machine-gun jetpack and ride through the lab as far as you can.</p>
-      <div class="play">Play Jetpack Joyride</div>
-    </div>
-  </a>
-  <a class="card" href="games/just-fall/" data-name="just fall penguin knockout multiplayer elimination">
-    <div class="cover">🐧</div>
-    <div class="body">
-      <div class="name">Just Fall <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Fall-Guys-style penguin battle royale — be the last one standing.</p>
-      <div class="play">Play Just Fall</div>
-    </div>
-  </a>
-  <a class="card" href="games/among-us/" data-name="among us impostor crewmate tasks space crew">
-    <div class="cover">🛸</div>
-    <div class="body">
-      <div class="name">Among Us <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Crewmates vs impostors — finish the tasks or sneakily eliminate everyone.</p>
-      <div class="play">Play Among Us</div>
-    </div>
-  </a>
-  <a class="card" href="games/duke-nukem-2/" data-name="duke nukem 2 retro shooter arcade platformer dos">
-    <div class="cover">🎮</div>
-    <div class="body">
-      <div class="name">Duke Nukem 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The 90s king returns — blast aliens and save the world, retro-style.</p>
-      <div class="play">Play Duke Nukem 2</div>
-    </div>
-  </a>
-  <a class="card" href="games/cubefield/" data-name="cubefield 3d dodger speed cubes reflex">
-    <div class="cover">🟦</div>
-    <div class="body">
-      <div class="name">Cubefield <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Steer through a field of cubes at ever-increasing speed. One touch and it's over.</p>
-      <div class="play">Play Cubefield</div>
-    </div>
-  </a>
-  <a class="card" href="games/ducklife1/" data-name="duck life 1 train racing runs duck tournament">
-    <div class="cover">🦆</div>
-    <div class="body">
-      <div class="name">Duck Life 1 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Train a duckling to race — running, jumping, flying tournaments.</p>
-      <div class="play">Play Duck Life 1</div>
-    </div>
-  </a>
-  <a class="card" href="games/ducklife2/" data-name="duck life 2 train racing adventure racing duck">
-    <div class="cover">🦆</div>
-    <div class="body">
-      <div class="name">Duck Life 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Duck Life 2 — tougher tournaments, bigger races.</p>
-      <div class="play">Play Duck Life 2</div>
-    </div>
-  </a>
-  <a class="card" href="games/ducklife3/" data-name="duck life 3 evolution train farm duck">
-    <div class="cover">🦆</div>
-    <div class="body">
-      <div class="name">Duck Life 3 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Duck Life 3 —专业化 evolution and brand-new disciplines.</p>
-      <div class="play">Play Duck Life 3</div>
-    </div>
-  </a>
-  <a class="card" href="games/geodashlite/" data-name="geometry dash lite rhythm platformer levels">
-    <div class="cover">🔷</div>
-    <div class="body">
-      <div class="name">Geometry Dash Lite <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The free slice of Geometry Dash — spiked levels, bass-heavy beats.</p>
-      <div class="play">Play Geometry Dash Lite</div>
-    </div>
-  </a>
-  <a class="card" href="games/geoneondash/" data-name="geometry dash neon side-scroll platformer cube">
-    <div class="cover">🌌</div>
-    <div class="body">
-      <div class="name">Geometry Dash Neon <span class="tag local">Self-hosted</span></div>
-      <p class="desc">A neon-tinted side-scroll dash with spinning hazards.</p>
-      <div class="play">Play Geometry Dash Neon</div>
-    </div>
-  </a>
-  <a class="card" href="games/geogeo/" data-name="geogeo platformer cube dash series">
-    <div class="cover">🔵</div>
-    <div class="body">
-      <div class="name">GeoGeo <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Another cube-dash platformer for Geometry Dash fans.</p>
-      <div class="play">Play GeoGeo</div>
-    </div>
-  </a>
-  <a class="card" href="games/geops1/" data-name="geometry dash ps platformer rhythm">
-    <div class="cover">🟠</div>
-    <div class="body">
-      <div class="name">Geometry Dash PS <span class="tag local">Self-hosted</span></div>
-      <p class="desc">A retro-styled rhythm dash platformer.</p>
-      <div class="play">Play Geometry Dash PS</div>
-    </div>
-  </a>
-  <a class="card" href="games/motox3m2/" data-name="moto x3m 2 motorbike stunt levels trial">
-    <div class="cover">🏍️</div>
-    <div class="body">
-      <div class="name">Moto X3M 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">More levels, more loops and more explosions on your bike.</p>
-      <div class="play">Play Moto X3M 2</div>
-    </div>
-  </a>
-  <a class="card" href="games/minesweeper/" data-name="minesweeper logic grid classic windows">
-    <div class="cover">💣</div>
-    <div class="body">
-      <div class="name">Minesweeper <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The classic logic puzzle — clear the grid without waking a mine.</p>
-      <div class="play">Play Minesweeper</div>
-    </div>
-  </a>
-  <a class="card" href="games/flashtetris/" data-name="flash tetris tetris blocks classic lines">
-    <div class="cover">🧱</div>
-    <div class="body">
-      <div class="name">Flash Tetris <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Tetris rebuilt for the browser — stack and clear lines.</p>
-      <div class="play">Play Flash Tetris</div>
-    </div>
-  </a>
-  <a class="card" href="games/impossiblequiz/" data-name="impossible quiz tricky questions humor riddle">
-    <div class="cover">❓</div>
-    <div class="body">
-      <div class="name">Impossible Quiz <span class="tag local">Self-hosted</span></div>
-      <p class="desc">An absurd quiz with the least obvious answers in gaming history.</p>
-      <div class="play">Play Impossible Quiz</div>
-    </div>
-  </a>
-  <a class="card" href="games/google-feud/" data-name="google feud autocomplete guess quiz">
-    <div class="cover">🔤</div>
-    <div class="body">
-      <div class="name">Google Feud <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Guess Google's autocomplete results for everyday searches.</p>
-      <div class="play">Play Google Feud</div>
-    </div>
-  </a>
-  <a class="card" href="games/basketball-stars/" data-name="basketball stars 1v1 shots hoops multiplayer">
-    <div class="cover">🏀</div>
-    <div class="body">
-      <div class="name">Basketball Stars <span class="tag local">Self-hosted</span></div>
-      <p class="desc">1v1 hoops — fake, shoot and steal your way to victory.</p>
-      <div class="play">Play Basketball Stars</div>
-    </div>
-  </a>
-  <a class="card" href="games/basketbros-io/" data-name="basketbros basketball 2 player dunk arcade">
-    <div class="cover">🏀</div>
-    <div class="body">
-      <div class="name">Basket Bros <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Two-player arcade basketball — dunk or be dunked.</p>
-      <div class="play">Play Basket Bros</div>
-    </div>
-  </a>
-  <a class="card" href="games/aquapark-slides/" data-name="aquapark slides waterpark 3d racing slide">
-    <div class="cover">🌊</div>
-    <div class="body">
-      <div class="name">Aqua Park Slides <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Race down a giant waterpark on floats — avoid the walls.</p>
-      <div class="play">Play Aqua Park Slides</div>
-    </div>
-  </a>
-  <a class="card" href="games/miniputt/" data-name="mini putt golf putting minigolf hole in one">
-    <div class="cover">⛳</div>
-    <div class="body">
-      <div class="name">Mini Putt <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Mini-golf putting — bank shots, slopes and hole-in-ones.</p>
-      <div class="play">Play Mini Putt</div>
-    </div>
-  </a>
-  <a class="card" href="games/sugar-sugar/" data-name="sugar sugar draw lines physics bart bonte puzzle">
-    <div class="cover">🍬</div>
-    <div class="body">
-      <div class="name">Sugar Sugar <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Draw skid lines to guide the falling sugar into every cup on the screen.</p>
-      <div class="play">Play Sugar Sugar</div>
-    </div>
-  </a>
-  <a class="card" href="games/sugar-sugar-2/" data-name="sugar sugar 2 draw lines physics puzzle sequel">
-    <div class="cover">🍭</div>
-    <div class="body">
-      <div class="name">Sugar Sugar 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Bigger candy-physics puzzles: bend gravity and your own lines to fill all the cups.</p>
-      <div class="play">Play Sugar Sugar 2</div>
-    </div>
-  </a>
-  <a class="card" href="games/sugar-sugar-3/" data-name="sugar sugar 3 draw lines physics puzzle candy">
-    <div class="cover">🥄</div>
-    <div class="body">
-      <div class="name">Sugar Sugar 3 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The third serving of sugar: trickier cups, moving lines and more sweet physics.</p>
-      <div class="play">Play Sugar Sugar 3</div>
-    </div>
-  </a>
-  <a class="card" href="games/stickman-golf/" data-name="stickman golf golfing putting shot swing">
-    <div class="cover">⛳</div>
-    <div class="body">
-      <div class="name">Stickman Golf <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Hit your way around 2D golf courses in as few strokes as you can manage.</p>
-      <div class="play">Play Stickman Golf</div>
-    </div>
-  </a>
-  <a class="card" href="games/bloxors/" data-name="bloxors block puzzle flash roll rolling cube">
-    <div class="cover">🧊</div>
-    <div class="body">
-      <div class="name">Bloxors <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Roll the block around the tiles, land it upright on the hole - the classic Flash puzzle.</p>
-      <div class="play">Play Bloxors</div>
-    </div>
-  </a>
-  <a class="card" href="games/black-knight/" data-name="black knight knight gold coins whack flash">
-    <div class="cover">👑</div>
-    <div class="body">
-      <div class="name">Black Knight <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The king demands taxes: whack gold out of peasants as the Black Knight.</p>
-      <div class="play">Play Black Knight</div>
-    </div>
-  </a>
-  <a class="card" href="games/kitten-cannon/" data-name="kitten cannon launch distance flash">
-    <div class="cover">🐱</div>
-    <div class="body">
-      <div class="name">Kitten Cannon <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Load the kitten, pull the cannon back and see how far it flies.</p>
-      <div class="play">Play Kitten Cannon</div>
-    </div>
-  </a>
-  <a class="card" href="games/this-is-the-only-level/" data-name="this is the only level elephant button door">
-    <div class="cover">🐘</div>
-    <div class="body">
-      <div class="name">This Is The Only Level <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Same room, same elephant, same door - but every level breaks the rules.</p>
-      <div class="play">Play This Is The Only Level</div>
-    </div>
-  </a>
-  <a class="card" href="games/core-ball/" data-name="core ball timing rotate arrow chain">
-    <div class="cover">🎯</div>
-    <div class="body">
-      <div class="name">Core Ball <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Fire your arrows into time-gaps around the spinning core without hitting others.</p>
-      <div class="play">Play Core Ball</div>
-    </div>
-  </a>
-  <a class="card" href="games/double-wires/" data-name="double wires swing spider sticky">
-    <div class="cover">🕸️</div>
-    <div class="body">
-      <div class="name">Double Wires <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Latch to the wires with two hands and swing as far as you can before the drop.</p>
-      <div class="play">Play Double Wires</div>
-    </div>
-  </a>
-  <a class="card" href="games/papas-pizzaria/" data-name="papas pizzeria pizza baking time management">
-    <div class="cover">🍕</div>
-    <div class="body">
-      <div class="name">Papa's Pizzeria <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Bake, top and serve pizzas to keep Papa's customers happy.</p>
-      <div class="play">Play Papa's Pizzeria</div>
-    </div>
-  </a>
-  <a class="card" href="games/papas-burgeria/" data-name="papas burgeria burger grill serve time management">
-    <div class="cover">🍔</div>
-    <div class="body">
-      <div class="name">Papa's Burgeria <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Grill patties, stack toppings and assemble every order perfectly.</p>
-      <div class="play">Play Papa's Burgeria</div>
-    </div>
-  </a>
-  <a class="card" href="games/slope-2/" data-name="slope 2 ball rolling downhill neon">
-    <div class="cover">🎿</div>
-    <div class="body">
-      <div class="name">Slope 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">An all-new slope: faster ball, bigger drops, same endless downhill chase.</p>
-      <div class="play">Play Slope 2</div>
-    </div>
-  </a>
-  <a class="card" href="games/learn-to-fly/" data-name="learn to fly penguin glide distance">
-    <div class="cover">🛩️</div>
-    <div class="body">
-      <div class="name">Learn to Fly <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Teach the flightless penguin to fly with gliders, rockets and sheer spite.</p>
-      <div class="play">Play Learn to Fly</div>
-    </div>
-  </a>
-  <a class="card" href="games/learn-to-fly-2/" data-name="learn to fly 2 penguin arcade launch">
-    <div class="cover">✈️</div>
-    <div class="body">
-      <div class="name">Learn to Fly 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">The penguin is back with launch ramps, propellers and even more distance.</p>
-      <div class="play">Play Learn to Fly 2</div>
-    </div>
-  </a>
-  <a class="card" href="games/sand-game/" data-name="sand game falling sand simulation toy">
-    <div class="cover">🏝️</div>
-    <div class="body">
-      <div class="name">Sand Game <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Draw with falling sand, water, fire and oil and watch the physics react.</p>
-      <div class="play">Play Sand Game</div>
-    </div>
-  </a>
-  <a class="card" href="games/run-3/" data-name="run 3 endless runner tunnel platform">
-    <div class="cover">👾</div>
-    <div class="body">
-      <div class="name">Run 3 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Run through a crumbling space tunnel - falling through the floor opens new paths.</p>
-      <div class="play">Play Run 3</div>
-    </div>
-  </a>
-  <a class="card" href="games/ns-shaft/" data-name="ns shaft descend fall spikes arcade">
-    <div class="cover">🕳️</div>
-    <div class="body">
-      <div class="name">NS Shaft <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Descend the spike shaft: drop, dodge and keep falling as deep as you dare.</p>
-      <div class="play">Play NS Shaft</div>
-    </div>
-  </a>
-  <a class="card" href="games/tiny-fishing/" data-name="tiny fishing cast catch depths">
-    <div class="cover">🎣</div>
-    <div class="body">
-      <div class="name">Tiny Fishing <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Cast the line ever deeper to hook rare fish and upgrade your rod.</p>
-      <div class="play">Play Tiny Fishing</div>
-    </div>
-  </a>
-  <a class="card" href="games/align-4/" data-name="align 4 connect four four in a row board">
-    <div class="cover">🔴</div>
-    <div class="body">
-      <div class="name">Align 4 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Drop discs and get four in a row against the game in this classic head-scratcher.</p>
-      <div class="play">Play Align 4</div>
-    </div>
-  </a>
-  <a class="card" href="games/waterworks/" data-name="waterworks pipes flow puzzle">
-    <div class="cover">🚰</div>
-    <div class="body">
-      <div class="name">Waterworks <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Lay pipes and route the water through town before the flood hits.</p>
-      <div class="play">Play Waterworks</div>
-    </div>
-  </a>
-  <a class="card" href="games/factory-balls/" data-name="factory balls paint order logic flash">
-    <div class="cover">🖌️</div>
-    <div class="body">
-      <div class="name">Factory Balls <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Match every hat order by painting the balls in exactly the right sequence.</p>
-      <div class="play">Play Factory Balls</div>
-    </div>
-  </a>
-  <a class="card" href="games/bad-ice-cream-2/" data-name="bad ice cream 2 co-op maze fruit">
-    <div class="cover">🍦</div>
-    <div class="body">
-      <div class="name">Bad Ice Cream 2 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">Grab every fruit in the freezer mazes - and freeze the hazards solid.</p>
-      <div class="play">Play Bad Ice Cream 2</div>
-    </div>
-  </a>
-  <a class="card" href="games/bad-ice-cream-3/" data-name="bad ice cream 3 co-op maze fruit">
-    <div class="cover">🍨</div>
-    <div class="body">
-      <div class="name">Bad Ice Cream 3 <span class="tag local">Self-hosted</span></div>
-      <p class="desc">A whole new batch of freezer puzzles and fruit-robber levels for two players.</p>
-      <div class="play">Play Bad Ice Cream 3</div>
-    </div>
-  </a>
-</div></main>
-
-<footer>Games marked Self-hosted are full builds stored in <code>games/</code>. Everything runs in the browser; no installs, no logins.</footer>
+<footer>
+  <div class="wrap">
+    <span>Those Who Study — AP Calculus AB/BC notes and a browser arcade.</span>
+    <span><a href="https://sites.google.com/view/calculusabbc" rel="noopener">Calculus notes</a> · <a href="https://cameronorr2011-beep.github.io/friendly-potato/" rel="noopener">Potato arcade</a> · <a href="#arcade">Games</a></span>
+  </div>
+</footer>
 
 <script>
-  const q=document.getElementById('q'),cards=[...document.querySelectorAll('.card')],count=document.getElementById('count');
-  // staggered entrance
-  cards.forEach((c,i)=>c.style.animationDelay=(Math.min(i*28,700))+'ms');
-  // wrap cover emoji in a span so hover transforms can animate it
-  document.querySelectorAll('.cover').forEach(cv=>{cv.innerHTML='<span>'+cv.textContent.trim()+'</span>';});
-  // ---- categories ----
-  const CATS={
-    '2-Player':['Getaway Shootout','Boxhead 2Play','Rooftop Snipers','Fireboy & Watergirl','Bad Ice Cream','Tank Trouble 2','Basket Random','Boxing Random','Volley Random','12 Mini Battles','Soccer Random','Basketball Stars','Basket Bros','Just Fall','Bad Ice Cream 2','Bad Ice Cream 3'],
-    'Racing':['PolyTrack','Moto X3M','Moto X3M Pool Party','Moto X3M Spooky','Moto X3M Winter','Drive Mad','Eggy Car','Snow Rider 3D','Cluster Rush','Drift Hunters','Hill Climb Racing','Subway Surfers','Moto X3M 2','Madalin Stunt Cars 2','Madalin Stunt Cars 3','Aqua Park Slides','Cubefield'],
-    'Shooter':['Duke Nukem 2'],
-    'Horror':['Slender','Backrooms',"Baldi's Basics",'Pixel Jackpot','Buckshot Roulette'],
-    'Puzzle & Idle':['2048','CircloO 2',"The World's Hardest Game 2",'Cookie Clicker','Snake','Google Snake','There Is No Game','Idle Breakout','Grindcraft','Hextris','BitLife','Sort the Court','Minesweeper','Flash Tetris','Impossible Quiz','Google Feud','Mini Putt','Sugar Sugar','Sugar Sugar 2','Sugar Sugar 3','Stickman Golf','Bloxors','Core Ball',"Papa's Pizzeria","Papa's Burgeria",'Factory Balls','Waterworks','Sand Game','Tiny Fishing','Align 4'],
-    'Arcade & Strategy':['Bloons TD 5','Awesome Tanks 2','Stickman Hook','Stick Merge','Rabbit Samurai','N-GON','Doodle Jump','Flappy Bird','Elastic Man','Crossy Road','Flood Runner 4','Vex 4','Vex 2','Slope','Tunnel Rush','Geometry Dash','Temple Run 2','Happy Wheels','Duck Life 4','Stack','Minecraft Classic','Jetpack Joyride','Among Us','Duck Life 1','Duck Life 2','Duck Life 3','Geometry Dash Lite','Geometry Dash Neon','GeoGeo','Geometry Dash PS','Black Knight','Kitten Cannon','This Is The Only Level','SUSHI unROLL','Double Wires','Learn to Fly','Learn to Fly 2','Run 3','Push the Square','NS Shaft','Slope 2']
-  };
-  const catOf={};
-  Object.entries(CATS).forEach(([cat,names])=>names.forEach(n=>catOf[n.toLowerCase()]=cat));
-  const UNKNOWN='Arcade & Strategy';
-  let activeCat='';
-  const chipsBox=document.getElementById('chips');
-  ['All',...Object.keys(CATS)].forEach(name=>{
-    const b=document.createElement('button');b.className='chip'+(name==='All'?' on':'');b.textContent=name;
-    b.onclick=()=>{activeCat=(name==='All'?'':name);[...chipsBox.children].forEach(x=>x.classList.toggle('on',x===b));render();};
-    chipsBox.appendChild(b);
+const DATA=[
+["https://cameronorr2011-beep.github.io/friendly-potato/","🥔","Friendly Potato — 59 games","The whole potato arcade in one place: Hollow Knight, Doom, Pac-Man, racing and 55 more.","e"],
+["https://sites.google.com/view/calculusabbc","📐","AP Calculus AB/BC notes","Course notes, integral calculus guide and exam references.","e"],
+["games/ovo/","🏃","OvO Self-hosted","Wall jumps, slides and tight timing across 60+ parkour levels.","s"],
+["games/snow-rider-3d/","🛷","Snow Rider 3D Self-hosted","Endless sled run down a snowy slope. Dodge trees, grab gifts, unlock sleighs.","s"],
+["12-mini-battles.html","⚔️","12 Mini Battles","Tiny stick-figure armies fighting it out across a dozen battlefields.",""],
+["bloons-TD-5.html","🎈","Bloons TD 5","The classic tower defence — pop balloons with monkeys across 50+ tracks.",""],
+["games/circloo-2/","🔵","CircloO 2","Physics platformer where rolling is the only way forward.",""],
+["crossy-road.htm","🐔","Crossy Road","Hop the chicken across endless roads, rivers and train tracks.",""],
+["games/drive-mad/","🚗","Drive Mad","Stunt driving where every level is one bad angle away from a crash.",""],
+["eggy-car.html","🥚","Eggy Car","Drive an egg uphill without cracking it. Harder than it sounds.",""],
+["flood-runner-4.html","🌊","Flood Runner 4","Outrun the rising water across rooftops and collapsing platforms.",""],
+["games/getaway-shootout2/","🔫","Getaway Shootout Self-hosted","Two-player chaotic race-and-shoot sprint to the exit. WASD vs arrows.","s"],
+["games/moto-x3m/","🏍️","Moto X3M Self-hosted","Time-trial bike stunts over deadly obstacle courses. Arrows to ride, flips cut seconds.","s"],
+["games/snake/","🐍","Snake Self-hosted","The juicy remake: glowing speed-up snake, golden bonus apples, eye-tracking head.","s"],
+["games/google-snake/","🐍","Google Snake Self-hosted","The real Google Doodle snake, mirrored locally — green guy, big apple, apple counter.","s"],
+["games/pixel-jackpot/","🎰","Pixel Jackpot Self-hosted","Horror slots: you owe the mob $6,300 and the reels are hungry.","s"],
+["games/baldis-basics/","📚","Baldi's Basics Self-hosted","You know the drill: grab notebooks, avoid Baldi, don't trust him.","s"],
+["games/awesome-tanks-2/","💥","Awesome Tanks 2 Self-hosted","Arcade tank shooter — blow up rooms and upgrade your ride.","s"],
+["games/boxhead2play/","🧟","Boxhead 2Play Self-hosted","Endless zombie mayhem, co-op on one keyboard.","s"],
+["games/cookie-clicker/","🍪","Cookie Clicker Self-hosted","The original grandma-factory idle game. Click the cookie.","s"],
+["games/retro-bowl/","🏈","Retro Bowl Self-hosted","Manage your franchise and win the Retro Bowl. The cult-manager every classroom plays.","s"],
+["games/rooftop-snipers/","🪜","Rooftop Snipers Self-hosted","Physics ragdoll shooting duel: shove or snipe your friend off the rooftop. 2-player.","s"],
+["games/fireboy-watergirl/","🔥","Fireboy & Watergirl Self-hosted","The legendary co-op temple puzzle platformer. Fire avoids water, water avoids lava.","s"],
+["games/bad-ice-cream/","🍦","Bad Ice Cream Self-hosted","Freeze walls, dodge fruit-haters, eat every grape. Up to 4 players on one keyboard.","s"],
+["games/tank-trouble-2/","💥","Tank Trouble 2 Self-hosted","Ricochet your own shell back into your friend's tank. Split-keyboard arena chaos.","s"],
+["games/stickman-hook/","🪝","Stickman Hook Self-hosted","Grapple, swing, fling the stickman through 100+ momentum puzzles.","s"],
+["games/basket-random/","🏀","Basket Random Self-hosted","Two-button wobbly basketball with exploding randomness. First to 5 wins. 2-player.","s"],
+["games/boxing-random/","🥊","Boxing Random Self-hosted","Same wobbling two-button chaos, now with boxing gloves and falling bodies. 2-player.","s"],
+["games/volley-random/","🏐","Volley Random Self-hosted","Third in the Random series: wobbly two-button beach volleyball chaos. First to 5 wins. 2-player.","s"],
+["games/stick-merge/","🔫","Stick Merge Self-hosted","Merge increasingly absurd guns, then plug waves of stickmen with them.","s"],
+["games/rabbit-samurai/","🐰","Rabbit Samurai Self-hosted","Swing from threads, cut ropes, collect all the carrots. Physics-y and sharp.","s"],
+["games/n-gon/","🌀","N-GON Self-hosted","Open-source hyper-chaotic arena roguelite. Bullets everywhere, upgrades forever.","s"],
+["games/doodle-jump/","⬆️","Doodle Jump Self-hosted","Bounce forever up the doodle world. Arrows left/right, tilted, timeless.","s"],
+["games/2048/","🔢","2048 Self-hosted","Slide tiles, merge numbers, chase the 2048 before your brain melts.","s"],
+["games/flappy-bird/","🐤","Flappy Bird Self-hosted","The original rage tap-fest, resurrected locally. One button, pure suffering.","s"],
+["games/elastic-man/","😛","Elastic Man Self-hosted","Grab and stretch a photoreal face. Zero goal, maximum giggles.","s"],
+["games/polytrack6/","🏁","PolyTrack Self-hosted","Time-trial racing with 350+ tracks, community packages and a track editor.","s"],
+["games/moto-x3m-pool/","🏊","Moto X3M Pool Party Self-hosted","Summer season of Moto X3M. Arrows to ride, flips cut seconds.","s"],
+["games/moto-x3m-spooky/","👻","Moto X3M Spooky Self-hosted","Halloween season of Moto X3M. Arrows to ride, flips cut seconds.","s"],
+["games/moto-x3m-winter/","❄️","Moto X3M Winter Self-hosted","Ice-and-snow season of Moto X3M. Arrows to ride, flips cut seconds.","s"],
+["games/cluster-rush-games/","🚚","Cluster Rush Self-hosted","Jump truck-to-truck across moving cargo in a collapsing chaos parkour. Space to jump.","s"],
+["games/worlds-hardest-game-2-fresh/","💀","The World's Hardest Game 2 Self-hosted","Devious dot-dodging maze sequel. Cross every level without losing your squishy blue self.","s"],
+["games/slope/","⛰️","Slope Self-hosted","Roll a neon ball down an endlessly steepening slope at blistering speed.","s"],
+["games/tunnel-rush/","🌀","Tunnel Rush Self-hosted","Dash through spinning neon tunnels and dodge every wall before it hits you.","s"],
+["games/vex4/","🧗","Vex 4 Self-hosted","Stickman parkour across spike-laced courses — wall-jumps, swings and secret stars.","s"],
+["games/vex2/","🕹️","Vex 2 Self-hosted","The classic stickman platformer (TurboWarp edition) — master the jumps, avoid every spike.","s"],
+["games/drift-hunters/","🚗","Drift Hunters Self-hosted","Free-roam drift simulator — 25+ cars, deep tuning and drift-scoring garage action.","s"],
+["games/hill-climb-racing/","🚙","Hill Climb Racing Self-hosted","Physics driving challenge — keep both the fuel and the driver in one piece uphill.","s"],
+["games/temple-run-2/","🏯","Temple Run 2 Self-hosted","Endless temple runner — swerve, jump, slide and outrun the demon monkey.","s"],
+["games/there-is-no-game/","🎭","There Is No Game Self-hosted","A comedy meta-puzzle where the program insists there is nothing to play. Spoiler: there is.","s"],
+["games/idle-breakout/","🧱","Idle Breakout Self-hosted","Idle brick-breaker — buy and upgrade balls that smash bricks even while you wait.","s"],
+["games/grindcraft/","⛏️","Grindcraft Self-hosted","Mine, craft and grow a whole crafting-base in this Minecraft-style idle clicker.","s"],
+["games/minecraft-classic/","🌱","Minecraft Classic Self-hosted","The original browser Minecraft — build what you like in classic creative mode.","s"],
+["games/geodash/","🎵","Geometry Dash Self-hosted","Rhythm platformer — jump to the beat over spikes, portals and one-hit-no-retries.","s"],
+["games/bitlife/","📱","BitLife Self-hosted","Text life-simulator — careers, crime, relationships and all the chaos between.","s"],
+["games/happywheels/","🛞","Happy Wheels Self-hosted","Ragdoll obstacle courses on wheels — expect pain, and lots of it.","s"],
+["games/sort-the-court/","👑","Sort the Court Self-hosted","Rule the realm with yes/no decisions — balance gold, people and happiness.","s"],
+["games/stack/","🟦","Stack Self-hosted","Stack the blocks perfectly sky-high — miss once and the tower starts shrinking.","s"],
+["games/hextris/","🔶","Hextris Self-hosted","A spinning-hexagon puzzle — stack edges on the right side before they overflow.","s"],
+["games/jetpack-joyride/","🚀","Jetpack Joyride Self-hosted","Strap a machine-gun jetpack and ride through the lab as far as you can.","s"],
+["games/just-fall/","🐧","Just Fall Self-hosted","Fall-Guys-style penguin battle royale — be the last one standing.","s"],
+["games/among-us/","🛸","Among Us Self-hosted","Crewmates vs impostors — finish the tasks or sneakily eliminate everyone.","s"],
+["games/duke-nukem-2/","🎮","Duke Nukem 2 Self-hosted","The 90s king returns — blast aliens and save the world, retro-style.","s"],
+["games/cubefield/","🟦","Cubefield Self-hosted","Steer through a field of cubes at ever-increasing speed. One touch and it's over.","s"],
+["games/ducklife1/","🦆","Duck Life 1 Self-hosted","Train a duckling to race — running, jumping, flying tournaments.","s"],
+["games/ducklife2/","🦆","Duck Life 2 Self-hosted","Duck Life 2 — tougher tournaments, bigger races.","s"],
+["games/ducklife3/","🦆","Duck Life 3 Self-hosted","Duck Life 3 — evolution, farming and brand-new disciplines.","s"],
+["games/geodashlite/","🔷","Geometry Dash Lite Self-hosted","The free slice of Geometry Dash — spiked levels, bass-heavy beats.","s"],
+["games/geoneondash/","🌌","Geometry Dash Neon Self-hosted","A neon-tinted side-scroll dash with spinning hazards.","s"],
+["games/geogeo/","🔵","GeoGeo Self-hosted","Another cube-dash platformer for Geometry Dash fans.","s"],
+["games/geops1/","🟠","Geometry Dash PS Self-hosted","A retro-styled rhythm dash platformer.","s"],
+["games/motox3m2/","🏍️","Moto X3M 2 Self-hosted","More levels, more loops and more explosions on your bike.","s"],
+["games/minesweeper/","💣","Minesweeper Self-hosted","The classic logic puzzle — clear the grid without waking a mine.","s"],
+["games/flashtetris/","🧱","Flash Tetris Self-hosted","Tetris rebuilt for the browser — stack and clear lines.","s"],
+["games/impossiblequiz/","❓","Impossible Quiz Self-hosted","An absurd quiz with the least obvious answers in gaming history.","s"],
+["games/google-feud/","🔤","Google Feud Self-hosted","Guess Google's autocomplete results for everyday searches.","s"],
+["games/basketball-stars/","🏀","Basketball Stars Self-hosted","1v1 hoops — fake, shoot and steal your way to victory.","s"],
+["games/basketbros-io/","🏀","Basket Bros Self-hosted","Two-player arcade basketball — dunk or be dunked.","s"],
+["games/aquapark-slides/","🌊","Aqua Park Slides Self-hosted","Race down a giant waterpark on floats — avoid the walls.","s"],
+["games/miniputt/","⛳","Mini Putt Self-hosted","Mini-golf putting — bank shots, slopes and hole-in-ones.","s"],
+["games/sugar-sugar/","🍬","Sugar Sugar Self-hosted","Draw skid lines to guide the falling sugar into every cup on the screen.","s"],
+["games/sugar-sugar-2/","🍭","Sugar Sugar 2 Self-hosted","Bigger candy-physics puzzles: bend gravity and your own lines to fill all the cups.","s"],
+["games/sugar-sugar-3/","🥄","Sugar Sugar 3 Self-hosted","The third serving of sugar: trickier cups, moving lines and more sweet physics.","s"],
+["games/stickman-golf/","⛳","Stickman Golf Self-hosted","Hit your way around 2D golf courses in as few strokes as you can manage.","s"],
+["games/bloxors/","🧊","Bloxors Self-hosted","Roll the block around the tiles, land it upright on the hole - the classic Flash puzzle.","s"],
+["games/black-knight/","👑","Black Knight Self-hosted","The king demands taxes: whack gold out of peasants as the Black Knight.","s"],
+["games/kitten-cannon/","🐱","Kitten Cannon Self-hosted","Load the kitten, pull the cannon back and see how far it flies.","s"],
+["games/this-is-the-only-level/","🐘","This Is The Only Level Self-hosted","Same room, same elephant, same door - but every level breaks the rules.","s"],
+["games/core-ball/","🎯","Core Ball Self-hosted","Fire your arrows into time-gaps around the spinning core without hitting others.","s"],
+["games/double-wires/","🕸️","Double Wires Self-hosted","Latch to the wires with two hands and swing as far as you can before the drop.","s"],
+["games/papas-pizzaria/","🍕","Papa's Pizzeria Self-hosted","Bake, top and serve pizzas to keep Papa's customers happy.","s"],
+["games/papas-burgeria/","🍔","Papa's Burgeria Self-hosted","Grill patties, stack toppings and assemble every order perfectly.","s"],
+["games/slope-2/","🎿","Slope 2 Self-hosted","An all-new slope: faster ball, bigger drops, same endless downhill chase.","s"],
+["games/learn-to-fly/","🛩️","Learn to Fly Self-hosted","Teach the flightless penguin to fly with gliders, rockets and sheer spite.","s"],
+["games/learn-to-fly-2/","✈️","Learn to Fly 2 Self-hosted","The penguin is back with launch ramps, propellers and even more distance.","s"],
+["games/sand-game/","🏝️","Sand Game Self-hosted","Draw with falling sand, water, fire and oil and watch the physics react.","s"],
+["games/run-3/","👾","Run 3 Self-hosted","Run through a crumbling space tunnel - falling through the floor opens new paths.","s"],
+["games/ns-shaft/","🕳️","NS Shaft Self-hosted","Descend the spike shaft: drop, dodge and keep falling as deep as you dare.","s"],
+["games/tiny-fishing/","🎣","Tiny Fishing Self-hosted","Cast the line ever deeper to hook rare fish and upgrade your rod.","s"],
+["games/align-4/","🔴","Align 4 Self-hosted","Drop discs and get four in a row against the game in this classic head-scratcher.","s"],
+["games/waterworks/","🚰","Waterworks Self-hosted","Lay pipes and route the water through town before the flood hits.","s"],
+["games/factory-balls/","🖌️","Factory Balls Self-hosted","Match every hat order by painting the balls in exactly the right sequence.","s"],
+["games/bad-ice-cream-2/","🍦","Bad Ice Cream 2 Self-hosted","Grab every fruit in the freezer mazes - and freeze the hazards solid.","s"],
+["games/bad-ice-cream-3/","🍨","Bad Ice Cream 3 Self-hosted","A whole new batch of freezer puzzles and fruit-robber levels for two players.","s"]
+];
+const CATS={
+  '2-player':['Getaway Shootout','Boxhead 2Play','Rooftop Snipers','Fireboy & Watergirl','Bad Ice Cream','Tank Trouble 2','Basket Random','Boxing Random','Volley Random','12 Mini Battles','Basketball Stars','Basket Bros','Just Fall','Bad Ice Cream 2','Bad Ice Cream 3'],
+  'Racing':['PolyTrack','Moto X3M','Moto X3M Pool Party','Moto X3M Spooky','Moto X3M Winter','Drive Mad','Eggy Car','Snow Rider 3D','Cluster Rush','Drift Hunters','Hill Climb Racing','Moto X3M 2','Aqua Park Slides','Cubefield'],
+  'Horror':['Baldi\'s Basics','Pixel Jackpot'],
+  'Puzzle':['2048','CircloO 2','The World\'s Hardest Game 2','Cookie Clicker','Snake','Google Snake','There Is No Game','Idle Breakout','Grindcraft','Hextris','BitLife','Sort the Court','Minesweeper','Flash Tetris','Impossible Quiz','Google Feud','Mini Putt','Sugar Sugar','Sugar Sugar 2','Sugar Sugar 3','Stickman Golf','Bloxors','Core Ball','Papa\'s Pizzeria','Papa\'s Burgeria','Factory Balls','Waterworks','Sand Game','Tiny Fishing','Align 4'],
+  'Arcade':['Bloons TD 5','Awesome Tanks 2','Stickman Hook','Stick Merge','Rabbit Samurai','N-GON','Doodle Jump','Flappy Bird','Elastic Man','Crossy Road','Flood Runner 4','Vex 4','Vex 2','Slope','Tunnel Rush','Geometry Dash','Temple Run 2','Happy Wheels','Stack','Minecraft Classic','Jetpack Joyride','Among Us','Duck Life 1','Duck Life 2','Duck Life 3','Geometry Dash Lite','Geometry Dash Neon','GeoGeo','Geometry Dash PS','Black Knight','Kitten Cannon','This Is The Only Level','Double Wires','Learn to Fly','Learn to Fly 2','Run 3','NS Shaft','Slope 2','Duke Nukem 2'],
+  'External':['Friendly Potato — 59 games','AP Calculus AB/BC notes']
+};
+const catOf={};
+Object.entries(CATS).forEach(([c,ns])=>ns.forEach(n=>catOf[n.toLowerCase()]=c));
+const grid=document.getElementById('grid'),q=document.getElementById('q'),count=document.getElementById('count'),chipsBox=document.getElementById('chips');
+const cards=[];
+const frag=document.createDocumentFragment();
+for(const [href,emoji,rawName,desc,tag] of DATA){
+  const name=rawName.replace(/ Self-hosted$/,'');
+  const a=document.createElement('a');
+  a.className='card';a.href=href;
+  if(tag==='e'){a.target='_blank';a.rel='noopener'}
+  a.dataset.cat=catOf[name.toLowerCase()]||'Arcade';
+  a.dataset.search=(name+' '+desc+' '+a.dataset.cat).toLowerCase();
+  const ico=document.createElement('span');ico.className='ico';ico.setAttribute('aria-hidden','true');ico.textContent=emoji;
+  const meta=document.createElement('span');meta.className='meta';
+  const nm=document.createElement('span');nm.className='nm';nm.textContent=name;
+  const ds=document.createElement('span');ds.className='ds';ds.textContent=desc;
+  meta.append(nm,ds);
+  const go=document.createElement('span');go.className='go';go.setAttribute('aria-hidden','true');go.textContent=tag==='e'?'↗':'→';
+  a.append(ico,meta,go);
+  frag.appendChild(a);cards.push(a);
+}
+grid.appendChild(frag);
+let active='';
+const names=['All',...Object.keys(CATS)];
+names.forEach(n=>{
+  const b=document.createElement('button');
+  b.type='button';b.className='chip';b.textContent=n;b.setAttribute('aria-pressed',n==='All'?'true':'false');
+  b.addEventListener('click',()=>{
+    active=(n==='All'?'':n);
+    [...chipsBox.children].forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+    render();
   });
-  function catFor(c){
-    let t=(c.querySelector('.name')?c.querySelector('.name').textContent:'').trim();
-    t=t.split('Self-hosted')[0].trim();
-    return catOf[t.toLowerCase()]||UNKNOWN;
+  chipsBox.appendChild(b);
+});
+function render(){
+  const t=q.value.trim().toLowerCase();let n=0;
+  for(const c of cards){
+    const hit=(!t||c.dataset.search.includes(t))&&(!active||c.dataset.cat===active);
+    c.hidden=!hit;if(hit)n++;
   }
-  function render(){
-    const t=q.value.trim().toLowerCase();let n=0;
-    for(const c of cards){
-      const hit=(!t||c.dataset.name.includes(t)||c.textContent.toLowerCase().includes(t))
-             &&(!activeCat||catFor(c)===activeCat);
-      c.style.display=hit?'':'none';if(hit)n++;
-    }
-    count.textContent=n+(n===1?' game':' games');
+  count.textContent=n+(n===1?' game':' games');
+}
+q.addEventListener('input',render);
+render();
+const stat=document.getElementById('stat-games');
+if(stat)stat.textContent=DATA.length;
+</script>
+<script>
+(function(){
+  var c=document.getElementById('bg');
+  var gl=c.getContext('webgl',{alpha:false,antialias:false,depth:false,stencil:false,powerPreference:'low-power'});
+  if(!gl){c.style.display='none';return;}
+  var vs='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
+  var fs=['precision mediump float;',
+    'uniform vec2 R;uniform float T;uniform vec2 M;',
+    'float h21(vec2 p){p=fract(p*vec2(123.34,345.45));p+=dot(p,p+34.345);return fract(p.x*p.y);}',
+    'void main(){',
+    '  vec2 uv=(gl_FragCoord.xy-0.5*R)/R.y;',
+    '  vec2 q=uv+vec2(M.x*0.035,-M.y*0.025);',
+    '  vec3 col=vec3(0.043,0.051,0.063);',
+    '  float hz=0.34;',
+    '  col+=vec3(0.14,0.60,0.68)*0.26*exp(-abs(q.y+hz)*15.0);',
+    '  float y=q.y+hz;',
+    '  if(y<0.0){',
+    '    float z=1.0/((-y)+0.02);',
+    '    float fade=clamp(1.0-z*0.075,0.0,1.0);',
+    '    float gx=abs(fract(q.x*z*1.15)-0.5);',
+    '    float gz=abs(fract(z*0.45-T*0.35)-0.5);',
+    '    float lx=1.0-smoothstep(0.0,0.06,gx);',
+    '    float lz=1.0-smoothstep(0.0,0.05,gz);',
+    '    col+=vec3(0.30,0.85,0.92)*(lx+lz)*0.20*fade;',
+    '  }',
+    '  for(int i=0;i<3;i++){',
+    '    float fi=float(i);',
+    '    vec2 gp=floor((q+vec2(fi*0.6,T*0.015*(0.4+fi*0.3)))*220.0);',
+    '    col+=vec3(0.62,0.94,1.0)*step(0.9962,h21(gp))*0.5*(1.0-fi*0.22);',
+    '  }',
+    '  col*=1.0-0.9*length(uv*vec2(0.58,0.92));',
+    '  gl_FragColor=vec4(col,1.0);',
+    '}'].join('\n');
+  function sh(t,src){var s=gl.createShader(t);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+  var pr=gl.createProgram();
+  gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));
+  gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){c.style.display='none';return;}
+  gl.useProgram(pr);
+  var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  var loc=gl.getAttribLocation(pr,'p');
+  gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  var uR=gl.getUniformLocation(pr,'R'),uT=gl.getUniformLocation(pr,'T'),uM=gl.getUniformLocation(pr,'M');
+  var mouse=[0,0],target=[0,0],reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){
+    var dpr=Math.min(window.devicePixelRatio||1,1.5);
+    c.width=Math.floor(innerWidth*dpr);c.height=Math.floor(innerHeight*dpr);
+    gl.viewport(0,0,c.width,c.height);
+    gl.uniform2f(uR,c.width,c.height);
   }
-  q.addEventListener('input',render);render();
-  document.getElementById('random').onclick=()=>{
-    const vis=cards.filter(c=>c.style.display!=='none');
-    if(vis.length)vis[Math.floor(Math.random()*vis.length)].scrollIntoView({behavior:'smooth',block:'center'});
-  };
+  size();addEventListener('resize',size,{passive:true});
+  addEventListener('pointermove',function(e){target[0]=(e.clientX/innerWidth)*2-1;target[1]=(e.clientY/innerHeight)*2-1;},{passive:true});
+  var t0=performance.now(),last=0,raf=0;
+  function frame(now){
+    var dt=Math.min((now-t0)/1000,0.05);t0=now;
+    mouse[0]+=(target[0]-mouse[0])*0.05;mouse[1]+=(target[1]-mouse[1])*0.05;
+    gl.uniform1f(uT,now/1000);
+    gl.uniform2f(uM,mouse[0],mouse[1]);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+    raf=requestAnimationFrame(frame);
+  }
+  if(reduce){gl.uniform1f(uT,0.0);gl.uniform2f(uM,0,0);gl.drawArrays(gl.TRIANGLES,0,3);}
+  else{raf=requestAnimationFrame(frame);}
+  document.addEventListener('visibilitychange',function(){
+    if(reduce)return;
+    if(document.hidden){cancelAnimationFrame(raf);raf=0;}
+    else if(!raf){t0=performance.now();raf=requestAnimationFrame(frame);}
+  });
+})();
 </script>
 </body>
 </html>

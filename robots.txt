@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://800012693-cmyk.github.io/Those-who-study/sitemap.xml
