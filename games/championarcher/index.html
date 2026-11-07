@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Champion Archer</title><style>html,body{height:100%;margin:0;background:#000;overflow:hidden}#ruffle{width:100%;height:100%}#fsBtn{position:fixed;right:10px;bottom:10px;z-index:99999;opacity:.35;background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:6px 10px;font:12px system-ui,sans-serif;cursor:pointer}#fsBtn:hover{opacity:1}</style></head>
+<body><div id="ruffle"></div>
+<script src="../_ruffle-legacy/ruffle.js"></script>
+<script>
+window.RufflePlayer=window.RufflePlayer||{};
+window.addEventListener("load",()=>{
+  const ruffle=window.RufflePlayer.newest();
+  const player=ruffle.createPlayer();
+  const c=document.getElementById("ruffle");
+  player.id="player";player.style.width="100%";player.style.height="100%";
+  c.appendChild(player);player.load("ChampionArcher.swf");
+});
+</script><script>function toggleFullscreen(){if(document.fullscreenElement){document.exitFullscreen()}else if(document.documentElement.requestFullscreen){document.documentElement.requestFullscreen()}}</script><button id="fsBtn" onclick="toggleFullscreen()">&#9974; Fullscreen</button></body></html>
