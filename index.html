@@ -19,266 +19,207 @@
 {"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Those Who Study","url":"https://800012693-cmyk.github.io/Those-who-study/","description":"AP Calculus AB/BC study hub with unit notes and a browser arcade."},{"@type":"Course","name":"AP Calculus AB/BC","description":"Unit-by-unit AP Calculus AB and BC notes covering limits, differentiation, applications of derivatives, integration, differential equations and series.","url":"https://sites.google.com/view/calculusabbc","educationalLevel":"Advanced Placement","inLanguage":"en","provider":{"@type":"EducationalOrganization","name":"Those Who Study","sameAs":"https://sites.google.com/view/calculusabbc"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is AP Calculus BC harder than AB?","acceptedAnswer":{"@type":"Answer","text":"BC contains everything in AB and adds series, parametric and polar calculus, and more integration techniques, at a faster pace. It is not a separate easier path: it is AB plus roughly two more units."}},{"@type":"Question","name":"How do you get a 5 on AP Calculus?","acceptedAnswer":{"@type":"Answer","text":"Work the units in order, get the derivative and integral rules to recall speed, then practise released free-response questions under timed conditions and review every mistake by topic."}},{"@type":"Question","name":"Are the games on this site free?","acceptedAnswer":{"@type":"Answer","text":"Yes. They are static browser builds served from this site with no logins, installs or payments, meant to be short study breaks."}}]}]}
 </script>
 <style>
-  :root{
-    --ink:#0b0d10; --ink-2:#0e1116; --panel:#12161c; --panel-2:#161b22;
-    --line:rgba(255,255,255,.085); --line-2:rgba(255,255,255,.14);
-    --fg:#eceef3; --dim:#8b93a5; --dim-2:#606776;
-    --accent:#5fe0ee; --accent-dim:rgba(95,224,238,.12); --accent-line:rgba(95,224,238,.34);
-    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-    --radius:3px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  body{
-    background:var(--ink); color:var(--fg); overflow-x:hidden;
-    font:400 16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background-image:radial-gradient(1100px 520px at 50% -8%,rgba(95,224,238,.10),transparent 62%),
-                     radial-gradient(760px 420px at 88% 6%,rgba(95,224,238,.05),transparent 60%);
-  }
-  #bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none}
-  .scrim{position:fixed;inset:0;z-index:1;pointer-events:none;
-    background:linear-gradient(180deg,rgba(11,13,16,.10) 0%,rgba(11,13,16,.55) 46%,var(--ink) 88%)}
-  a{color:inherit}
-  .skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:#06232a;padding:10px 14px;z-index:99;font-weight:600}
-  .skip:focus{left:12px;top:12px}
-  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-  .wrap{position:relative;z-index:2;width:min(1180px,92vw);margin:0 auto}
-
-  /* ---------- nav ---------- */
-  .nav{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);
-    background:rgba(11,13,16,.74);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2)}
-  .nav .wrap{display:flex;align-items:center;gap:28px;height:62px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:-.01em;text-decoration:none;font-size:15px}
-  .brand i{width:9px;height:9px;background:var(--accent);border-radius:1px;box-shadow:0 0 14px var(--accent-line);display:inline-block}
-  .brand span{color:var(--dim-2);font-weight:400;font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em}
-  .nav nav{display:flex;align-items:center;gap:22px;margin-left:auto;font-size:13.5px}
-  .nav nav a{text-decoration:none;color:var(--dim);padding:6px 0;border-bottom:1px solid transparent;transition:color .16s,border-color .16s}
-  .nav nav a:hover{color:var(--fg);border-bottom-color:var(--line-2)}
-  .nav .cta{color:#06232a;background:var(--accent);border-radius:var(--radius);padding:8px 14px;font-weight:650;border:none;transition:transform .16s,box-shadow .16s}
-  .nav .cta:hover{color:#06232a;transform:translateY(-1px);box-shadow:0 6px 20px rgba(95,224,238,.28)}
-
-  /* ---------- hero ---------- */
-  .hero{padding:88px 0 56px;display:grid;grid-template-columns:1.22fr .78fr;gap:56px;align-items:start}
-  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px}
-  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent-line)}
-  h1{font-size:clamp(38px,5.6vw,74px);line-height:1.02;letter-spacing:-.025em;font-weight:680;margin:18px 0 20px}
-  h1 em{font-style:normal;color:var(--accent)}
-  .lede{color:var(--dim);font-size:clamp(15px,1.5vw,17.5px);max-width:44ch}
-  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
-  .btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:640;font-size:14.5px;
-    padding:13px 20px;border-radius:var(--radius);border:1px solid var(--line-2);transition:transform .16s,border-color .16s,background .16s}
-  .btn:hover{transform:translateY(-1px)}
-  .btn.solid{background:var(--accent);color:#06232a;border-color:var(--accent)}
-  .btn.solid:hover{box-shadow:0 10px 28px rgba(95,224,238,.26)}
-  .btn.ghost{background:rgba(255,255,255,.03);color:var(--fg)}
-  .btn.ghost:hover{border-color:var(--accent-line);background:var(--accent-dim)}
-  .panel{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--ink-2));border-radius:var(--radius)}
-  .hero aside{padding:20px}
-  .aside-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim-2);margin-bottom:6px}
-  .aside-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:13.5px}
-  .aside-row:first-of-type{border-top:none}
-  .aside-row b{font-weight:650;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:12.5px;color:var(--accent)}
-  .aside-row span{color:var(--dim)}
-
-  /* ---------- sections ---------- */
-  section{padding:64px 0}
-  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:26px;flex-wrap:wrap}
-  h2{font-size:clamp(24px,2.9vw,34px);letter-spacing:-.02em;font-weight:660;line-height:1.15}
-  .sec-head p{color:var(--dim);font-size:14px;max-width:52ch}
-  .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim-2);margin-bottom:10px;display:block}
-
-  /* units */
-  .units{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .unit{padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);position:relative;transition:border-color .18s,transform .18s,background .18s}
-  .unit:hover{border-color:var(--accent-line);transform:translateY(-2px);background:var(--panel-2)}
-  .unit b{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.1em}
-  .unit h3{font-size:15.5px;font-weight:640;margin:9px 0 7px;letter-spacing:-.01em}
-  .unit p{color:var(--dim);font-size:13px;line-height:1.5}
-  .unit .bc{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--dim-2);border:1px solid var(--line);padding:2px 6px;border-radius:2px}
-
-  /* reference */
-  .ref{margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .ref code{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ink-2);
-    font-family:var(--mono);font-size:12.5px;color:#cfd6e4;overflow-x:auto;white-space:nowrap}
-  .ref code i{color:var(--accent);font-style:normal}
-
-  /* arcade controls */
-  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-  .search{position:relative;flex:1 1 260px;max-width:340px}
-  .search input{width:100%;padding:11px 12px 11px 34px;background:var(--ink-2);border:1px solid var(--line-2);border-radius:var(--radius);
-    color:var(--fg);font:inherit;font-size:14px;transition:border-color .16s,box-shadow .16s}
-  .search input::placeholder{color:var(--dim-2)}
-  .search input:focus{outline:none;border-color:var(--accent-line);box-shadow:0 0 0 3px rgba(95,224,238,.10)}
-  .search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--dim-2);fill:none;stroke-width:2}
-  .chips{display:flex;gap:6px;flex-wrap:wrap}
-  .chip{padding:8px 12px;border:1px solid var(--line);background:transparent;color:var(--dim);border-radius:var(--radius);
-    font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;transition:color .16s,border-color .16s,background .16s}
-  .chip:hover{color:var(--fg);border-color:var(--line-2)}
-  .chip[aria-pressed="true"]{color:#06232a;background:var(--accent);border-color:var(--accent)}
-  .count{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--dim-2);letter-spacing:.08em;text-transform:uppercase;font-variant-numeric:tabular-nums}
-
-  /* grid */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:8px}
-  .card{display:grid;grid-template-columns:42px 1fr 16px;align-items:center;gap:12px;padding:9px 12px;
-    border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.018);
-    text-decoration:none;transition:border-color .16s,background .16s,transform .16s}
-  .card:hover{border-color:var(--accent-line);background:var(--accent-dim);transform:translateY(-1px)}
-  .ico{width:42px;height:42px;display:grid;place-items:center;font-size:19px;line-height:1;
-    background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:var(--radius);transition:transform .16s,border-color .16s}
-  .card:hover .ico{transform:scale(1.06);border-color:var(--accent-line)}
-  .meta{min-width:0;display:flex;flex-direction:column;gap:1px}
-  .nm{font-size:13.5px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .ds{font-size:11.5px;color:var(--dim-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .go{font-size:12px;color:var(--dim-2);opacity:0;transform:translateX(-3px);transition:opacity .16s,transform .16s,color .16s}
-  .card:hover .go{opacity:1;transform:none;color:var(--accent)}
-  .empty{grid-column:1/-1;padding:34px;text-align:center;color:var(--dim-2);font-size:13.5px;border:1px dashed var(--line);border-radius:var(--radius)}
-
-  /* faq */
-  .faq{max-width:820px}
-  details{border-top:1px solid var(--line);padding:16px 0}
-  details:last-child{border-bottom:1px solid var(--line)}
-  summary{cursor:pointer;font-weight:620;font-size:15.5px;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
-  summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";font-family:var(--mono);color:var(--accent);font-size:17px;line-height:1}
-  details[open] summary::after{content:"−"}
-  details p{color:var(--dim);font-size:14px;margin-top:10px;max-width:70ch}
-
-  footer{border-top:1px solid var(--line);padding:30px 0 46px;margin-top:40px}
-  footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--dim-2);font-size:12.5px}
-  footer a{color:var(--dim);text-decoration:none;border-bottom:1px solid transparent}
-  footer a:hover{color:var(--fg);border-bottom-color:var(--line-2)}
-
-  @media (max-width:900px){
-    .hero{grid-template-columns:1fr;gap:30px;padding:62px 0 40px}
-    .units,.ref{grid-template-columns:1fr 1fr}
-    .nav nav a:not(.cta){display:none}
-  }
-  @media (max-width:560px){
-    .units,.ref{grid-template-columns:1fr}
-    .grid{grid-template-columns:1fr}
-    .count{margin-left:0}
-    section{padding:46px 0}
-  }
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    *{transition:none!important;animation:none!important}
-  }
+:root{--ink:#0b0d10;--ink-2:#0e1116;--panel:#12161c;--panel-2:#161b22;--line:rgba(255,255,255,.085);--line-2:rgba(255,255,255,.14);--fg:#eceef3;--dim:#8b93a5;--dim-2:#606776;--accent:#5fe0ee;--accent-dim:rgba(95,224,238,.12);--accent-line:rgba(95,224,238,.34);--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--radius:3px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--fg);overflow-x:hidden;font:400 16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background-image:radial-gradient(1100px 520px at 50% -8%,rgba(95,224,238,.10),transparent 62%),radial-gradient(760px 420px at 88% 6%,rgba(95,224,238,.05),transparent 60%)}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none}
+.scrim{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(11,13,16,.10) 0%,rgba(11,13,16,.55) 46%,var(--ink) 88%)}
+a{color:inherit}
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:#06232a;padding:10px 14px;z-index:99;font-weight:600}
+.skip:focus{left:12px;top:12px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{position:relative;z-index:2;width:min(1180px,92vw);margin:0 auto}
+.nav{position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line);background:rgba(11,13,16,.74);backdrop-filter:blur(16px) saturate(1.2);-webkit-backdrop-filter:blur(16px) saturate(1.2)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:62px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:-.01em;text-decoration:none;font-size:15px}
+.brand i{width:9px;height:9px;background:var(--accent);border-radius:1px;box-shadow:0 0 14px var(--accent-line);display:inline-block}
+.brand span{color:var(--dim-2);font-weight:400;font-size:12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em}
+.nav nav{display:flex;align-items:center;gap:22px;margin-left:auto;font-size:13.5px}
+.nav nav a{text-decoration:none;color:var(--dim);padding:6px 0;border-bottom:1px solid transparent;transition:color .16s,border-color .16s}
+.nav nav a:hover{color:var(--fg);border-bottom-color:var(--line-2)}
+.nav .cta{color:#06232a;background:var(--accent);border-radius:var(--radius);padding:8px 14px;font-weight:650;border:none;transition:transform .16s,box-shadow .16s}
+.nav .cta:hover{color:#06232a;transform:translateY(-1px);box-shadow:0 6px 20px rgba(95,224,238,.28)}
+.hero{padding:88px 0 56px;display:grid;grid-template-columns:1.22fr .78fr;gap:56px;align-items:start}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--accent-line)}
+h1{font-size:clamp(38px,5.6vw,74px);line-height:1.02;letter-spacing:-.025em;font-weight:680;margin:18px 0 20px}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{color:var(--dim);font-size:clamp(15px,1.5vw,17.5px);max-width:44ch}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:640;font-size:14.5px;padding:13px 20px;border-radius:var(--radius);border:1px solid var(--line-2);transition:transform .16s,border-color .16s,background .16s}
+.btn:hover{transform:translateY(-1px)}
+.btn.solid{background:var(--accent);color:#06232a;border-color:var(--accent)}
+.btn.solid:hover{box-shadow:0 10px 28px rgba(95,224,238,.26)}
+.btn.ghost{background:rgba(255,255,255,.03);color:var(--fg)}
+.btn.ghost:hover{border-color:var(--accent-line);background:var(--accent-dim)}
+.panel{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--ink-2));border-radius:var(--radius)}
+.hero aside{padding:20px}
+.aside-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim-2);margin-bottom:6px}
+.aside-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:13.5px}
+.aside-row:first-of-type{border-top:none}
+.aside-row b{font-weight:650;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:12.5px;color:var(--accent)}
+.aside-row span{color:var(--dim)}
+section{padding:64px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:26px;flex-wrap:wrap}
+h2{font-size:clamp(24px,2.9vw,34px);letter-spacing:-.02em;font-weight:660;line-height:1.15}
+.sec-head p{color:var(--dim);font-size:14px;max-width:52ch}
+.kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim-2);margin-bottom:10px;display:block}
+.units{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.unit{padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);position:relative;transition:border-color .18s,transform .18s,background .18s}
+.unit:hover{border-color:var(--accent-line);transform:translateY(-2px);background:var(--panel-2)}
+.unit b{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.1em}
+.unit h3{font-size:15.5px;font-weight:640;margin:9px 0 7px;letter-spacing:-.01em}
+.unit p{color:var(--dim);font-size:13px;line-height:1.5}
+.unit .bc{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--dim-2);border:1px solid var(--line);padding:2px 6px;border-radius:2px}
+.ref{margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.ref code{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ink-2);font-family:var(--mono);font-size:12.5px;color:#cfd6e4;overflow-x:auto;white-space:nowrap}
+.ref code i{color:var(--accent);font-style:normal}
+.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.search{position:relative;flex:1 1 260px;max-width:340px}
+.search input{width:100%;padding:11px 12px 11px 34px;background:var(--ink-2);border:1px solid var(--line-2);border-radius:var(--radius);color:var(--fg);font:inherit;font-size:14px;transition:border-color .16s,box-shadow .16s}
+.search input::placeholder{color:var(--dim-2)}
+.search input:focus{outline:none;border-color:var(--accent-line);box-shadow:0 0 0 3px rgba(95,224,238,.10)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--dim-2);fill:none;stroke-width:2}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{padding:8px 12px;border:1px solid var(--line);background:transparent;color:var(--dim);border-radius:var(--radius);font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;transition:color .16s,border-color .16s,background .16s}
+.chip:hover{color:var(--fg);border-color:var(--line-2)}
+.chip[aria-pressed="true"]{color:#06232a;background:var(--accent);border-color:var(--accent)}
+.count{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--dim-2);letter-spacing:.08em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:8px}
+.card{display:grid;grid-template-columns:42px 1fr 16px;align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.018);text-decoration:none;transition:border-color .16s,background .16s,transform .16s}
+.card:hover{border-color:var(--accent-line);background:var(--accent-dim);transform:translateY(-1px)}
+.ico{width:42px;height:42px;display:grid;place-items:center;font-size:19px;line-height:1;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:var(--radius);transition:transform .16s,border-color .16s}
+.card:hover .ico{transform:scale(1.06);border-color:var(--accent-line)}
+.meta{min-width:0;display:flex;flex-direction:column;gap:1px}
+.nm{font-size:13.5px;font-weight:600;letter-spacing:-.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ds{font-size:11.5px;color:var(--dim-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.go{font-size:12px;color:var(--dim-2);opacity:0;transform:translateX(-3px);transition:opacity .16s,transform .16s,color .16s}
+.card:hover .go{opacity:1;transform:none;color:var(--accent)}
+.empty{grid-column:1/-1;padding:34px;text-align:center;color:var(--dim-2);font-size:13.5px;border:1px dashed var(--line);border-radius:var(--radius)}
+.faq{max-width:820px}
+details{border-top:1px solid var(--line);padding:16px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:620;font-size:15.5px;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--accent);font-size:17px;line-height:1}
+details[open] summary::after{content:"−"}
+details p{color:var(--dim);font-size:14px;margin-top:10px;max-width:70ch}
+footer{border-top:1px solid var(--line);padding:30px 0 46px;margin-top:40px}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--dim-2);font-size:12.5px}
+footer a{color:var(--dim);text-decoration:none;border-bottom:1px solid transparent}
+footer a:hover{color:var(--fg);border-bottom-color:var(--line-2)}
+@media (max-width:900px){.hero{grid-template-columns:1fr;gap:30px;padding:62px 0 40px}.units,.ref{grid-template-columns:1fr 1fr}.nav nav a:not(.cta){display:none}}
+@media (max-width:560px){.units,.ref{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.count{margin-left:0}section{padding:46px 0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
 <canvas id="bg" aria-hidden="true"></canvas>
 <div class="scrim" aria-hidden="true"></div>
 <a class="skip" href="#arcade">Skip to the arcade</a>
-
 <header class="nav">
-  <div class="wrap">
-    <a class="brand" href="/"><i></i>Those Who Study <span>hub</span></a>
-    <nav aria-label="Primary">
-      <a href="#calculus">Calculus</a>
-      <a href="#arcade">Arcade</a>
-      <a href="#faq">FAQ</a>
-      <a class="cta" href="https://sites.google.com/view/calculusabbc" rel="noopener">Open notes</a>
-    </nav>
-  </div>
+<div class="wrap">
+<a class="brand" href="/"><i></i>Those Who Study <span>hub</span></a>
+<nav aria-label="Primary">
+<a href="#calculus">Calculus</a>
+<a href="#arcade">Arcade</a>
+<a href="#faq">FAQ</a>
+<a class="cta" href="https://sites.google.com/view/calculusabbc" rel="noopener">Open notes</a>
+</nav>
+</div>
 </header>
-
 <main>
-  <div class="wrap">
-    <section class="hero" aria-labelledby="hero-h">
-      <div>
-        <p class="eyebrow">AP Calculus AB &amp; BC · study hub</p>
-        <h1 id="hero-h">Study calculus.<br>Then <em>press play</em>.</h1>
-        <p class="lede">Unit-by-unit notes for AP Calculus AB and BC, a quick reference you can actually revise from, and 148 browser games for the gap between two study blocks.</p>
-        <div class="actions">
-          <a class="btn solid" href="https://sites.google.com/view/calculusabbc" rel="noopener">Open the calculus notes</a>
-          <a class="btn ghost" href="#arcade">Browse the arcade <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-      <aside class="panel" aria-label="Hub at a glance">
-        <p class="aside-label">At a glance</p>
-        <div class="aside-row"><span>Calculus units mapped</span><b>06</b></div>
-        <div class="aside-row"><span>Browser games</span><b id="stat-games">148</b></div>
-        <div class="aside-row"><span>Installs or accounts</span><b>00</b></div>
-        <div class="aside-row"><span>Potato arcade titles</span><b>59</b></div>
-        <p class="aside-label" style="margin-top:18px">Elsewhere</p>
-        <div class="aside-row"><span><a href="https://cameronorr2011-beep.github.io/friendly-potato/" rel="noopener" style="text-decoration:none;border-bottom:1px solid var(--line-2)">Friendly Potato arcade</a></span><b>↗</b></div>
-      </aside>
-    </section>
-
-    <section id="calculus" aria-labelledby="calc-h">
-      <div class="sec-head">
-        <div>
-          <span class="kicker">The reason this site exists</span>
-          <h2 id="calc-h">Calculus, organised the way the exam asks it</h2>
-        </div>
-        <p>Six blocks mapped to the AP units. Each one links into the full notes, worked examples and past-paper walkthroughs.</p>
-      </div>
-      <div class="units">
-        <article class="unit"><b>UNIT 01</b><h3>Limits &amp; continuity</h3><p>One-sided limits, removable versus jump discontinuities, squeeze theorem and the Intermediate Value Theorem.</p></article>
-        <article class="unit"><b>UNIT 02</b><h3>Differentiation</h3><p>Power, product, quotient and chain rules, plus implicit and logarithmic differentiation.</p></article>
-        <article class="unit"><b>UNIT 03</b><h3>Applications of derivatives</h3><p>Related rates, mean value theorem, extrema, concavity, optimisation and L'Hôpital's rule.</p></article>
-        <article class="unit"><b>UNIT 04</b><h3>Integration</h3><p>Riemann sums, u-substitution, integration by parts and both parts of the Fundamental Theorem.</p></article>
-        <article class="unit"><b>UNIT 05</b><h3>Differential equations</h3><p>Slope fields, separation of variables and exponential growth and decay models.</p></article>
-        <article class="unit"><b>UNIT 06</b><h3>Series</h3><span class="bc">BC ONLY</span><p>Convergence tests, Taylor and Maclaurin series, and radius and interval of convergence.</p></article>
-      </div>
-      <div class="ref" aria-label="Quick reference">
-        <code>d/dx xⁿ = <i>n xⁿ⁻¹</i></code>
-        <code>d/dx sin x = <i>cos x</i></code>
-        <code>d/dx eˣ = <i>eˣ</i> · d/dx ln x = <i>1/x</i></code>
-        <code>∫ xⁿ dx = <i>xⁿ⁺¹/(n+1) + C</i></code>
-        <code>∫ 1/x dx = <i>ln|x| + C</i></code>
-        <code>∫ₐᵇ f = <i>F(b) − F(a)</i></code>
-      </div>
-    </section>
-
-    <section id="arcade" aria-labelledby="arcade-h">
-      <div class="sec-head">
-        <div>
-          <span class="kicker">Between two study blocks</span>
-          <h2 id="arcade-h">The study-break arcade</h2>
-        </div>
-        <p>149 games running entirely in the browser. Nothing to install, nothing to sign into — pick one, play a round, go back to the notes.</p>
-      </div>
-      <div class="controls">
-        <div class="search">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
-          <label class="skip" for="q">Search games</label>
-          <input id="q" type="search" placeholder="Search 149 games" autocomplete="off" spellcheck="false">
-        </div>
-        <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
-        <p class="count" id="count" aria-live="polite">149 games</p>
-      </div>
-      <div class="grid" id="grid"></div>
-      <noscript><p class="empty" style="margin-top:10px">The arcade needs JavaScript. The calculus notes are plain links: <a href="https://sites.google.com/view/calculusabbc">open the notes</a>.</p></noscript>
-    </section>
-
-    <section id="faq" aria-labelledby="faq-h">
-      <div class="sec-head">
-        <div>
-          <span class="kicker">Straight answers</span>
-          <h2 id="faq-h">Questions students actually ask</h2>
-        </div>
-      </div>
-      <div class="faq">
-        <details><summary>Is AP Calculus BC harder than AB?</summary><p>BC contains everything in AB and adds series, parametric and polar calculus, and more integration techniques, at a faster pace. It is not an easier alternative — it is AB plus roughly two more units.</p></details>
-        <details><summary>How do you get a 5 on AP Calculus?</summary><p>Work the units in order, get the derivative and integral rules to recall speed, then practise released free-response questions under timed conditions and review every mistake by topic. The unit map above is ordered for exactly that.</p></details>
-        <details><summary>Do the games cost anything or track you?</summary><p>No. They are static browser builds served from this site, with no logins, installs or payments. They exist so a break stays a break instead of turning into a scroll.</p></details>
-      </div>
-    </section>
-  </div>
+<div class="wrap">
+<section class="hero" aria-labelledby="hero-h">
+<div>
+<p class="eyebrow">AP Calculus AB &amp; BC · study hub</p>
+<h1 id="hero-h">Study calculus.<br>Then <em>press play</em>.</h1>
+<p class="lede">Unit-by-unit notes for AP Calculus AB and BC, a quick reference you can actually revise from, and 149 browser games for the gap between two study blocks.</p>
+<div class="actions">
+<a class="btn solid" href="https://sites.google.com/view/calculusabbc" rel="noopener">Open the calculus notes</a>
+<a class="btn ghost" href="#arcade">Browse the arcade <span aria-hidden="true">→</span></a>
+</div>
+</div>
+<aside class="panel" aria-label="Hub at a glance">
+<p class="aside-label">At a glance</p>
+<div class="aside-row"><span>Calculus units mapped</span><b>06</b></div>
+<div class="aside-row"><span>Browser games</span><b id="stat-games">149</b></div>
+<div class="aside-row"><span>Installs or accounts</span><b>00</b></div>
+<div class="aside-row"><span>Potato arcade titles</span><b>59</b></div>
+<p class="aside-label" style="margin-top:18px">Elsewhere</p>
+<div class="aside-row"><span><a href="https://cameronorr2011-beep.github.io/friendly-potato/" rel="noopener" style="text-decoration:none;border-bottom:1px solid var(--line-2)">Friendly Potato arcade</a></span><b>↗</b></div>
+</aside>
+</section>
+<section id="calculus" aria-labelledby="calc-h">
+<div class="sec-head">
+<div>
+<span class="kicker">The reason this site exists</span>
+<h2 id="calc-h">Calculus, organised the way the exam asks it</h2>
+</div>
+<p>Six blocks mapped to the AP units. Each one links into the full notes, worked examples and past-paper walkthroughs.</p>
+</div>
+<div class="units">
+<article class="unit"><b>UNIT 01</b><h3>Limits &amp; continuity</h3><p>One-sided limits, removable versus jump discontinuities, squeeze theorem and the Intermediate Value Theorem.</p></article>
+<article class="unit"><b>UNIT 02</b><h3>Differentiation</h3><p>Power, product, quotient and chain rules, plus implicit and logarithmic differentiation.</p></article>
+<article class="unit"><b>UNIT 03</b><h3>Applications of derivatives</h3><p>Related rates, mean value theorem, extrema, concavity, optimisation and L'Hôpital's rule.</p></article>
+<article class="unit"><b>UNIT 04</b><h3>Integration</h3><p>Riemann sums, u-substitution, integration by parts and both parts of the Fundamental Theorem.</p></article>
+<article class="unit"><b>UNIT 05</b><h3>Differential equations</h3><p>Slope fields, separation of variables and exponential growth and decay models.</p></article>
+<article class="unit"><b>UNIT 06</b><h3>Series</h3><span class="bc">BC ONLY</span><p>Convergence tests, Taylor and Maclaurin series, and radius and interval of convergence.</p></article>
+</div>
+<div class="ref" aria-label="Quick reference">
+<code>d/dx xⁿ = <i>n xⁿ⁻¹</i></code>
+<code>d/dx sin x = <i>cos x</i></code>
+<code>d/dx eˣ = <i>eˣ</i> · d/dx ln x = <i>1/x</i></code>
+<code>∫ xⁿ dx = <i>xⁿ⁺¹/(n+1) + C</i></code>
+<code>∫ 1/x dx = <i>ln|x| + C</i></code>
+<code>∫ₐᵇ f = <i>F(b) − F(a)</i></code>
+</div>
+</section>
+<section id="arcade" aria-labelledby="arcade-h">
+<div class="sec-head">
+<div>
+<span class="kicker">Between two study blocks</span>
+<h2 id="arcade-h">The study-break arcade</h2>
+</div>
+<p>149 games running entirely in the browser. Nothing to install, nothing to sign into — pick one, play a round, go back to the notes.</p>
+</div>
+<div class="controls">
+<div class="search">
+<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+<label class="skip" for="q">Search games</label>
+<input id="q" type="search" placeholder="Search 149 games" autocomplete="off" spellcheck="false">
+</div>
+<div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+<p class="count" id="count" aria-live="polite">149 games</p>
+</div>
+<div class="grid" id="grid"></div>
+<noscript><p class="empty" style="margin-top:10px">The arcade needs JavaScript. The calculus notes are plain links: <a href="https://sites.google.com/view/calculusabbc">open the notes</a>.</p></noscript>
+</section>
+<section id="faq" aria-labelledby="faq-h">
+<div class="sec-head">
+<div>
+<span class="kicker">Straight answers</span>
+<h2 id="faq-h">Questions students actually ask</h2>
+</div>
+</div>
+<div class="faq">
+<details><summary>Is AP Calculus BC harder than AB?</summary><p>BC contains everything in AB and adds series, parametric and polar calculus, and more integration techniques, at a faster pace. It is not an easier alternative — it is AB plus roughly two more units.</p></details>
+<details><summary>How do you get a 5 on AP Calculus?</summary><p>Work the units in order, get the derivative and integral rules to recall speed, then practise released free-response questions under timed conditions and review every mistake by topic. The unit map above is ordered for exactly that.</p></details>
+<details><summary>Do the games cost anything or track you?</summary><p>No. They are static browser builds served from this site, with no logins, installs or payments. They exist so a break stays a break instead of turning into a scroll.</p></details>
+</div>
+</section>
+</div>
 </main>
-
 <footer>
-  <div class="wrap">
-    <span>Those Who Study — AP Calculus AB/BC notes and a browser arcade.</span>
-    <span><a href="https://sites.google.com/view/calculusabbc" rel="noopener">Calculus notes</a> · <a href="https://cameronorr2011-beep.github.io/friendly-potato/" rel="noopener">Potato arcade</a> · <a href="#arcade">Games</a></span>
-  </div>
+<div class="wrap">
+<span>Those Who Study — AP Calculus AB/BC notes and a browser arcade.</span>
+<span><a href="https://sites.google.com/view/calculusabbc" rel="noopener">Calculus notes</a> · <a href="https://cameronorr2011-beep.github.io/friendly-potato/" rel="noopener">Potato arcade</a> · <a href="#arcade">Games</a></span>
+</div>
 </footer>
-
 <script>
 const DATA=[
 ["https://cameronorr2011-beep.github.io/friendly-potato/","🥔","Friendly Potato — 59 games","The whole potato arcade in one place: Hollow Knight, Doom, Pac-Man, racing and 55 more.","e"],
-["https://800012693-cmyk.github.io/Those-who-study-arcade/","⛳","Study-Break Arcade Vol. 2","The overflow arcade on its own repo: three golf games, Soccer Random, SUPERHOT, Spelunky and more.","e"],
 ["https://sites.google.com/view/calculusabbc","📐","AP Calculus AB/BC notes","Course notes, integral calculus guide and exam references.","e"],
 ["games/ovo/","🏃","OvO Self-hosted","Wall jumps, slides and tight timing across 60+ parkour levels.","s"],
 ["games/snow-rider-3d/","🛷","Snow Rider 3D Self-hosted","Endless sled run down a snowy slope. Dodge trees, grab gifts, unlock sleighs.","s"],
@@ -423,20 +364,21 @@ const DATA=[
 ["https://cameronorr2011-beep.github.io/games/supermario64/","🍄","Super Mario 64","The N64 classic running in the browser through a web port.","e"],
 ["https://cameronorr2011-beep.github.io/games/tetris/","🟪","Tetris","Tetr.js — the falling-block classic with proper rotation and hold.","e"],
 ["https://cameronorr2011-beep.github.io/games/timeshooter3/","🔫","Time Shooter SWAT","Time freezes when you stand still; clear each room in slow motion.","e"],
+["https://cameronorr2011-beep.github.io/undertale/","💛","Undertale","The full original game in the browser through a WASM GameMaker runner — keyboard or touch, saves included.","e"],
 ["https://cameronorr2011-beep.github.io/games/undertale-yellow/","💛","Undertale Yellow","The fan-made Undertale prequel, in full.","e"],
 ["https://cameronorr2011-beep.github.io/games/worldshardestgame/","💀","World's Hardest Game","The original dot-dodging nightmare, if you want proof.","e"],
 ["https://cameronorr2011-beep.github.io/games/yetanotherworld/","🌍","Yet Another World","Tight little platformer with a one-hit death loop.","e"]
 ];
 const CATS={
-  '2-player':['Getaway Shootout','Boxhead 2Play','Rooftop Snipers','Fireboy & Watergirl','Bad Ice Cream','Tank Trouble 2','Basket Random','Boxing Random','Volley Random','12 Mini Battles','Basketball Stars','Basket Bros','Just Fall','Bad Ice Cream 2','Bad Ice Cream 3','Tube Jumpers'],
-  'Racing':['PolyTrack','Moto X3M','Moto X3M Pool Party','Moto X3M Spooky','Moto X3M Winter','Drive Mad','Snow Rider 3D','Cluster Rush','Drift Hunters','Hill Climb Racing','Moto X3M 2','Aqua Park Slides','Cubefield'],
-  'Horror':['Baldi\'s Basics','Pixel Jackpot'],
-  'Puzzle':['2048','CircloO 2','The World\'s Hardest Game 2','Cookie Clicker','Snake','Google Snake','There Is No Game','Idle Breakout','Grindcraft','Hextris','BitLife','Sort the Court','Minesweeper','Flash Tetris','Impossible Quiz','Google Feud','Mini Putt','Sugar Sugar','Sugar Sugar 2','Sugar Sugar 3','Stickman Golf','Bloxors','Core Ball','Papa\'s Pizzeria','Papa\'s Burgeria','Factory Balls','Waterworks','Sand Game','Tiny Fishing','Align 4','Riddle School','Riddle School 2'],
-  'Arcade':['Bloons TD 5','Awesome Tanks 2','Stickman Hook','Stick Merge','Rabbit Samurai','N-GON','Doodle Jump','Flappy Bird','Elastic Man','Crossy Road','Flood Runner 4','Vex 4','Vex 2','Slope','Tunnel Rush','Geometry Dash','Temple Run 2','Happy Wheels','Stack','Minecraft Classic','Jetpack Joyride','Among Us','Duck Life 1','Duck Life 2','Duck Life 3','Geometry Dash Lite','Geometry Dash Neon','GeoGeo','Geometry Dash PS','Black Knight','Kitten Cannon','This Is The Only Level','Double Wires','Learn to Fly','Learn to Fly 2','Run 3','NS Shaft','Slope 2','Duke Nukem 2','Big Red Button','Bloons TD 2','Helicopter Game','Avalanche','Throw Rocks','Storm the House 2','Tactical Assassin 2','Endless War 3'],
-  'Story':['A Dark Room'],
-  'Sports':['Gravity Soccer','Champion Archer'],
-  'Potato fork':['1v1.lol','8 Ball Pool','Amazing Rope Police','A Small World Cup','Block Blast','Chess','ClassiCube','Crazy Cattle 3D','Dadish','Dadish 2','Dadish 3','Drift Boss',"Five Nights at Freddy's","Five Nights at Freddy's 2","Five Nights at Freddy's 3","Five Nights at Freddy's 4","Friday Night Funkin'",'Football Bros','House of Hazards','Murder','Paper.io 2','Retro Bowl College','Sandboxels','SUPERHOT','Super Mario 64','Tetris','Time Shooter SWAT','Undertale Yellow',"World's Hardest Game",'Yet Another World'],
-  'External':['Friendly Potato — 59 games','Study-Break Arcade Vol. 2','AP Calculus AB/BC notes']
+'2-player':['Getaway Shootout','Boxhead 2Play','Rooftop Snipers','Fireboy & Watergirl','Bad Ice Cream','Tank Trouble 2','Basket Random','Boxing Random','Volley Random','12 Mini Battles','Basketball Stars','Basket Bros','Just Fall','Bad Ice Cream 2','Bad Ice Cream 3','Tube Jumpers'],
+'Racing':['PolyTrack','Moto X3M','Moto X3M Pool Party','Moto X3M Spooky','Moto X3M Winter','Drive Mad','Snow Rider 3D','Cluster Rush','Drift Hunters','Hill Climb Racing','Moto X3M 2','Aqua Park Slides','Cubefield'],
+'Horror':['Baldi\'s Basics','Pixel Jackpot'],
+'Puzzle':['2048','CircloO 2','The World\'s Hardest Game 2','Cookie Clicker','Snake','Google Snake','There Is No Game','Idle Breakout','Grindcraft','Hextris','BitLife','Sort the Court','Minesweeper','Flash Tetris','Impossible Quiz','Google Feud','Mini Putt','Sugar Sugar','Sugar Sugar 2','Sugar Sugar 3','Stickman Golf','Bloxors','Core Ball','Papa\'s Pizzeria','Papa\'s Burgeria','Factory Balls','Waterworks','Sand Game','Tiny Fishing','Align 4','Riddle School','Riddle School 2'],
+'Arcade':['Bloons TD 5','Awesome Tanks 2','Stickman Hook','Stick Merge','Rabbit Samurai','N-GON','Doodle Jump','Flappy Bird','Elastic Man','Crossy Road','Flood Runner 4','Vex 4','Vex 2','Slope','Tunnel Rush','Geometry Dash','Temple Run 2','Happy Wheels','Stack','Minecraft Classic','Jetpack Joyride','Among Us','Duck Life 1','Duck Life 2','Duck Life 3','Geometry Dash Lite','Geometry Dash Neon','GeoGeo','Geometry Dash PS','Black Knight','Kitten Cannon','This Is The Only Level','Double Wires','Learn to Fly','Learn to Fly 2','Run 3','NS Shaft','Slope 2','Duke Nukem 2','Big Red Button','Bloons TD 2','Helicopter Game','Avalanche','Throw Rocks','Storm the House 2','Tactical Assassin 2','Endless War 3'],
+'Story':['A Dark Room'],
+'Sports':['Gravity Soccer','Champion Archer'],
+'Potato fork':['1v1.lol','8 Ball Pool','Amazing Rope Police','A Small World Cup','Block Blast','Chess','ClassiCube','Crazy Cattle 3D','Dadish','Dadish 2','Dadish 3','Drift Boss',"Five Nights at Freddy's","Five Nights at Freddy's 2","Five Nights at Freddy's 3","Five Nights at Freddy's 4","Friday Night Funkin'",'Football Bros','House of Hazards','Murder','Paper.io 2','Retro Bowl College','Sandboxels','SUPERHOT','Super Mario 64','Tetris','Time Shooter SWAT','Undertale','Undertale Yellow',"World's Hardest Game",'Yet Another World'],
+'External':['Friendly Potato — 59 games','AP Calculus AB/BC notes']
 };
 const catOf={};
 Object.entries(CATS).forEach(([c,ns])=>ns.forEach(n=>catOf[n.toLowerCase()]=c));
@@ -444,41 +386,41 @@ const grid=document.getElementById('grid'),q=document.getElementById('q'),count=
 const cards=[];
 const frag=document.createDocumentFragment();
 for(const [href,emoji,rawName,desc,tag] of DATA){
-  const name=rawName.replace(/ Self-hosted$/,'');
-  const a=document.createElement('a');
-  a.className='card';a.href=href;
-  if(tag==='e'){a.target='_blank';a.rel='noopener'}
-  a.dataset.cat=catOf[name.toLowerCase()]||'Arcade';
-  a.dataset.search=(name+' '+desc+' '+a.dataset.cat).toLowerCase();
-  const ico=document.createElement('span');ico.className='ico';ico.setAttribute('aria-hidden','true');ico.textContent=emoji;
-  const meta=document.createElement('span');meta.className='meta';
-  const nm=document.createElement('span');nm.className='nm';nm.textContent=name;
-  const ds=document.createElement('span');ds.className='ds';ds.textContent=desc;
-  meta.append(nm,ds);
-  const go=document.createElement('span');go.className='go';go.setAttribute('aria-hidden','true');go.textContent=tag==='e'?'↗':'→';
-  a.append(ico,meta,go);
-  frag.appendChild(a);cards.push(a);
+const name=rawName.replace(/ Self-hosted$/,'');
+const a=document.createElement('a');
+a.className='card';a.href=href;
+if(tag==='e'){a.target='_blank';a.rel='noopener'}
+a.dataset.cat=catOf[name.toLowerCase()]||'Arcade';
+a.dataset.search=(name+' '+desc+' '+a.dataset.cat).toLowerCase();
+const ico=document.createElement('span');ico.className='ico';ico.setAttribute('aria-hidden','true');ico.textContent=emoji;
+const meta=document.createElement('span');meta.className='meta';
+const nm=document.createElement('span');nm.className='nm';nm.textContent=name;
+const ds=document.createElement('span');ds.className='ds';ds.textContent=desc;
+meta.append(nm,ds);
+const go=document.createElement('span');go.className='go';go.setAttribute('aria-hidden','true');go.textContent=tag==='e'?'↗':'→';
+a.append(ico,meta,go);
+frag.appendChild(a);cards.push(a);
 }
 grid.appendChild(frag);
 let active='';
 const names=['All',...Object.keys(CATS)];
 names.forEach(n=>{
-  const b=document.createElement('button');
-  b.type='button';b.className='chip';b.textContent=n;b.setAttribute('aria-pressed',n==='All'?'true':'false');
-  b.addEventListener('click',()=>{
-    active=(n==='All'?'':n);
-    [...chipsBox.children].forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
-    render();
-  });
-  chipsBox.appendChild(b);
+const b=document.createElement('button');
+b.type='button';b.className='chip';b.textContent=n;b.setAttribute('aria-pressed',n==='All'?'true':'false');
+b.addEventListener('click',()=>{
+active=(n==='All'?'':n);
+[...chipsBox.children].forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+render();
+});
+chipsBox.appendChild(b);
 });
 function render(){
-  const t=q.value.trim().toLowerCase();let n=0;
-  for(const c of cards){
-    const hit=(!t||c.dataset.search.includes(t))&&(!active||c.dataset.cat===active);
-    c.hidden=!hit;if(hit)n++;
-  }
-  count.textContent=n+(n===1?' game':' games');
+const t=q.value.trim().toLowerCase();let n=0;
+for(const c of cards){
+const hit=(!t||c.dataset.search.includes(t))&&(!active||c.dataset.cat===active);
+c.hidden=!hit;if(hit)n++;
+}
+count.textContent=n+(n===1?' game':' games');
 }
 q.addEventListener('input',render);
 render();
@@ -487,74 +429,48 @@ if(stat)stat.textContent=DATA.length;
 </script>
 <script>
 (function(){
-  var c=document.getElementById('bg');
-  var gl=c.getContext('webgl',{alpha:false,antialias:false,depth:false,stencil:false,powerPreference:'low-power'});
-  if(!gl){c.style.display='none';return;}
-  var vs='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
-  var fs=['precision mediump float;',
-    'uniform vec2 R;uniform float T;uniform vec2 M;',
-    'float h21(vec2 p){p=fract(p*vec2(123.34,345.45));p+=dot(p,p+34.345);return fract(p.x*p.y);}',
-    'void main(){',
-    '  vec2 uv=(gl_FragCoord.xy-0.5*R)/R.y;',
-    '  vec2 q=uv+vec2(M.x*0.035,-M.y*0.025);',
-    '  vec3 col=vec3(0.043,0.051,0.063);',
-    '  float hz=0.34;',
-    '  col+=vec3(0.14,0.60,0.68)*0.26*exp(-abs(q.y+hz)*15.0);',
-    '  float y=q.y+hz;',
-    '  if(y<0.0){',
-    '    float z=1.0/((-y)+0.02);',
-    '    float fade=clamp(1.0-z*0.075,0.0,1.0);',
-    '    float gx=abs(fract(q.x*z*1.15)-0.5);',
-    '    float gz=abs(fract(z*0.45-T*0.35)-0.5);',
-    '    float lx=1.0-smoothstep(0.0,0.06,gx);',
-    '    float lz=1.0-smoothstep(0.0,0.05,gz);',
-    '    col+=vec3(0.30,0.85,0.92)*(lx+lz)*0.20*fade;',
-    '  }',
-    '  for(int i=0;i<3;i++){',
-    '    float fi=float(i);',
-    '    vec2 gp=floor((q+vec2(fi*0.6,T*0.015*(0.4+fi*0.3)))*220.0);',
-    '    col+=vec3(0.62,0.94,1.0)*step(0.9962,h21(gp))*0.5*(1.0-fi*0.22);',
-    '  }',
-    '  col*=1.0-0.9*length(uv*vec2(0.58,0.92));',
-    '  gl_FragColor=vec4(col,1.0);',
-    '}'].join('\n');
-  function sh(t,src){var s=gl.createShader(t);gl.shaderSource(s,src);gl.compileShader(s);return s;}
-  var pr=gl.createProgram();
-  gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));
-  gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));
-  gl.linkProgram(pr);
-  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){c.style.display='none';return;}
-  gl.useProgram(pr);
-  var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
-  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
-  var loc=gl.getAttribLocation(pr,'p');
-  gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
-  var uR=gl.getUniformLocation(pr,'R'),uT=gl.getUniformLocation(pr,'T'),uM=gl.getUniformLocation(pr,'M');
-  var mouse=[0,0],target=[0,0],reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function size(){
-    var dpr=Math.min(window.devicePixelRatio||1,1.5);
-    c.width=Math.floor(innerWidth*dpr);c.height=Math.floor(innerHeight*dpr);
-    gl.viewport(0,0,c.width,c.height);
-    gl.uniform2f(uR,c.width,c.height);
-  }
-  size();addEventListener('resize',size,{passive:true});
-  addEventListener('pointermove',function(e){target[0]=(e.clientX/innerWidth)*2-1;target[1]=(e.clientY/innerHeight)*2-1;},{passive:true});
-  var t0=performance.now(),last=0,raf=0;
-  function frame(now){
-    var dt=Math.min((now-t0)/1000,0.05);t0=now;
-    mouse[0]+=(target[0]-mouse[0])*0.05;mouse[1]+=(target[1]-mouse[1])*0.05;
-    gl.uniform1f(uT,now/1000);
-    gl.uniform2f(uM,mouse[0],mouse[1]);
-    gl.drawArrays(gl.TRIANGLES,0,3);
-    raf=requestAnimationFrame(frame);
-  }
-  if(reduce){gl.uniform1f(uT,0.0);gl.uniform2f(uM,0,0);gl.drawArrays(gl.TRIANGLES,0,3);}
-  else{raf=requestAnimationFrame(frame);}
-  document.addEventListener('visibilitychange',function(){
-    if(reduce)return;
-    if(document.hidden){cancelAnimationFrame(raf);raf=0;}
-    else if(!raf){t0=performance.now();raf=requestAnimationFrame(frame);}
-  });
+var c=document.getElementById('bg');
+var gl=c.getContext('webgl',{alpha:false,antialias:false,depth:false,stencil:false,powerPreference:'low-power'});
+if(!gl){c.style.display='none';return;}
+var vs='attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}';
+var fs=['precision mediump float;','uniform vec2 R;uniform float T;uniform vec2 M;','float h21(vec2 p){p=fract(p*vec2(123.34,345.45));p+=dot(p,p+34.345);return fract(p.x*p.y);}','void main(){','  vec2 uv=(gl_FragCoord.xy-0.5*R)/R.y;','  vec2 q=uv+vec2(M.x*0.035,-M.y*0.025);','  vec3 col=vec3(0.043,0.051,0.063);','  float hz=0.34;','  col+=vec3(0.14,0.60,0.68)*0.26*exp(-abs(q.y+hz)*15.0);','  float y=q.y+hz;','  if(y<0.0){','    float z=1.0/((-y)+0.02);','    float fade=clamp(1.0-z*0.075,0.0,1.0);','    float gx=abs(fract(q.x*z*1.15)-0.5);','    float gz=abs(fract(z*0.45-T*0.35)-0.5);','    float lx=1.0-smoothstep(0.0,0.06,gx);','    float lz=1.0-smoothstep(0.0,0.05,gz);','    col+=vec3(0.30,0.85,0.92)*(lx+lz)*0.20*fade;','  }','  for(int i=0;i<3;i++){','    float fi=float(i);','    vec2 gp=floor((q+vec2(fi*0.6,T*0.015*(0.4+fi*0.3)))*220.0);','    col+=vec3(0.62,0.94,1.0)*step(0.9962,h21(gp))*0.5*(1.0-fi*0.22);','  }','  col*=1.0-0.9*length(uv*vec2(0.58,0.92));','  gl_FragColor=vec4(col,1.0);','}'].join('\n');
+function sh(t,src){var s=gl.createShader(t);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+var pr=gl.createProgram();
+gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));
+gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));
+gl.linkProgram(pr);
+if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){c.style.display='none';return;}
+gl.useProgram(pr);
+var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+var loc=gl.getAttribLocation(pr,'p');
+gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+var uR=gl.getUniformLocation(pr,'R'),uT=gl.getUniformLocation(pr,'T'),uM=gl.getUniformLocation(pr,'M');
+var mouse=[0,0],target=[0,0],reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function size(){
+var dpr=Math.min(window.devicePixelRatio||1,1.5);
+c.width=Math.floor(innerWidth*dpr);c.height=Math.floor(innerHeight*dpr);
+gl.viewport(0,0,c.width,c.height);
+gl.uniform2f(uR,c.width,c.height);
+}
+size();addEventListener('resize',size,{passive:true});
+addEventListener('pointermove',function(e){target[0]=(e.clientX/innerWidth)*2-1;target[1]=(e.clientY/innerHeight)*2-1;},{passive:true});
+var t0=performance.now(),last=0,raf=0;
+function frame(now){
+var dt=Math.min((now-t0)/1000,0.05);t0=now;
+mouse[0]+=(target[0]-mouse[0])*0.05;mouse[1]+=(target[1]-mouse[1])*0.05;
+gl.uniform1f(uT,now/1000);
+gl.uniform2f(uM,mouse[0],mouse[1]);
+gl.drawArrays(gl.TRIANGLES,0,3);
+raf=requestAnimationFrame(frame);
+}
+if(reduce){gl.uniform1f(uT,0.0);gl.uniform2f(uM,0,0);gl.drawArrays(gl.TRIANGLES,0,3);}
+else{raf=requestAnimationFrame(frame);}
+document.addEventListener('visibilitychange',function(){
+if(reduce)return;
+if(document.hidden){cancelAnimationFrame(raf);raf=0;}
+else if(!raf){t0=performance.now();raf=requestAnimationFrame(frame);}
+});
 })();
 </script>
 </body>
